@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/18 01:58:17 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
+/*   Updated: 2022/11/18 01:50:22 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	main(int ac, char **av)
+enum e_errtype
 {
-	t_data	db;
+	ERR_BASIC,
+	ERR_NOARG,
+	ERR_TOOMANYARG,
+	ERR_WALL,
+	ERR_MISSPLAYER,
+	ERR_OTHER
+};
 
-	db.ps.ac = ac;
-	db.ps.av = av;
-	if (ft_start_parsing(&db) == EXIT_SUCCESS)
-		printf("HelloWorld!\n \
-je n'ai pas commencé le parsing, j'essaye de me motiver en creant au moins la \
-base du projet xD");
-	return (0);
-}
+typedef struct s_pars
+{
+	int		ac;
+	char	**av;
+}			t_pars;
+
+typedef struct s_data
+{
+	t_pars	ps;
+}			t_data;
+
+#endif

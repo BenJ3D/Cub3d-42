@@ -6,13 +6,14 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/18 00:46:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/18 02:01:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "./struct.h"
 # include "../libs/mlx_mac/mlx.h"
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
@@ -26,12 +27,12 @@
 # include <errno.h>
 
 /* Game Settings */
-# define HEIGHT 768
-# define WIDTH 768
-# define ROTATION_SPEED 0.04
-# define ONE_DEGREE_RAD 0.00116355333
-# define BLOCK_SIZE 32
-# define SPEED 1
+// # define HEIGHT 768
+// # define WIDTH 768
+// # define ROTATION_SPEED 0.04
+// # define ONE_DEGREE_RAD 0.00116355333
+// # define BLOCK_SIZE 32
+// # define SPEED 1
 
 /* Linux Keys */
 # define KEY_RIGHT 65363
@@ -52,5 +53,20 @@
 // # define KEY_D 2
 // # define DOORS 14
 // # define ESC 53
+
+# define COLOR_BLACK	"\001\033[0;30m\002"
+# define COLOR_RED		"\001\033[0;31m\002"
+# define COLOR_GREEN	"\001\033[0;32m\002"
+# define COLOR_YELLOW	"\001\033[0;33m\002"
+# define COLOR_BLUE		"\001\033[0;34m\002"
+# define COLOR_PURPLE	"\001\033[0;35m\002"
+# define COLOR_CYAN		"\001\033[0;36m\002"
+# define COLOR_NONE		"\001\033[0;37m\002"
+
+/* Parsing */
+int			ft_start_parsing(t_data *db);
+
+/* Error display */
+void		ft_err_display(int errtype);
 
 #endif

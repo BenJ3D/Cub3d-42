@@ -1,15 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
+#    Updated: 2022/11/18 01:28:25 by bducrocq         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # $< "include one prerequisite"
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
+
+NAME = cub3d
+
+
 SRCDIR      := srcs
 SRCEXT      := c
-
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-
 OBJS = ${SOURCES:.c=.o}
 
 CC = gcc
-
 CFLAGS =# -Wall -Wextra -Werror -g3
 
 OS	= $(shell uname)
@@ -17,7 +30,7 @@ LIBFT = libs/libft/libft.a
 GNL = libs/gnl/gnl.a
 LIBFT_PATH = libs/libft
 GNL_PATH = libs/gnl
-HEADER   = includes/cub3d.h
+HEADER   = includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
 
 ifeq ($(OS), Linux)
 	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
@@ -26,8 +39,6 @@ else
 	MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 	MLX_PATH = libs/mlx_mac
 endif
-
-NAME = cub3D
 
 all : $(NAME)
 
