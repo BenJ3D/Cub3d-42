@@ -6,9 +6,14 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/18 01:28:25 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/18 03:06:18 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#	Si probleme compile mlx (genre "/usr/bin/ld: cannot find -lz")
+#	sous ubuntu/debian, try install :
+#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev
+
 
 # $< "include one prerequisite"
 # $@ "include target"
