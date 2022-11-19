@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/18 02:01:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:18:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 
 /* Parsing */
 int			ft_start_parsing(t_data *db);
+int			ft_pars_check_if_legal_char(char c);
 
 /* Error display */
 void		ft_err_display(int errtype);
