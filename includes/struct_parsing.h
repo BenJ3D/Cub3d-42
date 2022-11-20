@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/19 01:20:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:28:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum e_errtype
 	ERR_TXTMISSING_SO,
 	ERR_TXTMISSING_WE,
 	ERR_TXTMISSING_EA,
+	ERR_PARAM_UNKNOWN,
 	ERR_OTHER
 };
 
@@ -62,6 +63,9 @@ typedef struct s_pars
 {
 	int		ac;
 	char	**av;
+	char	*map_path;
+	int		map_fd;
+	int		param_ok;
 }			t_pars;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:00:04 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/04/10 23:02:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 02:59:12 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ static int	ft_read(int fd, int ret2, char *buf, char **line)
 	return (ret2);
 }
 
+/**
+ * @brief Get the next line object
+ * 
+ * @param fd 
+ * @return char* 
+ */
 char	*get_next_line(int fd)
 {	
 	static char		buf[BUFFER_SIZE + 1];

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/20 02:01:16 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:48:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@
 # define LEGITCHAR " SNEW01"	//authorized character in map
 # define CUBEXT ".cub"			//extension requise
 
+# define PARAM_NO "NO "			//texture wall North
+# define PARAM_SO "SO "			//texture wall South
+# define PARAM_WE "WE "			//texture wall West
+# define PARAM_EA "EA "			//texture wall East
+# define PARAM_C "C "			//ceiling color
+# define PARAM_F "F "			//floor color
+
 /* Parsing */
 int			ft_start_parsing(t_data *db);
 int			ft_pars_check_if_legal_char(char c);
@@ -64,6 +71,8 @@ int			ft_pars_check_if_legal_char(char c);
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
 int			ft_pars_openfile(const char *path);
+int			ft_set_parameters_with_file_header(t_data *db);
+void		ft_pars_headerfile(const char *buf);
 
 /* Error display */
 void		ft_err_display(int errtype);

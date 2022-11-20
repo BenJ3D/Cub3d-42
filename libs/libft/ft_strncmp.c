@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 19:03:07 by bducrocq          #+#    #+#             */
-/*   Updated: 2021/11/23 14:39:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:46:45 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{
 		i++;
 	}
+	int ret = (unsigned char)str1[i] - (unsigned char)str2[i];
+	printf("dbg strncmp %s / %s= %i\n", s1, s2, ret);
 	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/19 01:48:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 03:53:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 typedef struct s_game
 {
-	int		ac;
-	char	**av;
-	char	*map_path;
-	
+	int		ceiling[3]; //RGB
+	int		floor[3]; //RGB
+	char	*pathNO;
+	char	*pathSO;
+	char	*pathWE;
+	char	*pathEA;
 }			t_game;
 
 typedef struct s_data
