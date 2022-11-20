@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/19 01:06:20 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:57:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_err_display_textures(int errtype)
 		return (ft_putstr_fd("Missing texture : SOUTH.\n", 2));
 	else if (errtype == ERR_TXTMISSING_NO)
 		return (ft_putstr_fd("Missing texture : NORTH.\n", 2));
+	else if (errtype == ERR_BADEXTENSION)
+		ft_putstr_fd("The map must be in \"*.cub\" format\n", 2);
 	else
 		return (EXIT_SUCCESS);
 }
@@ -42,16 +44,15 @@ Please fill in the path of a map .cub extension\n", 2);
 		ft_putstr_fd("Player must be placed between the closed walls\n", 2);
 	else if (errtype == ERR_ARG_FORBIDEN)
 		ft_putstr_fd("Forbidden arguments in the map\n", 2);
-	else if (errtype == ERR_BADEXTENSION)
-		ft_putstr_fd("The map must be in \"*.cub\" format\n", 2);
 	else if (errtype == ERR_PARAM_NO_C)
 		ft_putstr_fd("Please add C parameter in map(celling color RGB)\n", 2);
 	else if (errtype == ERR_PARAM_NO_F)
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
 	else if (errtype == ERR_TXTMISSING_EA)
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
-	else if (ft_err_display_textures(errtype) == EXIT_FAILURE)
-		return;
-	else
+	else if (errtype == ERR_OTHER)
 		ft_putstr_fd("Error\n", 2);
+	ft_err_display_textures(errtype);
+	if (errtype != ERR_NONE)
+		exit (EXIT_FAILURE);
 }
