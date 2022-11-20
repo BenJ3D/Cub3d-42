@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/20 01:02:22 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 02:01:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param db 
  * @return int fd
  */
-int	ft_pars_openfile(char *path)
+int	ft_pars_openfile(const char *path)
 {
 	int		fd;
 	char	*errline;
@@ -29,6 +29,7 @@ int	ft_pars_openfile(char *path)
 	{
 		errline = ft_strjoin("open : ", path);
 		perror("open");
+		free (errline);
 		return (-1);
 	}
 	return (fd);
@@ -41,7 +42,7 @@ int	ft_pars_openfile(char *path)
  * @param filetype enter ".type"
  * @return int 
  */
-int	ft_pars_check_type_file(char *path, char *filetype) 	
+int	ft_pars_check_type_file(const char *path, const char *filetype)
 {
 	int	i;
 	int	y;

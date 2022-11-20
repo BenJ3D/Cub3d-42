@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/20 01:41:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/20 02:01:16 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int			ft_start_parsing(t_data *db);
 int			ft_pars_check_if_legal_char(char c);
 
 /* parsing files */
-int			ft_pars_check_type_file(char *path, char *filetype);
-int			ft_pars_openfile(char *path);
+int			ft_pars_check_type_file(const char *path, const char *filetype);
+int			ft_pars_openfile(const char *path);
 
 /* Error display */
 void		ft_err_display(int errtype);
