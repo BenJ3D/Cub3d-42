@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 04:03:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 04:32:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ t_vector	ft_get_rgb_value(const char *buf, int i)
 			tmp = ft_concat_char(tmp, buf[i]);
 			if (!ft_isdigit(buf[i + 1]))
 			{
+				if (ft_strlen(tmp) > 3)
+					ft_err_display(ERR_PARAM_TO_HIGH);
 				if (step == 0)
 					vec.x = ft_atoi(tmp);
 				else if (step == 1)
@@ -93,6 +95,8 @@ t_vector	ft_get_rgb_value(const char *buf, int i)
 		if (buf [i])
 			i++;
 	}
+	if (vec.x > 255 || vec.y > 255 || vec.z > 255)
+		ft_err_display(ERR_PARAM_TO_HIGH);
 	return (vec);
 }
 

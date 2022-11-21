@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 04:09:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 04:35:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	main(int ac, char **av)
 	t_data	db;
 //   C       417,2,25    
 ///////////////// TEST  ////////////////////
-	char test[] = "    C 	243,123,456     ";
+	char test[] = "    C 	25,45,42	 ";
 	char test2[] = " F 4,50,6";
 	
-	printf("%s\n%s\n", test, test2);
+	printf("Testing with buf :\n%s\n%s\n\n", test, test2);
 	ft_bzero(&db, sizeof(t_data));
 	ft_pars_headerfile(test, &db);
 	ft_pars_headerfile(test2, &db);
-	printf ("Ceiling vector R=%i,G=%i,B=%i\n", \
+	printf ("Result :\nCeiling vector R=%i,G=%i,B=%i\n", \
 	db.gm.ceiling.x, db.gm.ceiling.y, db.gm.ceiling.z);
 	printf ("Floor   vector R=%i,G=%i,B=%i\n", \
 	db.gm.floor.x, db.gm.floor.y, db.gm.floor.z);
