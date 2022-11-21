@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 04:25:59 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:59:37 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ static int	ft_err_display_textures(int errtype)
 		ft_putstr_fd("Invalid value for one of the parameters\n", 2);
 	else if (errtype == ERR_PARAM_TO_HIGH)
 		ft_putstr_fd("Invalid value : range for RGB is [0-255]\n", 2);
-	else
-		return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
