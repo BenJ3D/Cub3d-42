@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_files.c                                    :+:      :+:    :+:   */
+/*   dbg_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 19:45:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:44:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_set_parameters_with_file_header(t_main *main)
+void	dbg_display_all_parameter_value(t_main *main)
 {
-	char	*buf;
-	
-	buf = get_next_line(main->ps.map_fd);
-	while(buf)
-	{
-		ft_pars_headerfile(buf, main);
-		/* tant que pas tous les paranetres TODO: creer une var pour ca*/
-		free (buf);
-		buf = get_next_line(main->ps.map_fd);
-	}
-	puts("Yolo tous les parm sont la\n");
-	dbg_display_all_parameter_value(main);
-	return (EXIT_SUCCESS);
+	printf("C RGB = %i,%i,%i\n", main->gm.ceiling.x,main->gm.ceiling.y, main->gm.ceiling.z);
+	printf("F RGB = %i,%i,%i\n", main->gm.floor.x,main->gm.floor.y,main->gm.floor.z);
+	printf("NO path = %s\nSO path = %s\nWE path = %s\nEA path = %s\n", \
+					main->gm.pathNO, main->gm.pathSO, main->gm.pathWE, main->gm.pathEA);
 }

@@ -3,47 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 04:32:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:49:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/cub3d.h"
-
-// int	ft_get_rgb_value(t_data	*db, char *buf, int	i)
-// {
-// 	char	tmp[3];
-// 	int		max;
-// 	int		y;
-	
-// 	max = 0;
-// 	y = 0;
-// 	ft_bzero(tmp, sizeof(char));
-// 	while (ft_isspace(buf[i]))
-// 		i++;
-// 	if (!ft_isdigit(buf[i]))
-// 		ft_err_display(ERR_PARAM_INVALID);
-// 	while (buf[i])
-// 	{
-// 		while (buf[i] && ft_isdigit(buf[i]))
-// 		{
-// 			tmp[y++] = buf[i++];
-// 			max++;
-// 		}
-// 		while (max <= 3)
-// 		{
-// 			tmp[y++] = '\0';
-// 			max++;
-// 		}
-// 	}
-// 	return (0);
-// }
-
-
-//   C       417,2,25     
 
 t_vector	ft_get_rgb_value(const char *buf, int i)
 {
@@ -101,7 +69,7 @@ t_vector	ft_get_rgb_value(const char *buf, int i)
 }
 
 
-int	ft_pars_set_param_east(t_data *db)
+int	ft_pars_set_param_east(t_main *main)
 {
 	
 	return (0);
@@ -113,7 +81,7 @@ int	ft_pars_set_param_east(t_data *db)
  * 
  * @param buff 
  */
-void	ft_pars_headerfile(const char *buf, t_data *db)
+void	ft_pars_headerfile(const char *buf, t_main *main)
 {
 	int		i;
 	int		type;
@@ -133,9 +101,9 @@ void	ft_pars_headerfile(const char *buf, t_data *db)
 	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
 		puts("go param SO\n");
 	else if (ft_strncmp(buf + i, PARAM_C, ft_strlen(PARAM_C)) == 0)
-		db->gm.ceiling = ft_get_rgb_value(buf, i + 1);
+		main->gm.ceiling = ft_get_rgb_value(buf, i + 1);
 	else if (ft_strncmp(buf + i, PARAM_F, ft_strlen(PARAM_F)) == 0)
-		db->gm.floor = ft_get_rgb_value(buf, i + 1);
+		main->gm.floor = ft_get_rgb_value(buf, i + 1);
 	else
 		ft_err_display(ERR_PARAM_UNKNOWN);
 }
