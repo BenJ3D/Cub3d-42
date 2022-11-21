@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/21 19:54:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:04:59 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ typedef struct s_vector
 	int	y;
 	int	z;
 }			t_vector;
+typedef struct s_data
+{
+	void *img;
+	char *addr;
+	int bpp;
+	int line_length;
+	int endian;
+}			t_data;
 
 typedef struct s_game
 {
@@ -32,14 +40,6 @@ typedef struct s_game
 	char		*pathEA;
 }			t_game;
 
-typedef struct s_data
-{
-	void *img;
-	char *addr;
-	int bpp;
-	int line_length;
-	int endian;
-}			t_data;
 
 typedef struct s_main
 {

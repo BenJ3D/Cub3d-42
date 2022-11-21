@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/21 19:45:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:09:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 // # define KEY_D 2
 // # define DOORS 14
 // # define ESC 53
-
+# define GL_SILENCE_DEPRECATION
 # define LEGITCHAR " SNEW01"	//authorized character in map
 # define CUBEXT ".cub"			//extension requise
 
@@ -79,7 +79,7 @@ void		ft_pars_headerfile(const char *buf, t_main *main);
 void		ft_err_display(int errtype);
 
 /* Error display */
-void	maing_display_all_parameter_value(t_main *main);
+void	dbg_display_all_parameter_value(t_main *main);
 
 
 
