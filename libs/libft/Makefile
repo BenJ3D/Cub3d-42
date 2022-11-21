@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 09:53:02 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/20 03:37:20 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/21 00:38:56 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ FILES = ft_memset \
 		ft_strdup \
 		ft_substr \
 		ft_strjoin \
+		ft_strjoin_max \
+		ft_concat \
 		ft_strtrim \
 		ft_split \
 		ft_itoa \

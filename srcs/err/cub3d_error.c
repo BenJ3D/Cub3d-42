@@ -6,30 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/20 04:02:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/21 03:11:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_err_display_textures(int errtype)
-{
-	if (errtype == ERR_TXTMISSING_EA)
-		return (ft_putstr_fd("Missing texture : EAST.\n", 2));
-	else if (errtype == ERR_TXTMISSING_WE)
-		return (ft_putstr_fd("Missing texture : WEST.\n", 2));
-	else if (errtype == ERR_TXTMISSING_SO)
-		return (ft_putstr_fd("Missing texture : SOUTH.\n", 2));
-	else if (errtype == ERR_TXTMISSING_NO)
-		return (ft_putstr_fd("Missing texture : NORTH.\n", 2));
-	else if (errtype == ERR_BADEXTENSION)
-		ft_putstr_fd("The map must be in \"*.cub\" format\n", 2);
-	else if (errtype == ERR_PARAM_UNKNOWN)
-		ft_putstr_fd("Invalid parameter detected\n", 2);
-	else
-		return (EXIT_SUCCESS);
-}
-
+static int	ft_err_display_textures(int errtype);
 
 void	ft_err_display(int errtype)
 {
@@ -54,7 +37,28 @@ Please fill in the path of a map .cub extension\n", 2);
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
 	else if (errtype == ERR_TXTMISSING_EA)
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
-	ft_err_display_textures(errtype);
+	else
+		ft_err_display_textures(errtype);
 	if (errtype != ERR_NONE)
 		exit (EXIT_FAILURE);
+}
+
+static int	ft_err_display_textures(int errtype)
+{
+	if (errtype == ERR_TXTMISSING_EA)
+		return (ft_putstr_fd("Missing texture : EAST.\n", 2));
+	else if (errtype == ERR_TXTMISSING_WE)
+		return (ft_putstr_fd("Missing texture : WEST.\n", 2));
+	else if (errtype == ERR_TXTMISSING_SO)
+		return (ft_putstr_fd("Missing texture : SOUTH.\n", 2));
+	else if (errtype == ERR_TXTMISSING_NO)
+		return (ft_putstr_fd("Missing texture : NORTH.\n", 2));
+	else if (errtype == ERR_BADEXTENSION)
+		ft_putstr_fd("The map must be in \"*.cub\" format\n", 2);
+	else if (errtype == ERR_PARAM_UNKNOWN)
+		ft_putstr_fd("Unknown parameter detected\n", 2);
+	else if (errtype == ERR_PARAM_INVALID)
+		ft_putstr_fd("Invalid value for one of the parameters\n", 2);
+	else
+		return (EXIT_SUCCESS);
 }
