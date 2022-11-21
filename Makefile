@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/20 02:06:17 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/21 20:03:51 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #	Si probleme compile mlx (genre "/usr/bin/ld: cannot find -lz")
 #	sous ubuntu/debian, try install :
-#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev
+#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev balbla
 
 
 # $< "include one prerequisite"
