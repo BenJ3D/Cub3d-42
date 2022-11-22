@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_files.c                                    :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 04:36:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 03:43:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_set_parameters_with_file_header(t_main *main)
+static void	ft_free_all(t_main *main)
 {
-	char	*buf;
-	char	*buf2;
-	
-	buf2 = NULL;
-	buf = get_next_line(main->ps.map_fd);
-	while(buf)
-	{
-		ft_pars_headerfile(buf, main);
-		/* tant que pas tous les paranetres TODO: creer une var pour ca*/
-		free (buf);
-		buf = get_next_line(main->ps.map_fd);
-	}
-	puts("Yolo tous les parm sont la\n");
-	dbg_display_all_parameter_value(main);
-	return (EXIT_SUCCESS);
+	free(main->ps.map_path);
+}
+
+/**
+ * @brief free and exit(0)
+ * 
+ * @param main 
+ */
+void	ft_free_all_and_exit(t_main *main)
+{
+	ft_free_all(main);
+	exit(0);
+}
+
+/**
+ * @brief free and exit(1)
+ * 
+ * @param main 
+ */
+void	ft_free_all_and_exit_err(t_main *main)
+{
+	ft_free_all(main);
+	exit(1);
 }

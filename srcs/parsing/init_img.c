@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_files.c                                    :+:      :+:    :+:   */
+/*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 04:36:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 04:23:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_set_parameters_with_file_header(t_main *main)
+t_data	ft_init_mlx_img(char *buf, t_main *main)
 {
-	char	*buf;
-	char	*buf2;
-	
-	buf2 = NULL;
-	buf = get_next_line(main->ps.map_fd);
-	while(buf)
+	t_data	img;
+	char	path[MAXPATH];
+	int		i;
+
+	i = 0;
+	ft_bzero(path, sizeof(char) * MAXPATH);
+	while (ft_isspace(*buf))
+		buf++;
+	while (!ft_isspace(buf[i]))
+			i++;
+	while (ft_isspace(buf[i]))
+		i++;
+	if (!ft_isspace(buf[i]) && buf[i] != '\0')
+		ft_err_display(ERR_PARAM_INVALID, main);
+	i = 0;
+	while (!ft_isspace(buf[i]) && i <= MAXPATH)
 	{
-		ft_pars_headerfile(buf, main);
-		/* tant que pas tous les paranetres TODO: creer une var pour ca*/
-		free (buf);
-		buf = get_next_line(main->ps.map_fd);
+		path[i] = buf[i];
+		i++;
 	}
-	puts("Yolo tous les parm sont la\n");
-	dbg_display_all_parameter_value(main);
-	return (EXIT_SUCCESS);
+	ft_pars_openfile(path);
+	return (img);
 }

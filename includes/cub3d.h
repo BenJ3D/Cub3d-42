@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/21 19:45:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 03:59:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 
 # define LEGITCHAR " SNEW01"	//authorized character in map
 # define CUBEXT ".cub"			//extension requise
+# define MAXPATH 2048
 
 # define PARAM_NO "NO "			//texture wall North
 # define PARAM_SO "SO "			//texture wall South
@@ -67,19 +68,26 @@
 /* Parsing */
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_if_legal_char(char c);
-t_vector	ft_get_rgb_value(const char *buf, int i);
+t_vector	ft_get_rgb_value(const char *buf, int i, t_main *main);
 
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
 int			ft_pars_openfile(const char *path);
 int			ft_set_parameters_with_file_header(t_main *main);
-void		ft_pars_headerfile(const char *buf, t_main *main);
+void		ft_pars_headerfile(char *buf, t_main *main);
+
+/* init mlx */
+t_data		ft_init_mlx_img(char *buf, t_main *main);
+
+/* free ft */
+void		ft_free_all_and_exit(t_main *main);
+void		ft_free_all_and_exit_err(t_main *main);
 
 /* Error display */
-void		ft_err_display(int errtype);
+void		ft_err_display(int errtype, t_main *main);
 
 /* Error display */
-void	maing_display_all_parameter_value(t_main *main);
+void		dbg_display_all_parameter_value(t_main *main);
 
 
 

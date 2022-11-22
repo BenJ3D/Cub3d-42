@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 16:59:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 03:04:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 static int	ft_err_display_textures(int errtype);
 
-void	ft_err_display(int errtype)
+/**
+ * @brief display error explained and exit(1) without free() 
+ * 
+ * @param errtype 
+ */
+void	ft_err_display(int errtype, t_main *main)
 {
 	if (errtype != ERR_NONE)
 		ft_putstr_fd("Error\n", 2);
@@ -32,7 +37,7 @@ Please fill in the path of a map .cub extension\n", 2);
 	else if (errtype == ERR_ARG_FORBIDEN)
 		ft_putstr_fd("Forbidden arguments in the map\n", 2);
 	else if (errtype == ERR_PARAM_NO_C)
-		ft_putstr_fd("Please add C parameter in map(celling color RGB)\n", 2);
+		ft_putstr_fd("Please add C parameter in map(ceiling color RGB)\n", 2);
 	else if (errtype == ERR_PARAM_NO_F)
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
 	else if (errtype == ERR_TXTMISSING_EA)
@@ -40,7 +45,7 @@ Please fill in the path of a map .cub extension\n", 2);
 	else
 		ft_err_display_textures(errtype);
 	if (errtype != ERR_NONE)
-		exit (EXIT_FAILURE);
+		ft_free_all_and_exit_err(main);
 }
 
 static int	ft_err_display_textures(int errtype)
@@ -61,5 +66,9 @@ static int	ft_err_display_textures(int errtype)
 		ft_putstr_fd("Invalid value for one of the parameters\n", 2);
 	else if (errtype == ERR_PARAM_TO_HIGH)
 		ft_putstr_fd("Invalid value : range for RGB is [0-255]\n", 2);
+	else if (errtype == ERR_MLX_FAILINIT)
+		ft_putstr_fd("mlx failed while initiating\n", 2);
+	else if (errtype == ERR_PARAM_MISSING)
+		ft_putstr_fd("Missing parameters: map must contain 6 parameters\n", 2);
 	return (EXIT_SUCCESS);
 }
