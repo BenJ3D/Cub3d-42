@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 04:36:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 04:37:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	ft_set_parameters_with_file_header(t_main *main)
 {
 	char	*buf;
-	char	*buf2;
 	
-	buf2 = NULL;
 	buf = get_next_line(main->ps.map_fd);
 	while(buf)
 	{
