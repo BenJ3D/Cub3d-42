@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 03:43:49 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:29:34 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_free_all_and_exit(t_main *main)
  * 
  * @param main 
  */
-void	ft_free_all_and_exit_err(t_main *main)
+void	ft_free_all_and_exit_err(t_main *main, int error)
 {
 	ft_free_all(main);
-	exit(1);
+	exit(error);
 }

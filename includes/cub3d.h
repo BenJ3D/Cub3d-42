@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/22 03:59:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:29:56 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_data		ft_init_mlx_img(char *buf, t_main *main);
 
 /* free ft */
 void		ft_free_all_and_exit(t_main *main);
-void		ft_free_all_and_exit_err(t_main *main);
+void		ft_free_all_and_exit_err(t_main *main, int error);
 
 /* Error display */
 void		ft_err_display(int errtype, t_main *main);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 17:23:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:30:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_start_parsing(t_main *main)
 	main->ps.map_path = ft_strdup(main->ps.av[1]);
 	main->ps.map_fd = ft_pars_openfile(main->ps.map_path);
 	if (main->ps.map_fd < 3)
-		exit(errno);
+		ft_free_all_and_exit_err(main, errno);
 	else
 		ft_set_parameters_with_file_header(main);
 	return (EXIT_SUCCESS);
