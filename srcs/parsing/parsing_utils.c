@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 04:33:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:22:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_pars_openfile(const char *path)
 		free (errline);
 		return (-1);
 	}
-	return (0);
+	return (fd);
 }
 
 /**
