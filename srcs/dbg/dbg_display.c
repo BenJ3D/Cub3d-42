@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dbg_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 19:44:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:37:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	dbg_display_all_parameter_value(t_main *main)
 {
-	printf("C RGB = %i,%i,%i\n", main->gm.ceiling.x,main->gm.ceiling.y, main->gm.ceiling.z);
-	printf("F RGB = %i,%i,%i\n", main->gm.floor.x,main->gm.floor.y,main->gm.floor.z);
+	printf("C RGB = %i,%i,%i\n", main->gm.c_rgb.x,main->gm.c_rgb.y, main->gm.c_rgb.z);
+	printf("F RGB = %i,%i,%i\n", main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z);
 	printf("NO path = %s\nSO path = %s\nWE path = %s\nEA path = %s\n", \
 					main->gm.pathNO, main->gm.pathSO, main->gm.pathWE, main->gm.pathEA);
 }

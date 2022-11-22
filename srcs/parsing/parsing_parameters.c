@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 19:49:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/22 01:37:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	ft_pars_headerfile(const char *buf, t_main *main)
 	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
 		puts("go param SO\n");
 	else if (ft_strncmp(buf + i, PARAM_C, ft_strlen(PARAM_C)) == 0)
-		main->gm.ceiling = ft_get_rgb_value(buf, i + 1);
+		main->gm.c_rgb = ft_get_rgb_value(buf, i + 1);
 	else if (ft_strncmp(buf + i, PARAM_F, ft_strlen(PARAM_F)) == 0)
-		main->gm.floor = ft_get_rgb_value(buf, i + 1);
+		main->gm.f_rgb = ft_get_rgb_value(buf, i + 1);
 	else
 		ft_err_display(ERR_PARAM_UNKNOWN);
 }
