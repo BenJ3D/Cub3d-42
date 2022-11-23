@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 18:49:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:59:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_set_parameters_with_file_header(t_main *main)
 		free (buf);
 		buf = get_next_line(main->ps.map_fd);
 	}
+	free (buf);
 	// printf("dgb path EA = %s\n", main->ps.txtpath.pathEA);
 	dbg_display_all_parameter_value(main);
 	// printf("dgb path EA = %s\n", main->ps.txtpath.pathEA);
