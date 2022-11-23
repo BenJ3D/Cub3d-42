@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 18:53:40 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:34:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
-# include <sys/syslimits.h>
+// # include <sys/syslimits.h>
 
 /* Game Settings */
 // # define HEIGHT 768
@@ -56,6 +56,8 @@
 // # define DOORS 14
 // # define ESC 53
 
+
+# define PATH_MAX 1024
 # define LEGITCHAR " SNEW01"	//authorized character in map
 # define CUBEXT ".cub"			//extension requise
 

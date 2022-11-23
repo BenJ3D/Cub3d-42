@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   struct_parsing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 17:52:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:35:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_PARSING_H
 # define STRUCT_PARSING_H
 # include "struct.h"
-# include <sys/syslimits.h>
+# include "cub3d.h"
+// # include <sys/syslimits.h>
+// # include <syslimits.h>
+// # include <limits.h>
+# define PATH_MAX 1024
 
 enum e_errtype
 {

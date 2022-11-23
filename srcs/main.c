@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 18:44:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:07:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	main(int ac, char **av)
 		ft_err_display(ERR_MLX_FAILINIT, &main);
 	if (ft_start_parsing(&main) == EXIT_SUCCESS)
 		printf("Parsing it's OK\nLet's go exec !\n");
+	ft_free_all_and_exit(&main);
 	return (0);
 }

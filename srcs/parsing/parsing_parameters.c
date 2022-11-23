@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 19:25:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:22:42 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,16 @@ t_vector	ft_get_rgb_value(char *buf, t_main *main)
 		if (step < 3 && ft_strncmp(tmp, ",", 2))
 		{
 			free(tmp);
+			tmp = NULL;
 			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
 		}
 		else if (step >= 3 && tmp[0] != '\0')
 		{
 			free(tmp);
+			tmp = NULL;
 			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
 		}
+		free (tmp);
 	}
 	if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
 												|| (vec.z > 255 || vec.z < 0))

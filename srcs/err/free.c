@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 14:40:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 22:18:27 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 static void	ft_free_all(t_main *main)
 {
+	// main->ps.map_path = NULL;
+	printf("map path before free = %s\n", main->ps.map_path);
 	free(main->ps.map_path);
+	// free(main->gm.c_rgb);
+	// free(main->gm.f_rgb);
+	
+	close(main->ps.map_fd);
 }
 
 /**

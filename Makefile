@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/23 18:49:24 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/23 21:30:36 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJS = ${SOURCES:.c=.o}
 
 CFLAGS = -g3 # -Wall -Wextra -Werror
 SANITIZE = -fsanitize=address
-CC = gcc $(SANITIZE)
+CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
 LIBFT = libs/libft/libft.a
