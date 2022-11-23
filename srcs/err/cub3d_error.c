@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 14:34:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:53:44 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static int	ft_err_display_textures(int errtype)
 		ft_putstr_fd("mlx failed while initiating\n", 2);
 	else if (errtype == ERR_PARAM_MISSING)
 		ft_putstr_fd("Missing parameters: map must contain 6 parameters\n", 2);
+	else if (errtype == ERR_PARAM_DUPLICATED)
+		ft_putstr_fd("A parameter is duplicated\n", 2);
 	return (EXIT_SUCCESS);
 }
 

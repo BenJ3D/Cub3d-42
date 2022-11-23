@@ -6,13 +6,13 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 17:06:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:25:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_get_next_word(char *buf, int *i2, t_main *main)
+char	*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main)
 {
 	char			*tmp;
 	int				i;
@@ -39,6 +39,27 @@ char	*ft_get_next_word(char *buf, int *i2, t_main *main)
 	tmp[x] = '\0';
 	*i2 = i;
 	return (tmp);
+}
+
+void	ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	y = 0;
+	if (dest[0] != '\0')
+		ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
+	while (ft_isspace(str[i]))
+		i++;
+	while (!ft_isspace(str[i]))
+		dest[y++] = str[i++];
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]) && str[i] != '\0')
+			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
+		i++;
+	}
 }
 
 /**
@@ -76,7 +97,7 @@ t_vector	ft_get_rgb_value(char *buf, t_main *main)
 	ft_bzero(&vec, sizeof(t_vector));
 	while(step < 3)
 	{
-		tmp = ft_get_next_word(buf, &i, main);
+		tmp = ft_get_next_word_custom_i(buf, &i, main);
 		printf("tmp = %s\n", tmp);
 		if (ft_str_has_only_digit(tmp))
 		{
@@ -97,7 +118,7 @@ t_vector	ft_get_rgb_value(char *buf, t_main *main)
 		step++;
 		free(tmp);
 		tmp = NULL;
-		tmp = ft_get_next_word(buf, &i, main);
+		tmp = ft_get_next_word_custom_i(buf, &i, main);
 		if (step < 3 && ft_strncmp(tmp, ",", 2))
 		{
 			free(tmp);
@@ -115,70 +136,13 @@ t_vector	ft_get_rgb_value(char *buf, t_main *main)
 	return (vec);
 }
 
-// t_vector	ft_get_rgb_value(const char *buf, int i, t_main *main)
-// {
-// 	char		*tmp;
-// 	int			step;
-// 	t_vector	vec;
+void	ft_action_for_texture_param(int paramtype)
+{
 	
-// 	step = 0;
-// 	tmp = NULL;
-// 	ft_bzero(&vec, sizeof(t_vector));
-// 	while (ft_isspace(buf[i]))
-// 		i++;
-// 	if (!ft_isdigit(buf[i]))
-// 		ft_err_display(ERR_PARAM_INVALID, main);
-// 	while(buf[i])
-// 	{
-// 		while (ft_isspace(buf[i]))
-// 			i++;
-// 		if ((!ft_isdigit(buf[i])) && buf[i] != ',')
-// 			ft_err_display(ERR_PARAM_INVALID, main);
-// 		if (ft_isdigit(buf[i]))
-// 		{
-// 			tmp = ft_concat_char(tmp, buf[i]);
-// 			if (!ft_isdigit(buf[i + 1]))
-// 			{
-// 				if (ft_strlen(tmp) > 3)
-// 					ft_err_display(ERR_PARAM_TO_HIGH, main);
-// 				if (step == 0)
-// 					vec.x = ft_atoi(tmp);
-// 				else if (step == 1)
-// 					vec.y = ft_atoi(tmp);
-// 				else if (step == 2)
-// 					vec.z = ft_atoi(tmp);
-// 				step++;
-// 				free (tmp);
-// 				tmp = NULL;
-// 				i++;
-// 				while (ft_isspace(buf[i]))
-// 					i++;
-// 				if (buf[i] != ',')
-// 					ft_err_display(ERR_PARAM_INVALID, main);
-// 			}
-// 		}
-// 		if (step > 0 && step < 3)
-// 		{
-// 			if (ft_isdigit(buf[i]) || buf[i] != ',')
-// 				ft_err_display(ERR_PARAM_INVALID, main);
-// 		}
-// 		else if (buf[i] && step >= 3)
-// 		{
-// 			if (!ft_isspace(buf[i]))
-// 				ft_err_display(ERR_PARAM_INVALID, main);
-// 		}
-// 		if (buf [i])
-// 			i++;
-// 	}
-// 	if (vec.x > 255 || vec.y > 255 || vec.z > 255)
-// 		ft_err_display(ERR_PARAM_TO_HIGH, main);
-// 	return (vec);
-// }
-
-
+}
 
 /**
- * @brief check header file for find parameters line per line
+ * @brief check header file for find parameters line per line //TODO: norme ;(
  * 
  * @param buff 
  */
@@ -196,25 +160,34 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 	if (ft_strncmp(buf + i, PARAM_EA, ft_strlen(PARAM_EA)) == 0)
 	{
 		puts("go param EA\n");
-	
-		// main->gm.imgEA = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);
+		if (!ft_isspace(buf[i + ft_strlen(PARAM_EA)]))
+			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
+		puts("go param EA2\n");
+		ft_getpath_texture(buf + (i + ft_strlen(PARAM_EA)), \
+											main->ps.txtpath.pathEA, main);
 		main->ps.param_count++;
 	}
 	else if (ft_strncmp(buf + i, PARAM_WE, ft_strlen(PARAM_WE)) == 0)
 	{
 		puts("go param WE\n");
+		ft_getpath_texture(buf + (i + ft_strlen(PARAM_WE)), \
+											main->ps.txtpath.pathWE, main);
 		main->ps.param_count++;
 
 	}
 	else if (ft_strncmp(buf + i, PARAM_NO, ft_strlen(PARAM_NO)) == 0)
 	{
 		puts("go param NO\n");
+		ft_getpath_texture(buf + (i + ft_strlen(PARAM_NO)), \
+											main->ps.txtpath.pathNO, main);
 		main->ps.param_count++;
 
 	}
 	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
 	{
 		puts("go param SO\n");
+		ft_getpath_texture(buf + (i + ft_strlen(PARAM_SO)), \
+											main->ps.txtpath.pathSO, main);
 		main->ps.param_count++;
 
 	}
@@ -222,12 +195,20 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 	{
 		if (!ft_isspace(buf[i + 1]))
 			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
+		else if (main->ps.c_isalreadyset == 1)
+			ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
 		main->gm.c_rgb = ft_get_rgb_value(buf + (i + 1), main);
+		main->ps.c_isalreadyset = 1;
 		main->ps.param_count++;
 	}
 	else if (ft_strncmp(buf + i, PARAM_F, ft_strlen(PARAM_F)) == 0)
 	{
+		if (!ft_isspace(buf[i + 1]))
+			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
+		else if (main->ps.f_isalreadyset == 1)
+			ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
 		main->gm.f_rgb = ft_get_rgb_value(buf + (i + 1), main);
+		main->ps.f_isalreadyset = 1;
 		main->ps.param_count++;
 	}
 	else if (ft_strncmp(buf + i, LEGITCHAR, 1) == 0)

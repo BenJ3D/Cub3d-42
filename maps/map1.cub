@@ -1,10 +1,9 @@
 C		  10, 			231 ,227 						
-F 0,  055,   13						
-   EA     ./assets/textures/wall_1.xpm      
+F	0,055,13					
+EA ./assets/textures/wall_1.xpm      
    NO     ./assets/wall_2.xpm
          SO     ./assets/wall_3.xpm 
    WE     ./assets/wall_4.xpm 
-
 
 
 111111111111111

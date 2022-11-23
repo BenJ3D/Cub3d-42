@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 13:25:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:52:06 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ enum e_errtype
 	ERR_PLAYER_BAD_POS,
 	ERR_PARAM_UNKNOWN,
 	ERR_PARAM_INVALID,
+	ERR_PARAM_DUPLICATED,
 	ERR_PARAM_MISSING,
 	ERR_PARAM_TO_HIGH,
 	ERR_PARAM_NO_C,
@@ -79,6 +80,8 @@ typedef struct s_pars
 	char			**av;
 	char			*map_path;
 	int				map_fd;
+	int				f_isalreadyset;
+	int				c_isalreadyset;
 	int				param_count;
 	t_textpath		txtpath;
 }			t_pars;
