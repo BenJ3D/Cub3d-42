@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/22 17:29:56 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 17:03:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "./struct.h"
+# include "./struct_parsing.h"
 # include "../libs/mlx_mac/mlx.h"
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
@@ -25,6 +26,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+# include <sys/syslimits.h>
 
 /* Game Settings */
 // # define HEIGHT 768
@@ -56,19 +58,18 @@
 
 # define LEGITCHAR " SNEW01"	//authorized character in map
 # define CUBEXT ".cub"			//extension requise
-# define MAXPATH 2048
 
 # define PARAM_NO "NO "			//texture wall North
 # define PARAM_SO "SO "			//texture wall South
 # define PARAM_WE "WE "			//texture wall West
 # define PARAM_EA "EA "			//texture wall East
-# define PARAM_C "C "			//ceiling color
+# define PARAM_C "C"			//ceiling color
 # define PARAM_F "F "			//floor color
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_if_legal_char(char c);
-t_vector	ft_get_rgb_value(const char *buf, int i, t_main *main);
+t_vector	ft_get_rgb_value(char *buf, t_main *main);
 
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
@@ -79,14 +80,19 @@ void		ft_pars_headerfile(char *buf, t_main *main);
 /* init mlx */
 t_data		ft_init_mlx_img(char *buf, t_main *main);
 
+/* libft custom */
+void		*ft_calloc_cub(size_t count, size_t size, t_main *main); //exit if malloc fail
+
+
 /* free ft */
 void		ft_free_all_and_exit(t_main *main);
 void		ft_free_all_and_exit_err(t_main *main, int error);
 
 /* Error display */
-void		ft_err_display(int errtype, t_main *main);
+void		ft_err_display(int errtype, t_main *main); //FIXME: unless ?
+void		ft_err_display_and_exit(int errtype, t_main *main);
 
-/* Error display */
+/* ft dbg //TODO: del before final push */
 void		dbg_display_all_parameter_value(t_main *main);
 
 

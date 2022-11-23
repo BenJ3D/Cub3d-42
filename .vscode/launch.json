@@ -10,7 +10,8 @@
 			"name": "Debug",
 			"program": "${workspaceFolder}/cub3d",
 			"args": ["./maps/map1.cub"],
-			"cwd": "${workspaceFolder}"
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "build"
 		}
 	]
 }

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/22 03:40:34 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:22:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+# include "cub3d.h"
 # include "struct_parsing.h"
 
 typedef struct s_vector
@@ -30,6 +31,7 @@ typedef struct s_data
 	int				endian;
 }				t_data;
 
+
 typedef struct s_game
 {
 	t_vector		c_rgb; // ceiling color RGB (xyz)
@@ -38,10 +40,6 @@ typedef struct s_game
 	t_data			imgSO;
 	t_data			imgWE;
 	t_data			imgEA;
-	// char			*pathNO;
-	// char			*pathSO;
-	// char			*pathWE;
-	// char			*pathEA;
 }				t_game;
 
 typedef struct s_main

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/22 03:04:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:34:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ Please fill in the path of a map .cub extension\n", 2);
 	else
 		ft_err_display_textures(errtype);
 	if (errtype != ERR_NONE)
-		ft_free_all_and_exit_err(main);
+		ft_free_all_and_exit_err(main, errtype);
 }
 
 static int	ft_err_display_textures(int errtype)
@@ -71,4 +71,16 @@ static int	ft_err_display_textures(int errtype)
 	else if (errtype == ERR_PARAM_MISSING)
 		ft_putstr_fd("Missing parameters: map must contain 6 parameters\n", 2);
 	return (EXIT_SUCCESS);
+}
+
+/**
+ * @brief display type error and exit to ft_free_all_and_exit_err()
+ * 
+ * @param errtype 
+ * @param main 
+ */
+void	ft_err_display_and_exit(int errtype, t_main *main)
+{
+	ft_err_display(errtype, main);
+	ft_free_all_and_exit_err(main, 1);
 }

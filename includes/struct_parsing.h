@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   struct_parsing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/22 03:03:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:25:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_PARSING_H
 # define STRUCT_PARSING_H
+# include "struct.h"
+# include <sys/syslimits.h>
 
 enum e_errtype
 {
@@ -49,27 +51,36 @@ enum e_boxtype
 	BOX_SPACE
 };
 
+typedef struct s_textpath
+{
+	char			pathNO[PATH_MAX];
+	char			pathSO[PATH_MAX];
+	char			pathWE[PATH_MAX];
+	char			pathEA[PATH_MAX];
+}				t_textpath;
+
 typedef struct s_box
 {
-	int		type;
-	int		posx;
-	int		posy;
-	int		in_map;
+	int				type;
+	int				posx;
+	int				posy;
+	int				in_map;
 }			t_box;
 
 typedef struct s_map
 {
-	int		max_width;
-	int		height;
+	int				max_width;
+	int				height;
 }			t_map;
 
 typedef struct s_pars
 {
-	int		ac;
-	char	**av;
-	char	*map_path;
-	int		map_fd;
-	int		param_ok;
+	int				ac;
+	char			**av;
+	char			*map_path;
+	int				map_fd;
+	int				param_count;
+	t_textpath		txtpath;
 }			t_pars;
 
 #endif
