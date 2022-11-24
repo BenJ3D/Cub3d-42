@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 13:22:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 01:40:31 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 
 typedef struct s_game
 {
+	char			**map;
 	t_vector		c_rgb; // ceiling color RGB (xyz)
 	t_vector		f_rgb; // floor color RGB (xyz)
 	t_data			imgNO;
@@ -44,7 +45,7 @@ typedef struct s_game
 
 typedef struct s_main
 {
-	t_data			main;
+	t_data			db;
 	t_pars			ps; //tout pour le parsing
 	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
 	void			*mlx;

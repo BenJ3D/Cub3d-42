@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 21:35:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 02:47:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ enum e_errtype
 	ERR_NOARG,
 	ERR_ARG_FORBIDEN,
 	ERR_TOOMANYARG,
-	ERR_WALL,
+	ERR_MAP_UNKNOWN_CHAR,
+	ERR_MAP_WALLNOCLOSE,
 	ERR_PLAYER_MISSING,
 	ERR_PLAYER_BAD_POS,
 	ERR_PARAM_UNKNOWN,
@@ -75,7 +76,8 @@ typedef struct s_box
 typedef struct s_map
 {
 	int				max_width;
-	int				height;
+	int				max_h;
+	char			*maptmp;
 }			t_map;
 
 typedef struct s_pars
@@ -88,6 +90,7 @@ typedef struct s_pars
 	int				c_isalreadyset;
 	int				param_count;
 	t_textpath		txtpath;
+	t_map			map;
 }			t_pars;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/23 21:34:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 03:17:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
+# define PATH_MAX 1024
+# define LEGITCHAR "SNEW01"	//authorized character in map
+# define PLAYERSTART "SNEW"	// char for player start position
+# define CUBEXT ".cub"			//extension requise
+# define EMPTYCHAR "2"			//char de substitution dans les vides de la map
+
+# define PARAM_NO "NO"			//texture wall North
+# define PARAM_SO "SO"			//texture wall South
+# define PARAM_WE "WE"			//texture wall West
+# define PARAM_EA "EA"			//texture wall East
+# define PARAM_C "C"			//ceiling color
+# define PARAM_F "F"			//floor color
+
 /* Linux Keys */
 # define KEY_RIGHT 65363
 # define KEY_LEFT 65361
@@ -57,27 +70,20 @@
 // # define ESC 53
 
 
-# define PATH_MAX 1024
-# define LEGITCHAR " SNEW01"	//authorized character in map
-# define CUBEXT ".cub"			//extension requise
-
-# define PARAM_NO "NO"			//texture wall North
-# define PARAM_SO "SO"			//texture wall South
-# define PARAM_WE "WE"			//texture wall West
-# define PARAM_EA "EA"			//texture wall East
-# define PARAM_C "C"			//ceiling color
-# define PARAM_F "F"			//floor color
-
 /* Parsing */
 int			ft_start_parsing(t_main *main);
-int			ft_pars_check_if_legal_char(char c);
+int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
 t_vector	ft_get_rgb_value(char *buf, t_main *main);
 
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
 int			ft_pars_openfile(const char *path);
-int			ft_set_parameters_with_file_header(t_main *main);
+int			ft_set_parameters_with_file(t_main *main);
 void		ft_pars_headerfile(char *buf, t_main *main);
+
+/* parsing map */
+int			ft_pars_map(char *buf, t_main *main);
+int			ft_norm_map(t_main *main);
 
 /* init mlx */
 t_data		ft_init_mlx_img(char *buf, t_main *main);

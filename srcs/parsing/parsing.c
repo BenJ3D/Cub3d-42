@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 21:56:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 02:20:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_start_parsing(t_main *main)
 	if (main->ps.map_fd < 3)
 		ft_free_all_and_exit_err(main, errno);
 	else
-		ft_set_parameters_with_file_header(main);
+		ft_set_parameters_with_file(main);
 	return (EXIT_SUCCESS);
 }

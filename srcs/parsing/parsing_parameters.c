@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 22:22:42 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 02:30:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_vector	ft_get_rgb_value(char *buf, t_main *main)
 	while(step < 3)
 	{
 		tmp = ft_get_next_word_custom_i(buf, &i, main);
-		printf("tmp = %s\n", tmp);
 		if (ft_str_has_only_digit(tmp))
 		{
 			free(tmp);
@@ -162,17 +161,14 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 		return ;
 	if (ft_strncmp(buf + i, PARAM_EA, ft_strlen(PARAM_EA)) == 0)
 	{
-		puts("go param EA\n");
 		if (!ft_isspace(buf[i + ft_strlen(PARAM_EA)]))
 			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		puts("go param EA2\n");
 		ft_getpath_texture(buf + (i + ft_strlen(PARAM_EA)), \
 											main->ps.txtpath.pathEA, main);
 		main->ps.param_count++;
 	}
 	else if (ft_strncmp(buf + i, PARAM_WE, ft_strlen(PARAM_WE)) == 0)
 	{
-		puts("go param WE\n");
 		ft_getpath_texture(buf + (i + ft_strlen(PARAM_WE)), \
 											main->ps.txtpath.pathWE, main);
 		main->ps.param_count++;
@@ -180,7 +176,6 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 	}
 	else if (ft_strncmp(buf + i, PARAM_NO, ft_strlen(PARAM_NO)) == 0)
 	{
-		puts("go param NO\n");
 		ft_getpath_texture(buf + (i + ft_strlen(PARAM_NO)), \
 											main->ps.txtpath.pathNO, main);
 		main->ps.param_count++;
@@ -188,7 +183,6 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 	}
 	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
 	{
-		puts("go param SO\n");
 		ft_getpath_texture(buf + (i + ft_strlen(PARAM_SO)), \
 											main->ps.txtpath.pathSO, main);
 		main->ps.param_count++;
