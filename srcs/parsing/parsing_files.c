@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 03:53:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:58:34 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,20 @@ int	ft_check_if_map_has_player(t_main *main)
 	char	*str;
 
 	i = 0;
-	if (main->ps.map.maptmp)
-		str = main->ps.map.maptmp;
-	else
-		str = NULL;
-	// printf("str = %s\n", str);
+	str = ft_strdup(main->ps.map.maptmp);
 	while(str[i])
 	{
 		while(str[i] && ft_isspace(str[i]))
 			i++;
 		if (ft_pars_check_has_chars(str[i], PLAYERSTART, main) == EXIT_SUCCESS)
 		{
-			str = NULL;
+			free (str);
 			return (EXIT_SUCCESS);
 		}
-		i++;
+		if (str[i])
+			i++;
 	}
-	str = NULL;
+	free (str);
 	return (EXIT_FAILURE);
 }
 
