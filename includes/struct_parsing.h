@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/24 02:47:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:35:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ typedef struct s_box
 
 typedef struct s_map
 {
-	int				max_width;
-	int				max_h;
+	int				maxw;
+	int				maxh;
 	char			*maptmp;
 }			t_map;
 

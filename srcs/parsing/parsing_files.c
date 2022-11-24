@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 16:58:34 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:39:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	ft_set_parameters_with_file(t_main *main)
 	if (ft_check_if_map_has_player(main) == EXIT_FAILURE)
 		ft_err_display_and_exit(ERR_PLAYER_MISSING, main);
 	puts("Yolo tous les parm sont la - on \n");
-	printf("map one line == \n%s\n", main->ps.map.maptmp);
-
+	// printf("map one line == \n%s\n", main->ps.map.maptmp);
+	ft_pars_norm_map(main);
+	ft_pars_check_wall(main);
 	return (EXIT_SUCCESS);
 }

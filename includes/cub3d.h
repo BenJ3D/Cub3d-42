@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/24 03:17:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:39:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,16 @@
 # define PATH_MAX 1024
 # define LEGITCHAR "SNEW01"	//authorized character in map
 # define PLAYERSTART "SNEW"	// char for player start position
-# define CUBEXT ".cub"			//extension requise
-# define EMPTYCHAR "2"			//char de substitution dans les vides de la map
+# define FLOOR '0'	// char for player start position
+# define CUBEXT ".cub"		//extension requise
+# define EMPTY '-'		//char de substitution dans les vides de la map
 
-# define PARAM_NO "NO"			//texture wall North
-# define PARAM_SO "SO"			//texture wall South
-# define PARAM_WE "WE"			//texture wall West
-# define PARAM_EA "EA"			//texture wall East
-# define PARAM_C "C"			//ceiling color
-# define PARAM_F "F"			//floor color
+# define PARAM_NO "NO"		//texture wall North
+# define PARAM_SO "SO"		//texture wall South
+# define PARAM_WE "WE"		//texture wall West
+# define PARAM_EA "EA"		//texture wall East
+# define PARAM_C "C"		//ceiling color
+# define PARAM_F "F"		//floor color
 
 /* Linux Keys */
 # define KEY_RIGHT 65363
@@ -83,7 +84,8 @@ void		ft_pars_headerfile(char *buf, t_main *main);
 
 /* parsing map */
 int			ft_pars_map(char *buf, t_main *main);
-int			ft_norm_map(t_main *main);
+int			ft_pars_norm_map(t_main *main);
+int			ft_pars_check_wall(t_main *main);
 
 /* init mlx */
 t_data		ft_init_mlx_img(char *buf, t_main *main);
