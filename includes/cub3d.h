@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 20:53:51 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:24:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ t_data		ft_init_mlx_img(char *buf, t_main *main);
 
 /* libft custom */
 void		*ft_calloc_cub(size_t count, size_t size, t_main *main); //exit if malloc fail
-
 
 /* free ft */
 void		ft_free_all_and_exit(t_main *main);

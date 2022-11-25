@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 15:54:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:16:57 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,21 @@
 # include "struct.h"
 # include "cub3d.h"
 # include <sys/syslimits.h> //only work on mac
-// # include <syslimits.h>
-// # include <limits.h>
-// # define PATH_MAX 1024 // for fix linux syslimits dont work
+// # define PATH_MAX 1024 // for linux because syslimits dont work
+
+/**
+ * @brief xyz = RGB values
+ * 
+ */
+typedef struct s_vector
+{
+	int				x;
+	int				y;
+	int				z;
+	int				i;
+	int				s;
+	char			*tmp;
+}				t_vector;
 
 enum e_errtype
 {
@@ -45,19 +57,6 @@ enum e_errtype
 	ERR_MLX_FAILINIT,
 	ERR_OTHER
 };
-
-enum e_boxtype
-{
-	BOX_UNKNOWN,
-	BOX_WALL,
-	BOX_FLOOR,
-	BOX_PLAYER_S,
-	BOX_PLAYER_N,
-	BOX_PLAYER_E,
-	BOX_PLAYER_W,
-	BOX_SPACE
-};
-
 typedef struct s_textpath
 {
 	char			pathNO[PATH_MAX];
@@ -76,6 +75,7 @@ typedef struct s_box
 
 typedef struct s_map
 {
+	
 	int				maxw;
 	int				maxh;
 	char			*maptmp;

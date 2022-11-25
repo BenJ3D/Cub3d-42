@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 01:56:53 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:31:58 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ int	ft_start_parsing(t_main *main)
 	ft_pars_norm_map(main);
 	ft_pars_check_wall(main);
 	ft_pars_check_player_pos(main);
+	printf("Playstart location x=%i y=%i\n", main->gm.playstart.x, main->gm.playstart.y);
 	return (EXIT_SUCCESS);
 }
 
 void	ft_pars_check_player_pos(t_main *main)
 {
-		int	i;
+	int	i;
 	int	y;
 
 	i = 1;
@@ -49,11 +50,10 @@ void	ft_pars_check_player_pos(t_main *main)
 				|| main->gm.map[i][y + 1] == EMPTY \
 				|| main->gm.map[i - 1][y] == EMPTY \
 				|| main->gm.map[i + 1][y] == EMPTY)
-				{
-					printf("dbg fm map c = %c\n", main->gm.map[i][y]);
-					printf("y - 1  = %c\n", main->gm.map[i][y - 1]);
 					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
-				}
+				main->gm.playstart.x = y;
+				main->gm.playstart.y = i;
+				main->gm.map[i][y] = '0';
 			}
 			y++;
 		}

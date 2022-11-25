@@ -1,4 +1,4 @@
-C 1,2 ,-11
+C 15,23 ,11
 F 42,055,15
 EA ./assets/textures/wall_1.xpm
 NO ./assets/wall_2.xpm

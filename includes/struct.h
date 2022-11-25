@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 18:55:39 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:42:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define STRUCT_H
 # include "cub3d.h"
 # include "struct_parsing.h"
-
-typedef struct s_vector
-{
-	int				x;
-	int				y;
-	int				z;
-	int				i;
-	int				s;
-	char			*tmp;
-}				t_vector;
 
 typedef struct s_data
 {
@@ -44,6 +34,7 @@ typedef struct s_game
 	t_data			imgSO;
 	t_data			imgWE;
 	t_data			imgEA;
+	t_vector		playstart;	//xy = position plyaer start
 }				t_game;
 
 typedef struct s_main
