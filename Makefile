@@ -12,7 +12,7 @@
 
 #	Si probleme compile mlx (genre "/usr/bin/ld: cannot find -lz")
 #	sous ubuntu/debian, try install :
-#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev
+#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev balbla
 
 
 # $< "include one prerequisite"
