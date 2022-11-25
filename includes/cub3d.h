@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 23:24:00 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:50:41 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
-// # include <sys/syslimits.h>
 
 /* Game Settings */
 // # define HEIGHT 768

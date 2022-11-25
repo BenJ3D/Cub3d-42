@@ -6,12 +6,16 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:48:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:53:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*																		*\
+	/!\ sous linux /!\	dans includes/ :									
+	decommenter struct_parsing.h:18 et commenter struct_parsing.h:17		
+\*																		*/
 int	ft_exec(t_main *main)
 {
 	char	*line;
