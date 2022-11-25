@@ -69,6 +69,7 @@
 // # define KEY_D 2
 // # define DOORS 14
 // # define ESC 53
+# define GL_SILENCE_DEPRECATION
 
 
 /* Parsing */
