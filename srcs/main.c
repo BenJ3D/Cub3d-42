@@ -6,11 +6,26 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:29:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:48:36 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	ft_exec(t_main *main)
+{
+	char	*line;
+
+	line = ft_strjoin_max("%sParsing it's OK%s\nLet's go exec !\n \
+%stab map est dans main.gm.map (le joueur y est effacer)\n \
+et la map est rempli/entourer de char '-' (define avec %sEMPTYCHAR%s)\n \
+position joueur dans %smain.gm.playstart.x & main.gm.playstart.y%s", \
+COLOR_GREEN, COLOR_RED, COLOR_PURPLE, COLOR_BLUE,
+			COLOR_PURPLE, COLOR_GREEN, COLOR_NONE);
+	ft_putstr_fd(line, 2);
+	free (line);
+	return (EXIT_SUCCESS);
+}
 
 int	main(int ac, char **av)
 {
@@ -23,7 +38,7 @@ int	main(int ac, char **av)
 	if (!main.mlx)
 		ft_err_display(ERR_MLX_FAILINIT, &main);
 	if (ft_start_parsing(&main) == EXIT_SUCCESS)
-		printf("Parsing it's OK\nLet's go exec !\n");
+		ft_exec(&main);
 	ft_free_all_and_exit(&main);
 	return (0);
 }
