@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 00:59:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:14:28 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ Please fill in the path of a map .cub extension\n", 2);
 	else if (errtype == ERR_TOOMANYARG)
 		ft_putstr_fd("Please enter just one argument : the path map.\n", 2);
 	else if (errtype == ERR_MAP_WALLNOCLOSE)
-		ft_putstr_fd("The map must be completely closed with walls\n", 2);
+		ft_putstr_fd("The map with player must be completely \
+closed with walls\n", 2);
 	else if (errtype == ERR_PLAYER_MISSING)
 		ft_putstr_fd("Position of the player is missing\n", 2);
 	else if (errtype == ERR_PLAYER_BAD_POS)
@@ -77,10 +78,10 @@ static int	ft_err_display_textures(int errtype)
 
 static int	ft_err_display_map(int errtype)
 {
-	if (errtype == ERR_MAP_WALLNOCLOSE)
-		ft_putstr_fd("The map must be completely closed with walls\n", 2);
-	else if (errtype == ERR_MAP_UNKNOWN_CHAR)
+	if (errtype == ERR_MAP_UNKNOWN_CHAR)
 		ft_putstr_fd("An unknown character has been detected in the map\n", 2);
+	else if (errtype == ERR_PLAYER_MORE)
+		ft_putstr_fd("Fill only one starting position of the player\n", 2);
 	return (EXIT_SUCCESS);
 }
 

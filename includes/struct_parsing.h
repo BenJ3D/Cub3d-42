@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/24 17:35:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 01:56:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum e_errtype
 	ERR_MAP_UNKNOWN_CHAR,
 	ERR_MAP_WALLNOCLOSE,
 	ERR_PLAYER_MISSING,
+	ERR_PLAYER_MORE,
 	ERR_PLAYER_BAD_POS,
 	ERR_PARAM_UNKNOWN,
 	ERR_PARAM_INVALID,
@@ -83,6 +84,7 @@ typedef struct s_map
 typedef struct s_pars
 {
 	int				ac;
+	char			charplayer;
 	char			**av;
 	char			*map_path;
 	int				map_fd;

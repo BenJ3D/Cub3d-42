@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 19:41:30 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 01:11:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	ft_pars_norm_map(t_main *main)
 	x = 0;
 	while(main->ps.map.maptmp[y] && i < main->ps.map.maxh)
 	{
-		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 2, sizeof(char *), main);
-		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 2);
+		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 3, sizeof(char *), main);
+		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 1);
 		if (i > 0)
 		{
 			while (main->ps.map.maptmp[y] && main->ps.map.maptmp[y] != '\n')
@@ -74,27 +74,40 @@ int	ft_pars_norm_map(t_main *main)
 		printf("line %03i = %s\n", i, main->gm.map[i]);
 			i++;
 	}
-		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 2, sizeof(char *), main);
-		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 2);
+		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 3, sizeof(char *), main);
+		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 1);
 		printf("line %03i = %s\n", i, main->gm.map[i]);
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief check if the map is close with wall
+ * 
+ * @param main 
+ * @return int 
+ */
 int	ft_pars_check_wall(t_main *main) //TODO:TODO:TODO:TODO:TODO:TODO:
 {
 	int	i;
 	int	y;
 
-	i = 0;
+	i = 1;
 	y = 0;
 	while(main->gm.map[i])
 	{
 		while (main->gm.map[i][y])
 		{
-			if (main->gm.map[i] == FLOOR)
+			if (main->gm.map[i][y] == FLOOR)
 			{
-				if (main->gm.map[i][y - 1] == EMPTY || main->gm.map[i][y + 1] == EMPTY)
+				if (main->gm.map[i][y - 1] == EMPTY \
+				|| main->gm.map[i][y + 1] == EMPTY \
+				|| main->gm.map[i - 1][y] == EMPTY \
+				|| main->gm.map[i + 1][y] == EMPTY)
+				{
+					printf("dbg fm map c = %c\n", main->gm.map[i][y]);
+					printf("y - 1  = %c\n", main->gm.map[i][y - 1]);
 					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
+				}
 			}
 			y++;
 		}

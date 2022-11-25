@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/24 19:39:01 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:08:33 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		ft_pars_headerfile(char *buf, t_main *main);
 int			ft_pars_map(char *buf, t_main *main);
 int			ft_pars_norm_map(t_main *main);
 int			ft_pars_check_wall(t_main *main);
+void		ft_pars_check_player_pos(t_main *main);
 
 /* init mlx */
 t_data		ft_init_mlx_img(char *buf, t_main *main);

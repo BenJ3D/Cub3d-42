@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 02:20:36 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 01:56:53 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,38 @@ int	ft_start_parsing(t_main *main)
 		ft_free_all_and_exit_err(main, errno);
 	else
 		ft_set_parameters_with_file(main);
+	ft_pars_norm_map(main);
+	ft_pars_check_wall(main);
+	ft_pars_check_player_pos(main);
 	return (EXIT_SUCCESS);
+}
+
+void	ft_pars_check_player_pos(t_main *main)
+{
+		int	i;
+	int	y;
+
+	i = 1;
+	y = 0;
+	while(main->gm.map[i])
+	{
+		while (main->gm.map[i][y])
+		{
+			if (main->gm.map[i][y] == main->ps.charplayer)
+			{
+				if (main->gm.map[i][y - 1] == EMPTY \
+				|| main->gm.map[i][y + 1] == EMPTY \
+				|| main->gm.map[i - 1][y] == EMPTY \
+				|| main->gm.map[i + 1][y] == EMPTY)
+				{
+					printf("dbg fm map c = %c\n", main->gm.map[i][y]);
+					printf("y - 1  = %c\n", main->gm.map[i][y - 1]);
+					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
+				}
+			}
+			y++;
+		}
+		y = 0;
+		i++;
+	}
 }
