@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 02:08:33 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 20:53:51 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
 t_vector	ft_get_rgb_value(char *buf, t_main *main);
+void		ft_err_rgb(int errtype, char *tofree, t_main *main);
 
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
 int			ft_pars_openfile(const char *path);
 int			ft_set_parameters_with_file(t_main *main);
 void		ft_pars_headerfile(char *buf, t_main *main);
+void		ft_pars_check_range_rgb(t_vector vec, t_main *main);
+void		ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main);
 
 /* parsing map */
 int			ft_pars_map(char *buf, t_main *main);

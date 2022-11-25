@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/24 02:30:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 20:48:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,134 +84,51 @@ static int	ft_str_has_only_digit(char *str)
 	return (EXIT_SUCCESS);
 }
 
-t_vector	ft_get_rgb_value(char *buf, t_main *main)
+void	ft_pars_check_range_rgb(t_vector vec, t_main *main)
 {
-	int			i;
-	int			step;
-	char		*tmp;
-	t_vector	vec;
-	
-	i = 0;
-	step = 0;
-	tmp = NULL;
-	ft_bzero(&vec, sizeof(t_vector));
-	while(step < 3)
-	{
-		tmp = ft_get_next_word_custom_i(buf, &i, main);
-		if (ft_str_has_only_digit(tmp))
-		{
-			free(tmp);
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		}
-		if (ft_str_has_only_digit(tmp) || ft_strlen(tmp) > 3)
-		{
-			free(tmp);
-			ft_err_display_and_exit(ERR_PARAM_TO_HIGH, main);
-		}
-		if (step == 0)
-			vec.x = ft_atoi(tmp);
-		else if (step == 1)
-			vec.y = ft_atoi(tmp);
-		else if (step == 2)
-			vec.z = ft_atoi(tmp);
-		step++;
-		free(tmp);
-		tmp = NULL;
-		tmp = ft_get_next_word_custom_i(buf, &i, main);
-		if (step < 3 && ft_strncmp(tmp, ",", 2))
-		{
-			free(tmp);
-			tmp = NULL;
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		}
-		else if (step >= 3 && tmp[0] != '\0')
-		{
-			free(tmp);
-			tmp = NULL;
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		}
-		free (tmp);
-	}
-	if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
+		if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
 												|| (vec.z > 255 || vec.z < 0))
 		ft_err_display(ERR_PARAM_TO_HIGH, main);
+}
+
+void	ft_err_rgb(int errtype, char *tofree, t_main *main)
+{
+	free (tofree);
+	ft_err_display_and_exit(errtype, main);
+}
+
+t_vector	ft_get_rgb_value(char *buf, t_main *main)
+{
+	t_vector	vec;
+	
+	ft_bzero(&vec, sizeof(t_vector));
+	while(vec.s < 3)
+	{
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if (ft_str_has_only_digit(vec.tmp))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		if (ft_str_has_only_digit(vec.tmp) || ft_strlen(vec.tmp) > 4)
+			ft_err_rgb(ERR_PARAM_TO_HIGH, vec.tmp, main);
+		if (vec.s == 0)
+			vec.x = ft_atoi(vec.tmp);
+		else if (vec.s == 1)
+			vec.y = ft_atoi(vec.tmp);
+		else if (vec.s == 2)
+			vec.z = ft_atoi(vec.tmp);
+		vec.s++;
+		free(vec.tmp);
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if ((vec.s < 3 && ft_strncmp(vec.tmp, ",", 2)) \
+									|| (vec.s >= 3 && vec.tmp[0] != '\0'))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		free (vec.tmp);
+	}
 	return (vec);
 }
 
 void	ft_action_for_texture_param(int paramtype)
 {
 	
-}
-
-/**
- * @brief check header file for find parameters line per line //TODO: norme ;(
- * 
- * @param buff 
- */
-void	ft_pars_headerfile(char *buf, t_main *main)
-{
-	int		i;
-	int		type;
-	char	*tmp;
-	
-	i = 0;
-	while(ft_isspace(buf[i]))
-		i++;
-	if (!buf[i])
-		return ;
-	if (ft_strncmp(buf + i, PARAM_EA, ft_strlen(PARAM_EA)) == 0)
-	{
-		if (!ft_isspace(buf[i + ft_strlen(PARAM_EA)]))
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		ft_getpath_texture(buf + (i + ft_strlen(PARAM_EA)), \
-											main->ps.txtpath.pathEA, main);
-		main->ps.param_count++;
-	}
-	else if (ft_strncmp(buf + i, PARAM_WE, ft_strlen(PARAM_WE)) == 0)
-	{
-		ft_getpath_texture(buf + (i + ft_strlen(PARAM_WE)), \
-											main->ps.txtpath.pathWE, main);
-		main->ps.param_count++;
-
-	}
-	else if (ft_strncmp(buf + i, PARAM_NO, ft_strlen(PARAM_NO)) == 0)
-	{
-		ft_getpath_texture(buf + (i + ft_strlen(PARAM_NO)), \
-											main->ps.txtpath.pathNO, main);
-		main->ps.param_count++;
-
-	}
-	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
-	{
-		ft_getpath_texture(buf + (i + ft_strlen(PARAM_SO)), \
-											main->ps.txtpath.pathSO, main);
-		main->ps.param_count++;
-
-	}
-	else if (ft_strncmp(buf + i, PARAM_C, ft_strlen(PARAM_C)) == 0)
-	{
-		if (!ft_isspace(buf[i + 1]))
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		else if (main->ps.c_isalreadyset == 1)
-			ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
-		main->gm.c_rgb = ft_get_rgb_value(buf + (i + 1), main);
-		main->ps.c_isalreadyset = 1;
-		main->ps.param_count++;
-	}
-	else if (ft_strncmp(buf + i, PARAM_F, ft_strlen(PARAM_F)) == 0)
-	{
-		if (!ft_isspace(buf[i + 1]))
-			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
-		else if (main->ps.f_isalreadyset == 1)
-			ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
-		main->gm.f_rgb = ft_get_rgb_value(buf + (i + 1), main);
-		main->ps.f_isalreadyset = 1;
-		main->ps.param_count++;
-	}
-	else if (ft_strncmp(buf + i, LEGITCHAR, 1) == 0)
-		ft_err_display(ERR_PARAM_MISSING, main);
-	else
-		ft_err_display(ERR_PARAM_UNKNOWN, main);
 }
 
 		// main->gm.imgEA = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);

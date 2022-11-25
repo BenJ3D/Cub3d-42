@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_parsing.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 01:56:07 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:54:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define STRUCT_PARSING_H
 # include "struct.h"
 # include "cub3d.h"
-// # include <sys/syslimits.h>
+# include <sys/syslimits.h> //only work on mac
 // # include <syslimits.h>
 // # include <limits.h>
-# define PATH_MAX 1024
+// # define PATH_MAX 1024 // for fix linux syslimits dont work
 
 enum e_errtype
 {
