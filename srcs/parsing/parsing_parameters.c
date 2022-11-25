@@ -6,104 +6,129 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 19:49:06 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 20:48:21 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/cub3d.h"
 
-t_vector	ft_get_rgb_value(const char *buf, int i)
+char	*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main)
 {
-	char		*tmp;
-	int			step;
+	char			*tmp;
+	int				i;
+	int				y;
+	int				x;
+	
+	i = *i2;
+	y = 0;
+	x = 0;
+	while (buf[i] && ft_isspace(buf[i]))
+		i++;
+	if (buf[i] == ',')
+	{
+		*i2 = i + 1;
+		return (ft_strdup(","));
+	}
+	y = i;
+	while (buf[y] && !ft_isspace(buf[y]) && buf[y] != ',')
+		y++;
+	y = y - i;
+	tmp = ft_calloc_cub(y + 1, sizeof(char), main);
+	while (buf[i] && y-- > 0)
+		tmp[x++] = buf[i++];
+	tmp[x] = '\0';
+	*i2 = i;
+	return (tmp);
+}
+
+void	ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	y = 0;
+	if (dest[0] != '\0')
+		ft_err_display_and_exit(ERR_PARAM_DUPLICATED, main);
+	while (ft_isspace(str[i]))
+		i++;
+	while (!ft_isspace(str[i]))
+		dest[y++] = str[i++];
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]) && str[i] != '\0')
+			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
+		i++;
+	}
+}
+
+/**
+ * @brief return 1 if only digit
+ * 
+ * @param str 
+ * @return int 
+ */
+static int	ft_str_has_only_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+void	ft_pars_check_range_rgb(t_vector vec, t_main *main)
+{
+		if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
+												|| (vec.z > 255 || vec.z < 0))
+		ft_err_display(ERR_PARAM_TO_HIGH, main);
+}
+
+void	ft_err_rgb(int errtype, char *tofree, t_main *main)
+{
+	free (tofree);
+	ft_err_display_and_exit(errtype, main);
+}
+
+t_vector	ft_get_rgb_value(char *buf, t_main *main)
+{
 	t_vector	vec;
 	
-	step = 0;
-	tmp = NULL;
 	ft_bzero(&vec, sizeof(t_vector));
-	while (ft_isspace(buf[i]))
-		i++;
-	if (!ft_isdigit(buf[i]))
-		ft_err_display(ERR_PARAM_INVALID);
-	while(buf[i])
+	while(vec.s < 3)
 	{
-		if ((!ft_isdigit(buf[i])) && !ft_isspace(buf[i]) && buf[i] != ',')
-			ft_err_display(ERR_PARAM_INVALID);
-		if (ft_isdigit(buf[i]))
-		{
-			tmp = ft_concat_char(tmp, buf[i]);
-			if (!ft_isdigit(buf[i + 1]))
-			{
-				if (ft_strlen(tmp) > 3)
-					ft_err_display(ERR_PARAM_TO_HIGH);
-				if (step == 0)
-					vec.x = ft_atoi(tmp);
-				else if (step == 1)
-					vec.y = ft_atoi(tmp);
-				else if (step == 2)
-					vec.z = ft_atoi(tmp);
-				step++;
-				free (tmp);
-				tmp = NULL;
-				i++;
-			}
-		}
-		if (step > 0 && step < 3)
-		{
-			if (!ft_isdigit(buf[i]) && (buf[i] != ',' || !ft_isdigit(buf[i + 1])))
-				ft_err_display(ERR_PARAM_INVALID);
-
-		}
-		else if (buf[i] && step >= 3)
-		{
-			if (!ft_isspace(buf[i]))
-				ft_err_display(ERR_PARAM_INVALID);
-		}
-		if (buf [i])
-			i++;
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if (ft_str_has_only_digit(vec.tmp))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		if (ft_str_has_only_digit(vec.tmp) || ft_strlen(vec.tmp) > 4)
+			ft_err_rgb(ERR_PARAM_TO_HIGH, vec.tmp, main);
+		if (vec.s == 0)
+			vec.x = ft_atoi(vec.tmp);
+		else if (vec.s == 1)
+			vec.y = ft_atoi(vec.tmp);
+		else if (vec.s == 2)
+			vec.z = ft_atoi(vec.tmp);
+		vec.s++;
+		free(vec.tmp);
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if ((vec.s < 3 && ft_strncmp(vec.tmp, ",", 2)) \
+									|| (vec.s >= 3 && vec.tmp[0] != '\0'))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		free (vec.tmp);
 	}
-	if (vec.x > 255 || vec.y > 255 || vec.z > 255)
-		ft_err_display(ERR_PARAM_TO_HIGH);
 	return (vec);
 }
 
-
-int	ft_pars_set_param_east(t_main *main)
+void	ft_action_for_texture_param(int paramtype)
 {
 	
-	return (0);
 }
 
-
-/**
- * @brief check header file for find parameters line per line
- * 
- * @param buff 
- */
-void	ft_pars_headerfile(const char *buf, t_main *main)
-{
-	int		i;
-	int		type;
-	char	*tmp;
-	
-	i = 0;
-	while(ft_isspace(buf[i]))
-		i++;
-	if (!buf[i])
-		return ;
-	if (ft_strncmp(buf + i, PARAM_EA, ft_strlen(PARAM_EA)) == 0)
-		puts("go param EA\n");
-	else if (ft_strncmp(buf + i, PARAM_WE, ft_strlen(PARAM_WE)) == 0)
-		puts("go param WE\n");
-	else if (ft_strncmp(buf + i, PARAM_NO, ft_strlen(PARAM_NO)) == 0)
-		puts("go param NO\n");
-	else if (ft_strncmp(buf + i, PARAM_SO, ft_strlen(PARAM_SO)) == 0)
-		puts("go param SO\n");
-	else if (ft_strncmp(buf + i, PARAM_C, ft_strlen(PARAM_C)) == 0)
-		main->gm.ceiling = ft_get_rgb_value(buf, i + 1);
-	else if (ft_strncmp(buf + i, PARAM_F, ft_strlen(PARAM_F)) == 0)
-		main->gm.floor = ft_get_rgb_value(buf, i + 1);
-	else
-		ft_err_display(ERR_PARAM_UNKNOWN);
-}
+		// main->gm.imgEA = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);

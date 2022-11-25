@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/21 20:26:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:16:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "./struct.h"
+# include "./struct_parsing.h"
 # include "../libs/mlx_mac/mlx.h"
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
@@ -25,6 +26,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+// # include <sys/syslimits.h>
 
 /* Game Settings */
 // # define HEIGHT 768
@@ -33,6 +35,20 @@
 // # define ONE_DEGREE_RAD 0.00116355333
 // # define BLOCK_SIZE 32
 // # define SPEED 1
+
+# define PATH_MAX 1024
+# define LEGITCHAR "SNEW01"	//authorized character in map
+# define PLAYERSTART "SNEW"	// char for player start position
+# define FLOOR '0'	// char for player start position
+# define CUBEXT ".cub"		//extension requise
+# define EMPTY '-'		//char de substitution dans les vides de la map
+
+# define PARAM_NO "NO"		//texture wall North
+# define PARAM_SO "SO"		//texture wall South
+# define PARAM_WE "WE"		//texture wall West
+# define PARAM_EA "EA"		//texture wall East
+# define PARAM_C "C"		//ceiling color
+# define PARAM_F "F"		//floor color
 
 /* Linux Keys */
 # define KEY_RIGHT 65363
@@ -55,32 +71,43 @@
 // # define ESC 53
 # define GL_SILENCE_DEPRECATION
 
-# define LEGITCHAR " SNEW01"	//authorized character in map
-# define CUBEXT ".cub"			//extension requise
-
-# define PARAM_NO "NO "			//texture wall North
-# define PARAM_SO "SO "			//texture wall South
-# define PARAM_WE "WE "			//texture wall West
-# define PARAM_EA "EA "			//texture wall East
-# define PARAM_C "C "			//ceiling color
-# define PARAM_F "F "			//floor color
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
-int			ft_pars_check_if_legal_char(char c);
-t_vector	ft_get_rgb_value(const char *buf, int i);
+int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
+t_vector	ft_get_rgb_value(char *buf, t_main *main);
+void		ft_err_rgb(int errtype, char *tofree, t_main *main);
 
 /* parsing files */
 int			ft_pars_check_type_file(const char *path, const char *filetype);
 int			ft_pars_openfile(const char *path);
-int			ft_set_parameters_with_file_header(t_main *main);
-void		ft_pars_headerfile(const char *buf, t_main *main);
+int			ft_set_parameters_with_file(t_main *main);
+void		ft_pars_headerfile(char *buf, t_main *main);
+void		ft_pars_check_range_rgb(t_vector vec, t_main *main);
+void		ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main);
+
+/* parsing map */
+int			ft_pars_map(char *buf, t_main *main);
+int			ft_pars_norm_map(t_main *main);
+int			ft_pars_check_wall(t_main *main);
+void		ft_pars_check_player_pos(t_main *main);
+
+/* init mlx */
+void		ft_init_mlx_img(t_main *main);
+
+/* libft custom */
+void		*ft_calloc_cub(size_t count, size_t size, t_main *main); //exit if malloc fail
+
+/* free ft */
+void		ft_free_all_and_exit(t_main *main);
+void		ft_free_all_and_exit_err(t_main *main, int error);
 
 /* Error display */
-void		ft_err_display(int errtype);
+void		ft_err_display(int errtype, t_main *main); //FIXME: unless ?
+void		ft_err_display_and_exit(int errtype, t_main *main);
 
-/* Error display */
-void	dbg_display_all_parameter_value(t_main *main);
+/* ft dbg //TODO: del before final push */
+void		dbg_display_all_parameter_value(t_main *main);
 
 
 

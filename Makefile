@@ -6,7 +6,7 @@
 #    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/11/21 20:28:04 by bducrocq         ###   ########.fr        #
+#    Updated: 2022/11/25 21:41:51 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,9 @@ SRCEXT      := c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJS = ${SOURCES:.c=.o}
 
-CC = gcc
 CFLAGS = -g3 # -Wall -Wextra -Werror
+SANITIZE =# -fsanitize=address
+CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
 LIBFT = libs/libft/libft.a

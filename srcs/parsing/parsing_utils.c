@@ -3,28 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 19:45:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 00:55:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_pars_check_if_legal_char(char c)
+int	ft_pars_check_has_chars(char c, char *legalchars, t_main *main)
 {
-	char	legal[] = LEGITCHAR;
 	int		i;
 
-	i = 0;
-	while(legal[i])
+	if (!legalchars)
 	{
-		if (c != legal[i])
-			return (EXIT_FAILURE);
+		perror("malloc");
+		ft_err_display_and_exit(errno, main);
+	}
+	if (!c)
+		return (EXIT_FAILURE);
+	i = 0;
+	while(legalchars[i])
+	{
+		if (c == legalchars[i] || ft_isspace_no_nl(c))
+			return (EXIT_SUCCESS);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 /**
@@ -43,7 +49,7 @@ int	ft_pars_openfile(const char *path)
 	if (fd < 3)
 	{
 		errline = ft_strjoin("open : ", path);
-		perror("open");
+		perror(errline);
 		free (errline);
 		return (-1);
 	}

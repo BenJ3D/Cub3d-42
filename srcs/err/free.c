@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 22:07:03 by bducrocq         ###   ########.fr       */
+/*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
+/*   Updated: 2022/11/23 22:59:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int ac, char **av)
+static void	ft_free_all(t_main *main)
 {
-	t_main	main;
-	ft_bzero(&main, sizeof(t_main));
-	main.ps.ac = ac;
-	main.ps.av = av;
-	main.mlx = mlx_init();
-	if (!main.mlx)
-		ft_err_display(ERR_MLX_FAILINIT, &main);
-	if (ft_start_parsing(&main) == EXIT_SUCCESS)
-		printf("Parsing it's OK\nLet's go exec !\n");
-	ft_free_all_and_exit(&main);
-	return (0);
+	free(main->ps.map_path);
+}
+
+/**
+ * @brief free and exit(0)
+ * 
+ * @param main 
+ */
+void	ft_free_all_and_exit(t_main *main)
+{
+	ft_free_all(main);
+	exit(0);
+}
+
+/**
+ * @brief free and exit(error)
+ * 
+ * @param main 
+ * @param error 
+ */
+void	ft_free_all_and_exit_err(t_main *main, int error)
+{
+	ft_free_all(main);
+	exit(error);
 }

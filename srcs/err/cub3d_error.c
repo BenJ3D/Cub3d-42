@@ -6,15 +6,20 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/21 16:59:37 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:31:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 static int	ft_err_display_textures(int errtype);
-
-void	ft_err_display(int errtype)
+static int	ft_err_display_map(int errtype);
+/**
+ * @brief display error explained and exit(1) without free() 
+ * 
+ * @param errtype 
+ */
+void	ft_err_display(int errtype, t_main *main)
 {
 	if (errtype != ERR_NONE)
 		ft_putstr_fd("Error\n", 2);
@@ -23,8 +28,9 @@ void	ft_err_display(int errtype)
 Please fill in the path of a map .cub extension\n", 2);
 	else if (errtype == ERR_TOOMANYARG)
 		ft_putstr_fd("Please enter just one argument : the path map.\n", 2);
-	else if (errtype == ERR_WALL)
-		ft_putstr_fd("The map must be completely closed with walls\n", 2);
+	else if (errtype == ERR_MAP_WALLNOCLOSE)
+		ft_putstr_fd("The map with player must be completely \
+closed with walls\n", 2);
 	else if (errtype == ERR_PLAYER_MISSING)
 		ft_putstr_fd("Position of the player is missing\n", 2);
 	else if (errtype == ERR_PLAYER_BAD_POS)
@@ -32,15 +38,11 @@ Please fill in the path of a map .cub extension\n", 2);
 	else if (errtype == ERR_ARG_FORBIDEN)
 		ft_putstr_fd("Forbidden arguments in the map\n", 2);
 	else if (errtype == ERR_PARAM_NO_C)
-		ft_putstr_fd("Please add C parameter in map(celling color RGB)\n", 2);
+		ft_putstr_fd("Please add C parameter in map(ceiling color RGB)\n", 2);
 	else if (errtype == ERR_PARAM_NO_F)
-		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
-	else if (errtype == ERR_TXTMISSING_EA)
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
 	else
 		ft_err_display_textures(errtype);
-	if (errtype != ERR_NONE)
-		exit (EXIT_FAILURE);
 }
 
 static int	ft_err_display_textures(int errtype)
@@ -61,5 +63,34 @@ static int	ft_err_display_textures(int errtype)
 		ft_putstr_fd("Invalid value for one of the parameters\n", 2);
 	else if (errtype == ERR_PARAM_TO_HIGH)
 		ft_putstr_fd("Invalid value : range for RGB is [0-255]\n", 2);
+	else if (errtype == ERR_MLX_FAILINIT)
+		ft_putstr_fd("mlx failed while initiating\n", 2);
+	else if (errtype == ERR_PARAM_MISSING)
+		ft_putstr_fd("Missing parameters: map must contain 6 parameters\n", 2);
+	else if (errtype == ERR_PARAM_DUPLICATED)
+		ft_putstr_fd("A parameter is duplicated\n", 2);
+	else
+		ft_err_display_map(errtype);
 	return (EXIT_SUCCESS);
+}
+
+static int	ft_err_display_map(int errtype)
+{
+	if (errtype == ERR_MAP_UNKNOWN_CHAR)
+		ft_putstr_fd("An unknown character has been detected in the map\n", 2);
+	else if (errtype == ERR_PLAYER_MORE)
+		ft_putstr_fd("Fill only one starting position of the player\n", 2);
+	return (EXIT_SUCCESS);
+}
+
+/**
+ * @brief display type error and exit to ft_free_all_and_exit_err()
+ * 
+ * @param errtype 
+ * @param main 
+ */
+void	ft_err_display_and_exit(int errtype, t_main *main)
+{
+	ft_err_display(errtype, main);
+	ft_free_all_and_exit_err(main, 1);
 }

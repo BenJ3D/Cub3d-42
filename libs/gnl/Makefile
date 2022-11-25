@@ -1,7 +1,5 @@
 NAME = gnl.a
 
-DEBUG=0
-
 CC = gcc
 
 CFLAGS      := -Wall -Wextra -Werror
@@ -27,7 +25,7 @@ $(NAME): $(OBJS) $(HEADER) ./Makefile
 	$(AR) $@ $^
 	
 %.o: %.c $(SRCS) $(HEADER)
-	$(CC) $(CFLAGS) -c -o $@ $(OBJS_DIR)$< 
+	$(CC) $(CFLAGS) $(LLDBFLAG) -c -o $@ $(OBJS_DIR)$< 
 
 clean:
 	rm -rf $(OBJS)
