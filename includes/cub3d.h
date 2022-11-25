@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 22:16:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:24:00 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@
 // # define ESC 53
 # define GL_SILENCE_DEPRECATION
 
-
 /* Parsing */
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
@@ -96,7 +95,7 @@ void		ft_pars_check_player_pos(t_main *main);
 void		ft_init_mlx_img(t_main *main);
 
 /* libft custom */
-void		*ft_calloc_cub(size_t count, size_t size, t_main *main); //exit if malloc fail
+void		*ft_calloc_cub(size_t count, size_t size, t_main *main);
 
 /* free ft */
 void		ft_free_all_and_exit(t_main *main);
@@ -108,9 +107,6 @@ void		ft_err_display_and_exit(int errtype, t_main *main);
 
 /* ft dbg //TODO: del before final push */
 void		dbg_display_all_parameter_value(t_main *main);
-
-
-
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
