@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 22:03:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:29:07 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_pars_check_player_pos(t_main *main)
 
 	i = 1;
 	y = 0;
-	while(main->gm.map[i])
+	while (main->gm.map[i])
 	{
 		while (main->gm.map[i][y])
 		{

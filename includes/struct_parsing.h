@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 21:16:57 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:27:01 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ enum e_errtype
 };
 typedef struct s_textpath
 {
-	char			pathNO[PATH_MAX];
-	char			pathSO[PATH_MAX];
-	char			pathWE[PATH_MAX];
-	char			pathEA[PATH_MAX];
+	char			path_no[PATH_MAX];
+	char			path_so[PATH_MAX];
+	char			path_we[PATH_MAX];
+	char			path_ea[PATH_MAX];
 }				t_textpath;
 
 typedef struct s_box
@@ -75,7 +75,6 @@ typedef struct s_box
 
 typedef struct s_map
 {
-	
 	int				maxw;
 	int				maxh;
 	char			*maptmp;

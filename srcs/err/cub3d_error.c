@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 22:31:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:23:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_err_display_textures(int errtype);
 static int	ft_err_display_map(int errtype);
+
 /**
  * @brief display error explained and exit(1) without free() 
  * 
@@ -26,6 +27,8 @@ void	ft_err_display(int errtype, t_main *main)
 	if (errtype == ERR_NOARG)
 		ft_putstr_fd("NO ARG : \
 Please fill in the path of a map .cub extension\n", 2);
+	if (errtype == ERR_NOARG)
+		ft_free_all_and_exit_err(main, 1);
 	else if (errtype == ERR_TOOMANYARG)
 		ft_putstr_fd("Please enter just one argument : the path map.\n", 2);
 	else if (errtype == ERR_MAP_WALLNOCLOSE)
