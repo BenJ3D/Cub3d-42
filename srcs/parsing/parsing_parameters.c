@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 20:48:21 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:12:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_pars_check_range_rgb(t_vector vec, t_main *main)
 {
 		if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
 												|| (vec.z > 255 || vec.z < 0))
-		ft_err_display(ERR_PARAM_TO_HIGH, main);
+		ft_err_display_and_exit(ERR_PARAM_TO_HIGH, main);
 }
 
 void	ft_err_rgb(int errtype, char *tofree, t_main *main)
