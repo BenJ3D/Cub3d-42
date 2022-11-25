@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 21:31:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:03:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_start_parsing(t_main *main)
 	ft_pars_norm_map(main);
 	ft_pars_check_wall(main);
 	ft_pars_check_player_pos(main);
-	printf("Playstart location x=%i y=%i\n", main->gm.playstart.x, main->gm.playstart.y);
+	ft_init_mlx_img(main);
 	return (EXIT_SUCCESS);
 }
 

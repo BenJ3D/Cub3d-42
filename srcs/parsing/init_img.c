@@ -6,34 +6,22 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/23 13:18:47 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:03:48 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_data	ft_init_mlx_img(char *buf, t_main *main)
+void	ft_init_mlx_img(t_main *main)
 {
-	t_data	img;
-	char	path[PATH_MAX];
-	int		i;
-
-	i = 0;
-	ft_bzero(path, sizeof(char) * PATH_MAX);
-	while (ft_isspace(*buf))
-		buf++;
-	while (!ft_isspace(buf[i]))
-			i++;
-	while (ft_isspace(buf[i]))
-		i++;
-	if (!ft_isspace(buf[i]) && buf[i] != '\0')
-		ft_err_display(ERR_PARAM_INVALID, main);
-	i = 0;
-	while (!ft_isspace(buf[i]) && i <= PATH_MAX)
-	{
-		path[i] = buf[i];
-		i++;
-	}
-	ft_pars_openfile(path);
-	return (img);
+	if (ft_pars_openfile(main->ps.txtpath.pathEA) < 0)
+		ft_err_display_and_exit(ERR_TXTMISSING_EA, main);
+	if (ft_pars_openfile(main->ps.txtpath.pathWE) < 0)
+		ft_err_display_and_exit(ERR_TXTMISSING_WE, main);
+	if (ft_pars_openfile(main->ps.txtpath.pathSO) < 0)
+		ft_err_display_and_exit(ERR_TXTMISSING_SO, main);
+	if (ft_pars_openfile(main->ps.txtpath.pathNO) < 0)
+		ft_err_display_and_exit(ERR_TXTMISSING_NO, main);
+// 	main->mlx = mlx_init();
+// 	main->gm.imgEA.img = mlx_xpm_file_to_image(main->mlx,› )
 }

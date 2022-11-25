@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 02:14:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/25 22:31:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ closed with walls\n", 2);
 		ft_putstr_fd("Please add F parameter in map(floor color RGB)\n", 2);
 	else
 		ft_err_display_textures(errtype);
-	if (errtype != ERR_NONE)
-		ft_free_all_and_exit_err(main, errtype);
 }
 
 static int	ft_err_display_textures(int errtype)
