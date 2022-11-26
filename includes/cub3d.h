@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 23:50:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:31:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./struct.h"
-# include "./struct_parsing.h"
 # include "../libs/mlx_mac/mlx.h"
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
@@ -27,6 +25,19 @@
 # include <string.h>
 # include <errno.h>
 
+# ifdef __linux__
+#  define PATH_MAX 1024 // for linux because syslimits dont work
+# else
+#  ifdef __APPLE__
+#    include <sys/syslimits.h> //only work on mac
+#  else
+#   define PATH_MAX 128
+#  endif
+# endif
+
+# include "./struct.h"
+# include "./struct_parsing.h"
+
 /* Game Settings */
 // # define HEIGHT 768
 // # define WIDTH 768
@@ -35,7 +46,6 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# define PATH_MAX 1024
 # define LEGITCHAR "SNEW01"	//authorized character in map
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
@@ -50,25 +60,29 @@
 # define PARAM_F "F"		//floor color
 
 /* Linux Keys */
-# define KEY_RIGHT 65363
-# define KEY_LEFT 65361
-# define KEY_W 119
-# define KEY_S 115
-# define KEY_A 97
-# define KEY_D 100
-# define DOORS 101 // E
-# define ESC 65307
+# ifdef __linux__
+#  define KEY_RIGHT 65363
+#  define KEY_LEFT 65361
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_A 97
+#  define KEY_D 100
+#  define DOORS 101 // E
+#  define ESC 65307
+# endif
 
 /* Mac Keys */
-// # define KEY_RIGHT 124
-// # define KEY_LEFT 123
-// # define KEY_W 13
-// # define KEY_S 1
-// # define KEY_A 0
-// # define KEY_D 2
-// # define DOORS 14
-// # define ESC 53
-# define GL_SILENCE_DEPRECATION
+# ifdef __APPLE__
+#  define KEY_RIGHT 124
+#  define KEY_LEFT 123
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_A 0
+#  define KEY_D 2
+#  define DOORS 14
+#  define ESC 53
+# endif
+
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

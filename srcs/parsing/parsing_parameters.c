@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:12:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:30:24 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,4 @@ void	ft_action_for_texture_param(int paramtype)
 	
 }
 
-		// main->gm.imgEA = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);
+		// main->gm.img_ea = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);
