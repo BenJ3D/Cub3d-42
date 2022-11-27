@@ -13,7 +13,6 @@
 #ifndef STRUCT_PARSING_H
 # define STRUCT_PARSING_H
 
-# include "struct.h"
 # include "cub3d.h"
 # ifdef __linux__
 #  define PATH_MAX 1024 // for linux because syslimits dont work
