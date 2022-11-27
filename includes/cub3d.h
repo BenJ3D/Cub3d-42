@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/26 13:31:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:38:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #  define PATH_MAX 1024 // for linux because syslimits dont work
 # else
 #  ifdef __APPLE__
-#    include <sys/syslimits.h> //only work on mac
+#   include <sys/syslimits.h> //only work on mac
 #  else
 #   define PATH_MAX 128
 #  endif
@@ -82,7 +82,6 @@
 #  define DOORS 14
 #  define ESC 53
 # endif
-
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

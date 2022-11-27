@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/26 13:30:24 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:18:03 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main)
 	int				i;
 	int				y;
 	int				x;
-	
+
 	i = *i2;
 	y = 0;
 	x = 0;
@@ -86,7 +86,7 @@ static int	ft_str_has_only_digit(char *str)
 
 void	ft_pars_check_range_rgb(t_vector vec, t_main *main)
 {
-		if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
+	if ((vec.x > 255 || vec.x < 0) || (vec.y > 255 || vec.y < 0) \
 												|| (vec.z > 255 || vec.z < 0))
 		ft_err_display_and_exit(ERR_PARAM_TO_HIGH, main);
 }
@@ -100,7 +100,7 @@ void	ft_err_rgb(int errtype, char *tofree, t_main *main)
 t_vector	ft_get_rgb_value(char *buf, t_main *main)
 {
 	t_vector	vec;
-	
+
 	ft_bzero(&vec, sizeof(t_vector));
 	while(vec.s < 3)
 	{

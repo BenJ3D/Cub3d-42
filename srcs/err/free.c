@@ -3,23 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/26 17:00:32 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:37:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+void	ft_free_tab_char(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free (tab);
+}
+
 static void	ft_free_all(t_main *main)
 {
 	free(main->ps.map_path);
-	free(main->ps.txtpath.path_ea);
-	free(main->ps.txtpath.path_no);
-	free(main->ps.txtpath.path_so);
-	free(main->ps.txtpath.path_we);
-	//free tab** map final
+	ft_free_tab_char(main->gm.map);
 	//destroy img mlx
 }
 
@@ -31,7 +37,7 @@ static void	ft_free_all(t_main *main)
 void	ft_free_all_and_exit(t_main *main)
 {
 	ft_free_all(main);
-	exit(0);
+	// exit(0);
 }
 
 /**
@@ -43,5 +49,5 @@ void	ft_free_all_and_exit(t_main *main)
 void	ft_free_all_and_exit_err(t_main *main, int error)
 {
 	ft_free_all(main);
-	exit(error);
+	// exit(error);
 }
