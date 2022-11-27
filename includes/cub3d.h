@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 17:48:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:09:05 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct s_data
 	int				bpp;
 	int				line_length;
 	int				endian;
+	int				width;
+	int				height;
 }				t_data;
 
 typedef struct s_game
