@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 23:50:41 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:38:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@
 # include <fcntl.h>
 # include <string.h>
 # include <errno.h>
+
+# ifdef __linux__
+#  define PATH_MAX 1024 // for linux because syslimits dont work
+# else
+#  ifdef __APPLE__
+#   include <sys/syslimits.h> //only work on mac
+#  else
+#   define PATH_MAX 128
+#  endif
+# endif
+
+# include "./struct.h"
+# include "./struct_parsing.h"
 
 /* Game Settings */
 // # define HEIGHT 768
@@ -76,8 +89,6 @@
 #  define DOORS 14
 #  define ESC 53
 # endif
-
-# define GL_SILENCE_DEPRECATION
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

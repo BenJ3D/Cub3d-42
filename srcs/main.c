@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:53:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:58:47 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 	main.ps.av = av;
 	main.mlx = mlx_init();
 	if (!main.mlx)
-		ft_err_display(ERR_MLX_FAILINIT, &main);
+		ft_err_display_and_exit(ERR_MLX_FAILINIT, &main);
 	if (ft_start_parsing(&main) == EXIT_SUCCESS)
 		ft_exec(&main);
 	ft_free_all_and_exit(&main);

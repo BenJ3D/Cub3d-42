@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/25 23:36:58 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:33:32 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ typedef struct s_game
 	char			**map;
 	t_vector		c_rgb; // ceiling color RGB (xyz)
 	t_vector		f_rgb; // floor color RGB (xyz)
-	t_data			imgNO;
-	t_data			imgSO;
-	t_data			imgWE;
-	t_data			imgEA;
+	t_data			img_no;
+	t_data			img_so;
+	t_data			img_we;
+	t_data			img_ea;
 	t_vector		playstart;	//xy = position plyaer start
 }				t_game;
 
