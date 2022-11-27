@@ -3,7 +3,8 @@
 		"cub3d.h": "c",
 		"libft.h": "c",
 		"stdarg.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"struct.h": "c"
 	},
 	"editor.insertSpaces": false
 }

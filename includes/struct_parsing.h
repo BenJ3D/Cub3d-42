@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 16:38:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:46:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@
 #   define PATH_MAX 1024
 #  endif
 # endif
-
-/**
- * @brief xyz = RGB values
- * 
- */
-typedef struct s_vector
-{
-	int				x;
-	int				y;
-	int				z;
-	int				i;
-	int				s;
-	char			*tmp;
-}				t_vector;
 
 enum e_errtype
 {

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 16:38:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:48:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@
 #   define PATH_MAX 128
 #  endif
 # endif
-
-# include "./struct.h"
-# include "./struct_parsing.h"
 
 /* Game Settings */
 // # define HEIGHT 768
@@ -89,6 +86,69 @@
 #  define DOORS 14
 #  define ESC 53
 # endif
+
+typedef struct s_render
+{
+	float	other;
+}	t_render;
+
+/**
+ * @brief xyz = RGB values
+ * 
+ */
+typedef struct s_vector
+{
+	int				x;
+	int				y;
+	int				z;
+	int				i;
+	int				s;
+	char			*tmp;
+}				t_vector;
+typedef struct s_data
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+}				t_data;
+
+typedef struct s_game
+{
+	char			**map;
+	t_vector		c_rgb; // ceiling color RGB (xyz)
+	t_vector		f_rgb; // floor color RGB (xyz)
+	t_data			img_no;
+	t_data			img_so;
+	t_data			img_we;
+	t_data			img_ea;
+	t_vector		playstart;	//xy = position plyaer start
+}				t_game;
+
+typedef struct s_main
+{
+	t_render		render;
+	t_data			img;
+	t_pars			ps; //tout pour le parsing
+	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
+	void			*mlx;
+	void			*mlx_win;
+	int				win_h;
+	int				win_w;
+	float			velocity;
+	float			x;
+	float			y;
+}				t_main;
+
+/* exec utils */
+float		deg_to_rad(float i_deg);
+float		rad_to_deg(float i_rad);
+
+void		move_backward(t_main *game);
+void		move_right(t_main *game);
+void		move_left(t_main *game);
+void		move_forward(t_main *game);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
