@@ -13,9 +13,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "./exec.h"
 # include "./struct.h"
 # include "./struct_parsing.h"
-# include "../libs/mlx_mac/mlx.h"
+# ifdef __linux__
+#  include "../libs/mlx_linux/mlx.h"
+# else
+#  include "../libs/mlx_mac/mlx.h"
+# endif
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
 # include <unistd.h>
@@ -35,7 +40,6 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# define PATH_MAX 1024
 # define LEGITCHAR "SNEW01"	//authorized character in map
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
@@ -50,24 +54,29 @@
 # define PARAM_F "F"		//floor color
 
 /* Linux Keys */
-# define KEY_RIGHT 65363
-# define KEY_LEFT 65361
-# define KEY_W 119
-# define KEY_S 115
-# define KEY_A 97
-# define KEY_D 100
-# define DOORS 101 // E
-# define ESC 65307
+# ifdef __linux__
+#  define KEY_RIGHT 65363
+#  define KEY_LEFT 65361
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_A 97
+#  define KEY_D 100
+#  define DOORS 101 // E
+#  define ESC 65307
+# endif
 
 /* Mac Keys */
-// # define KEY_RIGHT 124
-// # define KEY_LEFT 123
-// # define KEY_W 13
-// # define KEY_S 1
-// # define KEY_A 0
-// # define KEY_D 2
-// # define DOORS 14
-// # define ESC 53
+# ifdef __APPLE__
+#  define KEY_RIGHT 124
+#  define KEY_LEFT 123
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_A 0
+#  define KEY_D 2
+#  define DOORS 14
+#  define ESC 53
+# endif
+
 # define GL_SILENCE_DEPRECATION
 
 /* Parsing */
