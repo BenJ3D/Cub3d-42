@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 17:41:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 21:46:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 // 	char			*addr;
 // 	int				bpp;
 // 	int				line_length;
-// 	int				endian;
+// 	int				end;
 // }				t_data;
 
 // typedef struct s_game

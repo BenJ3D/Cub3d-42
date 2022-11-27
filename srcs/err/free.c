@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/27 17:03:04 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 21:22:19 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,24 @@ void	ft_free_tab_char(char **tab)
 	free (tab);
 }
 
+void	ft_destroy_all_img(t_main *main)
+{
+	if (main->gm.img_ea.img)
+		mlx_destroy_image(main->mlx, main->gm.img_ea.img);
+	if (main->gm.img_we.img)
+		mlx_destroy_image(main->mlx, main->gm.img_we.img);
+	if (main->gm.img_so.img)
+		mlx_destroy_image(main->mlx, main->gm.img_so.img);
+	if (main->gm.img_no.img)
+		mlx_destroy_image(main->mlx, main->gm.img_no.img);
+}
+
 static void	ft_free_all(t_main *main)
 {
 	free(main->ps.map_path);
 	ft_free_tab_char(main->gm.map);
 	free(main->ps.map.maptmp);
+	ft_destroy_all_img(main);
 	//destroy img mlx / mlx
 }
 
