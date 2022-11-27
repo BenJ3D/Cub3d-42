@@ -13,7 +13,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libs/mlx_mac/mlx.h"
+# include "./exec.h"
+# include "./struct.h"
+# include "./struct_parsing.h"
+# ifdef __linux__
+#  include "../libs/mlx_linux/mlx.h"
+# else
+#  include "../libs/mlx_mac/mlx.h"
+# endif
 # include "../libs/libft/libft.h"
 # include "../libs/gnl/get_next_line.h"
 # include <unistd.h>

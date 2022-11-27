@@ -14,6 +14,7 @@
 # define STRUCT_H
 # include "cub3d.h"
 # include "struct_parsing.h"
+# include "exec.h"
 
 typedef struct s_data
 {
@@ -39,11 +40,17 @@ typedef struct s_game
 
 typedef struct s_main
 {
-	t_data			db;
+	t_render		render;
+	t_data			img;
 	t_pars			ps; //tout pour le parsing
 	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
 	void			*mlx;
 	void			*mlx_win;
+	int				win_h;
+	int				win_w;
+	float			velocity;
+	float			x;
+	float			y;
 }				t_main;
 
 #endif

@@ -12,7 +12,18 @@
 
 #ifndef STRUCT_PARSING_H
 # define STRUCT_PARSING_H
-# include "./cub3d.h"
+
+# include "struct.h"
+# include "cub3d.h"
+# ifdef __linux__
+#  define PATH_MAX 1024 // for linux because syslimits dont work
+# else
+#  ifdef __APPLE__
+#    include <sys/syslimits.h> //only work on mac
+#  else
+#   define PATH_MAX 1024
+#  endif
+# endif
 
 /**
  * @brief xyz = RGB values
