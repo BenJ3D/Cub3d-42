@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:53:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:49:17 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	ft_bzero(&main, sizeof(t_main));
 	main.ps.ac = ac;
 	main.ps.av = av;
-	main.mlx = mlx_init();
+	// main.mlx = mlx_init();
 	if (!main.mlx)
 		ft_err_display(ERR_MLX_FAILINIT, &main);
 	if (ft_start_parsing(&main) == EXIT_SUCCESS)
