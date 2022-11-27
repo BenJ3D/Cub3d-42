@@ -14,7 +14,7 @@
 # define EXEC_H
 # include "cub3d.h"
 # include "struct_parsing.h"
-# include "struct.h"
+
 # define MY_PI 3.141592653589793116f
 
 # define CELL_SIZE 64

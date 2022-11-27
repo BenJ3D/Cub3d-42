@@ -18,5 +18,6 @@ void	exec_main(t_main *game)
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
 	game->img.bpp /= 8;
+	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	
 }

@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "./exec.h"
-# include "./struct.h"
 # include "./struct_parsing.h"
 # ifdef __linux__
 #  include "../libs/mlx_linux/mlx.h"
