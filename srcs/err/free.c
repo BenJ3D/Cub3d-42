@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/27 17:00:48 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:03:04 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_free_all(t_main *main)
 {
 	free(main->ps.map_path);
 	ft_free_tab_char(main->gm.map);
-	free (main->ps.map.maptmp);
+	free(main->ps.map.maptmp);
 	//destroy img mlx / mlx
 }
 
