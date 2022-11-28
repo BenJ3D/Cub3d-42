@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/28 01:11:23 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/28 01:46:38 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_game
 	t_data			img_so;
 	t_data			img_we;
 	t_data			img_ea;
+	int				cell_size;
 	t_vector		playstart;	//xy = position plyaer start
 }				t_game;
 
@@ -141,6 +142,10 @@ typedef struct s_main
 	float			x;
 	float			y;
 	int				keyboard[200];
+		// Tab
+	int				**tab;
+	int				tab_width;
+	int				tab_height;
 }				t_main;
 
 /* exec utils */
@@ -150,6 +155,7 @@ void		exec_main(t_main *game);
 void 		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
+int			stop_mlx(int keycode, t_main *main);
 
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
