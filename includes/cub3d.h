@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 21:46:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/28 01:11:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,16 +140,23 @@ typedef struct s_main
 	float			velocity;
 	float			x;
 	float			y;
+	int				keyboard[200];
 }				t_main;
 
 /* exec utils */
 float		deg_to_rad(float i_deg);
 float		rad_to_deg(float i_rad);
+void		exec_main(t_main *game);
+void 		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int			key_release(int keycode, t_main *main);
+int			key_press(int keycode, t_main *main);
 
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);
 void		move_forward(t_main *game);
+
+int	render_next_frame(t_main *main);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
