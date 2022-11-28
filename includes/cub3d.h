@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/28 01:46:38 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:26:49 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,6 @@ typedef struct s_main
 	float			x;
 	float			y;
 	int				keyboard[200];
-		// Tab
-	int				**tab;
-	int				tab_width;
-	int				tab_height;
 }				t_main;
 
 /* exec utils */

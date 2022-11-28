@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/28 02:44:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:40:26 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	key_release(int keycode, t_main *main)
 
 int	stop_mlx(int keycode, t_main *main)
 {
+	printf("%p\n", main);
 	// ft_free_all_and_exit(main); // Sanitize
 	exit(0);
 	return (0);
@@ -101,7 +102,6 @@ int	render_next_frame(t_main *main)
 {
 	draw_map(main);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_ea.img, 1270, 0);
 }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
