@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/28 03:40:26 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/28 03:44:52 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	key_press(int keycode, t_main *main)
 		ft_free_all_and_exit(main);
 	if (keycode < 200)
 		main->keyboard[keycode] = 1;
-
 	return (0);
 }
 
