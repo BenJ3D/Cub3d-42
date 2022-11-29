@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/29 16:48:14 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:51:15 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	draw_cube(t_main *main, int x, int y, int color)
 
 	w = 0;
 	h = 0;
-	while(h < main->gm.cell_size)
+	while (h < main->gm.cell_size)
 	{
 		while (w < main->gm.cell_size)
 		{
@@ -74,29 +74,21 @@ int	draw_map(t_main *main)
 	y = 0;
 	// main->gm.cell_size = SCREEN_WIDTH / main->ps.map.maxw;
 	main->gm.cell_size = SCREEN_HEIGHT / main->ps.map.maxh;
-	// main->gm.cell_size = 8;
 	while (main->gm.map[y])
 	{
 		while (main->gm.map[y][x])
 		{
-			if ((x * main->gm.cell_size  + main->gm.cell_size) > SCREEN_WIDTH \
+			if ((x * main->gm.cell_size + main->gm.cell_size) > SCREEN_WIDTH \
 			|| (y * main->gm.cell_size + main->gm.cell_size) > SCREEN_HEIGHT)
 				break ;
-			if (main->gm.map[y][x] == '1')
+			if (main->gm.map[y][x] == WALL)
 				draw_cube(main, x * main->gm.cell_size, \
 										y * main->gm.cell_size, 0x63EA07);
-			if (main->gm.map[y][x] == EMPTY)
-				draw_cube(main, x * main->gm.cell_size, \
-										y * main->gm.cell_size, 0x9c3d00);
-			if (main->gm.map[y][x] == FLOOR)
-				draw_cube(main, x * main->gm.cell_size, \
-										y * main->gm.cell_size, 0x454545);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	
 	return (EXIT_SUCCESS);
 }
 
@@ -104,20 +96,8 @@ int	render_next_frame(t_main *main)
 {
 	draw_map(main);
 	update_velocity(main);
+	dbg_display_velocity(main); //TODO:
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	
-	printf ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	if (main->keyboard[KEY_A] == 1)
-		printf ("key press A\n");
-	else if (main->keyboard[KEY_D] == 1)
-		printf ("key press D\n");
-	else if (main->keyboard[KEY_W] == 1)
-		printf ("key press W\n");
-	else if (main->keyboard[KEY_S] == 1)
-		printf ("key press S\n");
-	else
-		printf ("key press NONE\n");
-	printf ("velocity =  %1.2f\n", main->velocity);
 }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/29 16:20:09 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:47:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@
 
 # define LEGITCHAR "SNEW01"	//authorized character in map
 # define PLAYERSTART "SNEW"	// char for player start position
-# define FLOOR '0'	// char for player start position
+# define WALL '1'
+# define FLOOR '0'
 # define CUBEXT ".cub"		//extension requise
 # define EMPTY '-'		//char de substitution dans les vides de la map
 
@@ -138,7 +139,7 @@ typedef struct s_main
 float		deg_to_rad(float i_deg);
 float		rad_to_deg(float i_rad);
 void		exec_main(t_main *game);
-void 		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
 int			stop_mlx(int keycode, t_main *main);
@@ -188,6 +189,7 @@ void		ft_err_display_and_exit(int errtype, t_main *main);
 
 /* ft dbg //TODO: del before final push */
 void		dbg_display_all_parameter_value(t_main *main);
+void		dbg_display_velocity(t_main *main);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
