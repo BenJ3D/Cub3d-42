@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/28 03:44:52 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/29 14:36:18 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ int	key_press(int keycode, t_main *main)
 	
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
-	if (keycode < 200)
+	if (keycode <= 200)
 		main->keyboard[keycode] = 1;
+	if (keycode < 200)
+		main->keyboard[keycode % 200] = 1;
 	return (0);
 }
 
 int	key_release(int keycode, t_main *main)
 {
+	printf("Key release : %d\n", keycode);
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
 	if (keycode < 200)
-		main->keyboard[keycode] = 0;
+		main->keyboard[keycode % 200] = 0;
 
 	return (0);
 }
