@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/29 14:31:27 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:20:09 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);
 void		move_forward(t_main *game);
+
+void		update_velocity(t_main *main);
 
 int	render_next_frame(t_main *main);
 

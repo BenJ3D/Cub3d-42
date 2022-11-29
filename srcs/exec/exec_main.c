@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/29 14:36:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:48:14 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_press(int keycode, t_main *main)
 {
-	printf("Key pressed : %d\n", keycode);
+	// printf("Key pressed : %d\n", keycode);
 	
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
@@ -27,7 +27,7 @@ int	key_press(int keycode, t_main *main)
 
 int	key_release(int keycode, t_main *main)
 {
-	printf("Key release : %d\n", keycode);
+	// printf("Key release : %d\n", keycode);
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
 	if (keycode < 200)
@@ -103,7 +103,21 @@ int	draw_map(t_main *main)
 int	render_next_frame(t_main *main)
 {
 	draw_map(main);
+	update_velocity(main);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
+	
+	printf ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	if (main->keyboard[KEY_A] == 1)
+		printf ("key press A\n");
+	else if (main->keyboard[KEY_D] == 1)
+		printf ("key press D\n");
+	else if (main->keyboard[KEY_W] == 1)
+		printf ("key press W\n");
+	else if (main->keyboard[KEY_S] == 1)
+		printf ("key press S\n");
+	else
+		printf ("key press NONE\n");
+	printf ("velocity =  %1.2f\n", main->velocity);
 }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
