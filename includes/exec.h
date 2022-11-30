@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/29 17:49:17 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/11/30 01:00:13 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # endif
 
 # ifndef MAX_VELOCITY
-#  define MAX_VELOCITY 4
+#  define MAX_VELOCITY 1000
 # endif
 
 # ifndef COEF_ACCELERATION
