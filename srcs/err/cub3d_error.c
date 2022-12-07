@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:23:43 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:33:23 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static int	ft_err_display_map(int errtype)
 		ft_putstr_fd("An unknown character has been detected in the map\n", 2);
 	else if (errtype == ERR_PLAYER_MORE)
 		ft_putstr_fd("Fill only one starting position of the player\n", 2);
+	else if (errtype == ERR_IMGBADEXTENSION)
+		ft_putstr_fd("Images must be in \"*.xmp\" format\n", 2);
 	return (EXIT_SUCCESS);
 }
 
