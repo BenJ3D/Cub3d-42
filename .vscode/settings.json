@@ -4,7 +4,8 @@
 		"libft.h": "c",
 		"stdarg.h": "c",
 		"cstdlib": "c",
-		"struct.h": "c"
+		"struct.h": "c",
+		"cmath": "c"
 	},
 	"editor.insertSpaces": false
 }

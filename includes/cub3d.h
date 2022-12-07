@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
 /*   Updated: 2022/12/07 13:48:11 by bducrocq         ###   ########.fr       */
@@ -31,16 +31,6 @@
 # include <string.h>
 # include <errno.h>
 
-# ifdef __linux__
-#  define PATH_MAX 1024 // for linux because syslimits dont work
-# else
-#  ifdef __APPLE__
-#   include <sys/syslimits.h> //only work on mac
-#  else
-#   define PATH_MAX 128
-#  endif
-# endif
-
 /* Game Settings */
 // # define HEIGHT 768
 // # define WIDTH 768
@@ -54,6 +44,7 @@
 # define FLOOR '0'	// char for player start position
 # define CUBEXT ".cub"		//extension requise pour la map
 # define IMGEXT ".xpm"		//extension requise pour les images
+# define WALL '1'
 # define EMPTY '-'		//char de substitution dans les vides de la map
 
 # define PARAM_NO "NO"		//texture wall North
@@ -125,6 +116,7 @@ typedef struct s_game
 	t_data			img_so;
 	t_data			img_we;
 	t_data			img_ea;
+	int				cell_size;
 	t_vector		playstart;	//xy = position plyaer start
 }				t_game;
 
@@ -141,16 +133,26 @@ typedef struct s_main
 	float			velocity;
 	float			x;
 	float			y;
+	int				keyboard[200];
 }				t_main;
 
 /* exec utils */
 float		deg_to_rad(float i_deg);
 float		rad_to_deg(float i_rad);
+void		exec_main(t_main *game);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int			key_release(int keycode, t_main *main);
+int			key_press(int keycode, t_main *main);
+int			stop_mlx(int keycode, t_main *main);
 
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);
 void		move_forward(t_main *game);
+
+void		update_velocity(t_main *main);
+
+int	render_next_frame(t_main *main);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
@@ -188,6 +190,7 @@ void		ft_err_display_and_exit(int errtype, t_main *main);
 
 /* ft dbg //TODO: del before final push */
 void		dbg_display_all_parameter_value(t_main *main);
+void		dbg_display_velocity(t_main *main);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
