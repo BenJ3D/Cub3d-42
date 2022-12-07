@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 00:55:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:24:25 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_pars_openfile(const char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 3)
 	{
-		errline = ft_strjoin("open : ", path);
+		errline = ft_strjoin("Error\nopen : ", path);
 		perror(errline);
 		free (errline);
 		return (-1);
