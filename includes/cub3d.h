@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 21:46:28 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:48:11 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@
 # define LEGITCHAR "SNEW01"	//authorized character in map
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
-# define CUBEXT ".cub"		//extension requise
+# define CUBEXT ".cub"		//extension requise pour la map
+# define IMGEXT ".xpm"		//extension requise pour les images
 # define EMPTY '-'		//char de substitution dans les vides de la map
 
 # define PARAM_NO "NO"		//texture wall North
