@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:29:31 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:12:29 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_pars_headerfile(char *buf, t_main *main)
 	else if (ft_pars_headerfile_c_f(buf, i, main) == EXIT_SUCCESS)
 		return ;
 	else if (ft_strncmp(buf + i, LEGITCHAR, 1) == 0)
-		ft_err_display(ERR_PARAM_MISSING, main);
+		ft_err_display_and_exit(ERR_PARAM_MISSING, main);
 	else
-		ft_err_display(ERR_PARAM_UNKNOWN, main);
+		ft_err_display_and_exit(ERR_PARAM_UNKNOWN, main);
 }
 
 int	ft_pars_headerfile_ea_we(char *buf, int i, t_main *main)

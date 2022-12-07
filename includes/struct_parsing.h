@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/11/27 17:46:18 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:31:43 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ enum e_errtype
 {
 	ERR_NONE,
 	ERR_BADEXTENSION,
+	ERR_IMGBADEXTENSION,
 	ERR_NOARG,
 	ERR_ARG_FORBIDEN,
 	ERR_TOOMANYARG,
