@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/29 17:51:15 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:05:50 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	render_next_frame(t_main *main)
 {
 	draw_map(main);
 	update_velocity(main);
-	dbg_display_velocity(main); //TODO:
+	dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 }
 

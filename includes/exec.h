@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/30 01:00:13 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:11:02 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@
 # endif
 
 # ifndef MAX_VELOCITY
-#  define MAX_VELOCITY 1000
+#  define MAX_VELOCITY 4
 # endif
 
 # ifndef COEF_ACCELERATION
-#  define COEF_ACCELERATION 1.01
+#  define COEF_ACCELERATION 1.13
 # endif
 
 # ifndef COEF_DECELERATION
-#  define COEF_DECELERATION 0.99
+#  define COEF_DECELERATION 0.94
 # endif
 
 // to optimise the performance we will limit the render to only 60 frame/sec
