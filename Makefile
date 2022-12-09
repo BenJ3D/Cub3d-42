@@ -3,70 +3,66 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/25 23:43:27 by vducoulo          #+#    #+#              #
-#    Updated: 2022/12/09 18:47:58 by abucia           ###   ########lyon.fr    #
+#    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
+#    Updated: 2022/12/07 13:17:09 by bducrocq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+#	Si probleme compile mlx (genre "/usr/bin/ld: cannot find -lz")
+#	sous ubuntu/debian, try install :
+#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev balbla
 
-SRCDIR := srcs
-SRCEXT := c
-BONUS = 0
-C_BONUS = -D BONUS=${BONUS}
-NAME_BONUS = cub3D_bonus
-SRCS_GLOBAL = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 
-OBJS_GLOBAL = ${SRCS_GLOBAL:.c=.o}
-OBJS_MANDATORY = ${SRCS_MANDATORY:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+# $< "include one prerequisite"
+# $@ "include target"
+# $^ "include the full list of prerequisites)"
 
+NAME = cub3d
+
+
+SRCDIR      := srcs
+SRCEXT      := c
+SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJS = ${SOURCES:.c=.o}
+
+CFLAGS = -g3 # -Wall -Wextra -Werror
+SANITIZE =# -fsanitize=address
+CC = cc $(SANITIZE)
+
+OS	= $(shell uname)
 LIBFT = libs/libft/libft.a
 GNL = libs/gnl/gnl.a
+LIBFT_PATH = libs/libft
+GNL_PATH = libs/gnl
+HEADER   = includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
 
-INCLUDES = includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
-CC = gcc -g3 #-fsanitize=address
-RM = rm -f
+ifeq ($(OS), Linux)
+	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
+	MLX_PATH = libs/mlx_linux
+else
+	MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
+	MLX_PATH = libs/mlx_mac
+endif
 
-FLAGS = -O3 #-Wall -Wextra -Werror
+all : $(NAME)
 
-all: lib ${NAME}
-
-bonus: 
-	make -C ./ bb BONUS=1
-
-bb: lib ${NAME_BONUS}
-
-$(NAME): ${OBJS_GLOBAL} ${OBJS_MANDATORY}
-	${CC}  -D BONUS=0 ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${MLX_FLAG} ${LIBFT} ${GNL} -o $(NAME)
-
-${NAME_BONUS}: ${OBJS_GLOBAL} ${OBJS_BONUS}
-	${CC}  -D BONUS=1 ${OBJS_GLOBAL} ${OBJS_BONUS} ${MLX_FLAG} ${LIBFT} ${GNL} -o $(NAME_BONUS)
-
-MLX_FLAG = -Llibs/libft -lft -Llibs/mlx_mac -lmlx -framework OpenGL -framework Appkit
-MLX = libs/mlx_mac
-
-%.o: %.c ${INCLUDES} Makefile
-		${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@
+$(NAME): $(OBJS) $(HEADER) Makefile
+	@$(MAKE) -C $(MLX_PATH)
+	@$(MAKE) -C $(LIBFT_PATH)
+	@$(MAKE) -C $(GNL_PATH)
+	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT)  $(CFLAGS) -o $(NAME)
 
 clean:
-	${RM} ${OBJS_GLOBAL} ${OBJS_MANDATORY} ${OBJS_BONUS}
-	make clean -C libs/mlx_mac
-	make clean -C libs/libft
-	make clean -C libs/gnl
-
+	$(MAKE) clean -C $(MLX_PATH)
+	$(MAKE) clean -C $(LIBFT_PATH)
+	$(MAKE) clean -C $(GNL_PATH)
+	rm -rf $(OBJS)
 fclean: clean
-	${RM} ${NAME} ${NAME_BONUS}
-	make fclean -C libs/libft
-	make fclean -C libs/gnl
+	rm -rf $(NAME)
+	$(MAKE) fclean -C $(LIBFT_PATH)
+	$(MAKE) fclean -C $(GNL_PATH)
+re:	fclean all
 
-lib:
-	make -C libs/mlx_mac
-	make -C libs/libft
-	make -C libs/gnl
-
-re: fclean all
-
-.PHONY: all clean fclean re NAME bonus
+.PHONY:	all clean fclean re

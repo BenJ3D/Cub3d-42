@@ -15,7 +15,7 @@
 
 # include "cub3d.h"
 # ifdef __linux__
-#  define PATH_MAX 1024 // for linux because syslimits dont work
+#  define PATH_MAX 4096 // for linux because syslimits dont work
 # else
 #  ifdef __APPLE__
 #    include <sys/syslimits.h> //only work on mac
