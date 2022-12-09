@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/12/07 15:05:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:51:18 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,61 +44,37 @@ int	stop_mlx(int keycode, t_main *main)
 	return (0);
 }
 
-int	draw_cube(t_main *main, int x, int y, int color)
+void	draw_minimap(t_main *game)
 {
 	int	w;
 	int	h;
+	int coef;
 
-	w = 0;
-	h = 0;
-	while (h < main->gm.cell_size)
+	coef = (SCREEN_HEIGHT * SCREEN_WIDTH * COEF_MINIMAP);
+	w = coef * game->ps.map.maxw;
+	while (w--)
 	{
-		while (w < main->gm.cell_size)
+		h = coef * game->ps.map.maxw;
+		while (h--)
 		{
-			my_mlx_pixel_put(&main->img, x + w, y + h, color);
-			w++;
+			if (game->gm.map[w / coef][h / coef] == '1')
+				my_mlx_pixel_put(&game->mini_map, w, h, 0x6600FF);
+			else if (game->gm.map[w / coef][h / coef] == '0')
+				my_mlx_pixel_put(&game->mini_map, w, h, 0x330000);
+			else
+				my_mlx_pixel_put(&game->mini_map, w, h, 0xFF3300);
 		}
-		w = 0;
-		h++;
 	}
-	return (EXIT_SUCCESS);
-}
-			// my_mlx_pixel_put(&main->img, 100, 100, 0x00FF0000);
-
-int	draw_map(t_main *main)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	// main->gm.cell_size = SCREEN_WIDTH / main->ps.map.maxw;
-	main->gm.cell_size = SCREEN_HEIGHT / main->ps.map.maxh;
-	while (main->gm.map[y])
-	{
-		while (main->gm.map[y][x])
-		{
-			if ((x * main->gm.cell_size + main->gm.cell_size) > SCREEN_WIDTH \
-			|| (y * main->gm.cell_size + main->gm.cell_size) > SCREEN_HEIGHT)
-				break ;
-			if (main->gm.map[y][x] == WALL)
-				draw_cube(main, x * main->gm.cell_size, \
-										y * main->gm.cell_size, 0x63EA07);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	return (EXIT_SUCCESS);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mini_map.img, 16, 16);
 }
 
-int	render_next_frame(t_main *main)
-{
-	draw_map(main);
-	update_velocity(main);
-	dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-}
+// int	render_next_frame(t_main *main)
+// {
+// 	draw_map(main);
+// 	update_velocity(main);
+// 	dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
+// 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
+// }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -110,9 +86,16 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	exec_main(t_main *game)
 {
+	game->mini_map.img = mlx_new_image(game->mlx, SCREEN_WIDTH * \
+	COEF_MINIMAP, SCREEN_HEIGHT * COEF_MINIMAP);
+	game->mini_map.addr = mlx_get_data_addr(game->mini_map.img, \
+	&game->mini_map.bpp, &game->mini_map.line_length, &game->mini_map.end);
+	game->mini_map.bpp /= 8; // SECURITER TODO
+	draw_minimap(game);
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
-	game->img.bpp /= 8;
+	game->img.bpp /= 8; // SECURITER TODO
+
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 }

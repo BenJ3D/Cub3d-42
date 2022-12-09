@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/12/07 13:48:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:24:45 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_game
 typedef struct s_main
 {
 	t_render		render;
+	t_data			mini_map;
 	t_data			img;
 	t_pars			ps; //tout pour le parsing
 	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc

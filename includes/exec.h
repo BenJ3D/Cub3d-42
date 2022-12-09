@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2022/12/07 15:11:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:40:33 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@
 
 # ifndef COEF_DECELERATION
 #  define COEF_DECELERATION 0.94
+# endif
+
+# ifndef COEF_MINIMAP
+#  define COEF_MINIMAP 0.000005
 # endif
 
 // to optimise the performance we will limit the render to only 60 frame/sec

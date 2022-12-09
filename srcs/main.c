@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:48:59 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/28 03:16:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:13:02 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_exec(t_main *main)
 	mlx_hook(main->mlx_win, 2, 1L << 0, &key_press, main);
 	mlx_hook(main->mlx_win, 17, 1L << 0, &stop_mlx, main); //sanitize ???!???
 	mlx_hook(main->mlx_win, 3, 1L << 1, &key_release, main);
-	mlx_loop_hook(main->mlx, render_next_frame, main);
+	//mlx_loop_hook(main->mlx, render_next_frame, main);
 	mlx_loop(main->mlx);
 	return (EXIT_SUCCESS);
 }
