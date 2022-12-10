@@ -121,7 +121,7 @@ void	exec_main(t_main *game)
 	i = 0;
 
 	game->delta_x = cos(game->player_angle) * 5;
-	game->delta_y = sin(game->player_angle) * 5
+	game->delta_y = sin(game->player_angle) * 5;
 	game->raycast = init_raycast();
 	while (i < SCREEN_WIDTH)
 	{
