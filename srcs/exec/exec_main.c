@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/12/09 18:51:18 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 15:40:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	exec_main(t_main *game)
 	i = 0;
 
 	game->delta_x = cos(game->player_angle) * 5;
-	game->delta_y = sin(game->player_angle) * 5
+	game->delta_y = sin(game->player_angle) * 5;
 	game->raycast = init_raycast();
 	while (i < SCREEN_WIDTH)
 	{

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/07 13:18:02 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:01:54 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ int	ft_start_parsing(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
+static void	ft_set_player_angle(t_main *main)
+{
+	if (main->ps.charplayer == 'S')
+		main->player_angle = (3 * MY_PI) / 2;
+	if (main->ps.charplayer == 'N')
+		main->player_angle = MY_PI / 2;
+	if (main->ps.charplayer == 'W')
+		main->player_angle = MY_PI;
+	if (main->ps.charplayer == 'E')
+		main->player_angle = 2 * MY_PI;
+}
+
 void	ft_pars_check_player_pos(t_main *main)
 {
 	int	i;
@@ -54,6 +66,7 @@ void	ft_pars_check_player_pos(t_main *main)
 				main->gm.playstart.x = y;
 				main->gm.playstart.y = i;
 				main->gm.map[i][y] = '0';
+				ft_set_player_angle(main);
 			}
 			y++;
 		}
