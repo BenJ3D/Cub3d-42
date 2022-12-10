@@ -134,6 +134,10 @@ typedef struct s_main
 	float			velocity;
 	float			x;
 	float			y;
+	float			player_angle;
+	float			delta_x;
+	float			delta_y;
+	t_raycast		raycast;
 	int				keyboard[200];
 }				t_main;
 

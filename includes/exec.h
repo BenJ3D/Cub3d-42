@@ -91,7 +91,7 @@ typedef struct s_raycast {
 	int					map_pos;
 	t_ray				horizontal_ray;
 	t_ray				vertical_ray;
-	t_ray				*winning_ray;
+	t_ray				winning_ray;
 }	t_raycast;
 
 #endif

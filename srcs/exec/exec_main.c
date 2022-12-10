@@ -44,28 +44,27 @@ int	stop_mlx(int keycode, t_main *main)
 	return (0);
 }
 
-void	draw_minimap(t_main *game)
+void	draw_minimap(t_main *game, int coef)
 {
 	int	w;
 	int	h;
-	int coef;
 
-	coef = (SCREEN_HEIGHT * SCREEN_WIDTH * COEF_MINIMAP);
-	w = coef * game->ps.map.maxw;
-	while (w--)
+	h = coef * game->ps.map.maxh - coef*2;
+	while (--h != coef)
 	{
-		h = coef * game->ps.map.maxw;
-		while (h--)
+		w = coef * game->ps.map.maxw - coef;
+		while (--w != coef)
 		{
-			if (game->gm.map[w / coef][h / coef] == '1')
+			//printf("%d=%d %d=%d %d\n", w, 4 * game->ps.map.maxw, h, 4 * game->ps.map.maxh, coef);
+			if (game->gm.map[h / coef][w / coef] == '1')
 				my_mlx_pixel_put(&game->mini_map, w, h, 0x6600FF);
-			else if (game->gm.map[w / coef][h / coef] == '0')
+			else if (game->gm.map[h / coef][w / coef] == '0')
 				my_mlx_pixel_put(&game->mini_map, w, h, 0x330000);
 			else
 				my_mlx_pixel_put(&game->mini_map, w, h, 0xFF3300);
 		}
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mini_map.img, 16, 16);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mini_map.img, 0, 0);
 }
 
 // int	render_next_frame(t_main *main)
@@ -84,18 +83,50 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+t_raycast	init_raycast(void)
+{
+	t_raycast	raycast;
+
+	raycast.ray_count = FOV_HORIZONTAL;
+	return (raycast);
+}
+
+void	shoot_ray(t_main *main)
+{
+	int i;
+	while (/* condition */)
+	{
+		/* code */
+	}
+	
+}
+
 void	exec_main(t_main *game)
 {
-	game->mini_map.img = mlx_new_image(game->mlx, SCREEN_WIDTH * \
-	COEF_MINIMAP, SCREEN_HEIGHT * COEF_MINIMAP);
+	int		coef;
+
+	coef = (SCREEN_HEIGHT * SCREEN_WIDTH * COEF_MINIMAP);
+	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
+	game->mini_map.img = mlx_new_image(game->mlx, coef * game->ps.map.maxw, coef * game->ps.map.maxh);
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.img, \
 	&game->mini_map.bpp, &game->mini_map.line_length, &game->mini_map.end);
 	game->mini_map.bpp /= 8; // SECURITER TODO
-	draw_minimap(game);
+	draw_minimap(game, coef);
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
 	game->img.bpp /= 8; // SECURITER TODO
 
-	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
+	int i;
+	i = 0;
+
+	game->delta_x = cos(game->player_angle) * 5;
+	game->delta_y = sin(game->player_angle) * 5
+	game->raycast = init_raycast();
+	while (i < SCREEN_WIDTH)
+	{
+		
+		i++;
+	}
+	
 }

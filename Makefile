@@ -36,7 +36,7 @@ LIBFT = libs/libft/libft.a
 GNL = libs/gnl/gnl.a
 LIBFT_PATH = libs/libft
 GNL_PATH = libs/gnl
-HEADER   = includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
+HEADER   = includes/exec.h includes/struct_parsing.h includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
 
 ifeq ($(OS), Linux)
 	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
