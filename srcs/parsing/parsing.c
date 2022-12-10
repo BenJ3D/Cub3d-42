@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/10 16:01:54 by bducrocq         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:40:10 by bducrocq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_start_parsing(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
-static void	ft_set_player_angle(t_main *main)
+static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
 	if (main->ps.charplayer == 'S')
 		main->player_angle = (3 * MY_PI) / 2;
@@ -43,6 +43,9 @@ static void	ft_set_player_angle(t_main *main)
 		main->player_angle = MY_PI;
 	if (main->ps.charplayer == 'E')
 		main->player_angle = 2 * MY_PI;
+	main->gm.playstart.x = y;
+	main->gm.playstart.y = i;
+	main->gm.map[i][y] = '0';
 }
 
 void	ft_pars_check_player_pos(t_main *main)
@@ -63,10 +66,7 @@ void	ft_pars_check_player_pos(t_main *main)
 				|| main->gm.map[i - 1][y] == EMPTY \
 				|| main->gm.map[i + 1][y] == EMPTY)
 					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
-				main->gm.playstart.x = y;
-				main->gm.playstart.y = i;
-				main->gm.map[i][y] = '0';
-				ft_set_player_angle(main);
+				ft_set_player_pos_angle(main, i, y);
 			}
 			y++;
 		}
