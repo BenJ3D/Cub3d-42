@@ -12,22 +12,133 @@
 
 #include "../../includes/cub3d.h"
 
+int	is_wall_coliding(t_main *game, float x, float y)
+{
+	//printf("pos : %d, %d | CHAR : '%c'\n", (int)(y / CELL_SIZE), (int)(x / CELL_SIZE), game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)]);
+	if (x < 1 || (int)(x / CELL_SIZE) + 1 >= game->ps.map.maxw
+		|| y < 1 || (int)(y / CELL_SIZE) + 2 >= game->ps.map.maxh)
+		return (1);
+	if (game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)] == '1' || \
+	game->gm.map[((int)ceil(y + MAX_VELOCITY + 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
+	game->gm.map[((int)ceil(y - MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
+	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / CELL_SIZE] == '1' || \
+	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - MAX_VELOCITY - 1)) / CELL_SIZE] == '1')
+		return (1);
+	return (0);
+}
+
+double	assure_360_deg_angle(double a)
+{
+	double	two_pi;
+
+	two_pi = 2 * M_PI;
+	if (a >= two_pi)
+		a -= (two_pi);
+	if (a < 0)
+		a += (two_pi);
+	return (a);
+}
+
+void	rotate_right(t_main *game)
+{
+	game->player_angle += 0.075;
+	game->player_angle = assure_360_deg_angle(game->player_angle);
+	game->delta_x = cos(game->player_angle) * 3;
+	game->delta_y = sin(game->player_angle) * 3;
+}
+
+void	rotate_left(t_main *game)
+{
+	game->player_angle -= 0.075;
+	game->player_angle = assure_360_deg_angle(game->player_angle);
+	game->delta_x = cos(game->player_angle) * 3;
+	game->delta_y = sin(game->player_angle) * 3;
+}
+
 void	move_forward(t_main *game)
 {
+	float	new_x;
+	float	new_y;
 
-}
-
-void	move_left(t_main *game)
-{
-	
-}
-
-void	move_right(t_main *game)
-{
-	
+	new_x = game->x + game->delta_x * game->velocity;
+	new_y = game->y + game->delta_y * game->velocity;
+	if (!is_wall_coliding(game, new_x, new_y))
+	{
+		game->x = new_x;
+		game->y = new_y;
+	}
+	else if (!is_wall_coliding(game, new_x, game->y))
+		game->x = new_x;
+	else if (!is_wall_coliding(game, game->x, new_y))
+		game->y = new_y;
 }
 
 void	move_backward(t_main *game)
 {
-	// game->x = game->velocity * cos(deg_to_rad());
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x - game->delta_x * game->velocity;
+	new_y = game->y - game->delta_y * game->velocity;
+	if (!is_wall_coliding(game, new_x, new_y))
+	{
+		game->x = new_x;
+		game->y = new_y;
+	}
+	else if (!is_wall_coliding(game, new_x, game->y))
+		game->x = new_x;
+	else if (!is_wall_coliding(game, game->x, new_y))
+		game->y = new_y;
+}
+
+void	move_left(t_main *game)
+{
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x + cos(game->player_angle + M_PI_2) * game->velocity;
+	new_y = game->y + sin(game->player_angle + M_PI_2) * game->velocity;
+	if (!is_wall_coliding(game, new_x, new_y))
+	{
+		game->x = new_x;
+		game->y = new_y;
+	}
+	else if (!is_wall_coliding(game, new_x, game->y))
+		game->x = new_x;
+	else if (!is_wall_coliding(game, game->x, new_y))
+		game->y = new_y;
+}
+
+void	move_right(t_main *game)
+{
+	float	new_x;
+	float	new_y;
+
+	new_x = game->x + cos(game->player_angle - M_PI_2) * game->velocity;
+	new_y = game->y + sin(game->player_angle - M_PI_2) * game->velocity;
+	if (!is_wall_coliding(game, new_x, new_y))
+	{
+		game->x = new_x;
+		game->y = new_y;
+	}
+	else if (!is_wall_coliding(game, new_x, game->y))
+		game->x = new_x;
+	else if (!is_wall_coliding(game, game->x, new_y))
+		game->y = new_y;
+}
+
+void	move_player(t_main *game)
+{
+	if (game->move_tab[0])
+		move_forward(game);
+	if (game->move_tab[1])
+		move_backward(game);
+	if (game->move_tab[2])
+		move_left(game);
+	if (game->move_tab[3])
+		move_right(game);
+	if (game->move_tab[4])
+		rotate_right(game);
+	if (game->move_tab[5])
+		rotate_left(game);
 }

@@ -27,7 +27,7 @@ SRCEXT      := c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJS = ${SOURCES:.c=.o}
 
-CFLAGS = -g3 # -Wall -Wextra -Werror
+CFLAGS = -g3 -O3 # -Wall -Wextra -Werror
 SANITIZE =# -fsanitize=address
 CC = cc $(SANITIZE)
 
@@ -49,9 +49,9 @@ endif
 all : $(NAME)
 
 $(NAME): $(OBJS) $(HEADER) Makefile
-	@$(MAKE) -C $(MLX_PATH)
-	@$(MAKE) -C $(LIBFT_PATH)
-	@$(MAKE) -C $(GNL_PATH)
+	@$(MAKE) -C $(MLX_PATH) -j
+	@$(MAKE) -C $(LIBFT_PATH) -j
+	@$(MAKE) -C $(GNL_PATH) -j
 	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT)  $(CFLAGS) -o $(NAME)
 
 clean:

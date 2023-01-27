@@ -14,11 +14,11 @@
 
 void	update_velocity(t_main *main)
 {
-	if (main->keyboard[KEY_W] == 1 || main->keyboard[KEY_S] == 1 \
-	|| main->keyboard[KEY_A] == 1 || main->keyboard[KEY_D] == 1)
+	if (main->move_tab[0] == 1 || main->move_tab[1] == 1 \
+	|| main->move_tab[2] == 1 || main->move_tab[3] == 1)
 	{
-		if (main->velocity < 0.1)
-			main->velocity = 0.1;
+		if (main->velocity < 0.1f)
+			main->velocity = 0.1f;
 		if (main->velocity < MAX_VELOCITY)
 			main->velocity *= COEF_ACCELERATION;
 		else if (main->velocity > MAX_VELOCITY)
@@ -26,9 +26,10 @@ void	update_velocity(t_main *main)
 	}
 	else
 	{
-		if (main->velocity > 0.1)
-			main->velocity *= COEF_DECELERATION;
-		if (main->velocity < 0.1)
-			main->velocity = 0;
+		// if (main->velocity > 0.1)
+		// 	main->velocity *= COEF_DECELERATION;
+		// if (main->velocity < 0.1)
+		main->velocity = 0;
 	}
+	//printf("velocity : %f\n",main->velocity);
 }

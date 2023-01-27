@@ -60,8 +60,8 @@
 #  define KEY_LEFT 65361
 #  define KEY_W 119
 #  define KEY_S 115
-#  define KEY_A 97
-#  define KEY_D 100
+#  define KEY_A 100
+#  define KEY_D 113
 #  define DOORS 101 // E
 #  define ESC 65307
 # endif
@@ -77,6 +77,30 @@
 #  define DOORS 14
 #  define ESC 53
 # endif
+
+typedef struct s_ray {
+	struct s_data		*texture;
+	float				a_tan;
+	float				x;
+	float				y;
+	float				x_offset;
+	float				y_offset;
+	int					map_x;
+	int					map_y;
+	int					depth_of_field;
+	float				traveled_dst;
+}	t_ray;
+
+typedef struct s_raycast {
+	int					ray_count;
+	double				ray_angle;
+	int					map_x;
+	int					map_y;
+	int					map_pos;
+	t_ray				horizontal_ray;
+	t_ray				vertical_ray;
+	t_ray				winning_ray;
+}	t_raycast;
 
 typedef struct s_render
 {
@@ -125,6 +149,7 @@ typedef struct s_main
 	t_render		render;
 	t_data			mini_map;
 	t_data			img;
+	t_data			background;
 	t_pars			ps; //tout pour le parsing
 	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
 	void			*mlx;
@@ -134,11 +159,14 @@ typedef struct s_main
 	float			velocity;
 	float			x;
 	float			y;
+	double			fov;
 	float			player_angle;
 	float			delta_x;
 	float			delta_y;
+	float			plane_x;
+	float			plane_y;
 	t_raycast		raycast;
-	int				keyboard[200];
+	int				move_tab[10];
 }				t_main;
 
 /* exec utils */
@@ -150,6 +178,7 @@ int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
 int			stop_mlx(int keycode, t_main *main);
 
+void		move_player(t_main *game);
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);

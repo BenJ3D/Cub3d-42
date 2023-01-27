@@ -19,7 +19,7 @@ int	ft_exec(t_main *main)
 	mlx_hook(main->mlx_win, 2, 1L << 0, &key_press, main);
 	mlx_hook(main->mlx_win, 17, 1L << 0, &stop_mlx, main); //sanitize ???!???
 	mlx_hook(main->mlx_win, 3, 1L << 1, &key_release, main);
-	//mlx_loop_hook(main->mlx, render_next_frame, main);
+	mlx_loop_hook(main->mlx, render_next_frame, main);
 	mlx_loop(main->mlx);
 	return (EXIT_SUCCESS);
 }
