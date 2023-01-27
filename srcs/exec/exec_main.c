@@ -231,13 +231,14 @@ int	render_next_frame(t_main *main)
 				map_y += step_y;
 				side = 1;
 			}
-			if (main->gm.map[map_x / CELL_SIZE][map_y / CELL_SIZE] != '0')
-				hit = 1;
-			else if (map_x > main->ps.map.maxh - 1 || map_x < 0 || map_y > main->ps.map.maxw - 1 || map_y < 0)
+			if (map_x / CELL_SIZE > main->ps.map.maxh - 2 || map_x < 0 || map_y / CELL_SIZE > main->ps.map.maxw - 1 || map_y < 0)
 			{
 				side = -1;
 				break;
 			}
+			else if (main->gm.map[map_x / CELL_SIZE][map_y / CELL_SIZE] != '0')
+				hit = 1;
+			my_mlx_pixel_put(&main->mini_map, (map_y / CELL_SIZE) * MAP_CELL_SIZE, (map_x / CELL_SIZE) * MAP_CELL_SIZE, 0xFFAA99);
 		}
 		double wall_hit_dist;
 		if (side == 0)
