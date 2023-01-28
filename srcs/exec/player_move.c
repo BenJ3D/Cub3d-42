@@ -41,7 +41,7 @@ double	assure_360_deg_angle(double a)
 
 void	rotate_right(t_main *game)
 {
-	game->player_angle += 0.075;
+	game->player_angle += MAX_VELOCITY * 0.075;
 	game->player_angle = assure_360_deg_angle(game->player_angle);
 	game->delta_x = cos(game->player_angle) * 3;
 	game->delta_y = sin(game->player_angle) * 3;
@@ -49,7 +49,7 @@ void	rotate_right(t_main *game)
 
 void	rotate_left(t_main *game)
 {
-	game->player_angle -= 0.075;
+	game->player_angle -= MAX_VELOCITY * 0.075;
 	game->player_angle = assure_360_deg_angle(game->player_angle);
 	game->delta_x = cos(game->player_angle) * 3;
 	game->delta_y = sin(game->player_angle) * 3;
