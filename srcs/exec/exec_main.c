@@ -188,9 +188,9 @@ int	render_next_frame(t_main *main)
 	while (x < SCREEN_WIDTH)
 	{
 		 //calculate ray position and direction
-      double cameraX = 2*x/(double)(SCREEN_WIDTH)-1; //x-coordinate in camera space
+      double cameraX = 2*x/(double)(SCREEN_HEIGHT)-1; //x-coordinate in camera space
       double rayDirX = main->delta_x + 0 * cameraX; // 0 = planeX
-      double rayDirY = main->delta_y + FOV_HORIZONTAL * cameraX; // FOV HORIZONTAL = PLANEY
+      double rayDirY = main->delta_y + 0.78 * cameraX; // FOV HORIZONTAL = PLANEY
 
       //which box of the map we're in
       int map_x = (int)(main->x + 0.5);
@@ -235,17 +235,65 @@ int	render_next_frame(t_main *main)
 		}
 		while (hit == 0)
 		{
-			if (side_dist_x < side_dist_y)
+			if (rayDirX > 0 && rayDirY > 0)
 			{
-				side_dist_x += deltaDistX;
-				map_x += step_x;
-				side = 0;
+				if (side_dist_x < side_dist_y)
+				{
+					side_dist_x += deltaDistX;
+					map_x += step_x;
+					side = 0;
+				}
+				else
+				{
+					side_dist_y += deltaDistY;
+					map_y += step_y;
+					side = 1;
+				}
+			}
+			else if (rayDirX < 0 && rayDirY > 0)
+			{
+				if (side_dist_x < side_dist_y)
+				{
+					side_dist_x += deltaDistX;
+					map_x -= step_x;
+					side = 0;
+				}
+				else
+				{
+					side_dist_y += deltaDistY;
+					map_y += step_y;
+					side = 1;
+				}
+			}
+			else if (rayDirX > 0 && rayDirY < 0)
+			{
+				if (side_dist_x < side_dist_y)
+				{
+					side_dist_x += deltaDistX;
+					map_x += step_x;
+					side = 0;
+				}
+				else
+				{
+					side_dist_y += deltaDistY;
+					map_y -= step_y;
+					side = 1;
+				}
 			}
 			else
 			{
-				side_dist_y += deltaDistY;
-				map_y += step_y;
-				side = 1;
+				if (side_dist_x < side_dist_y)
+				{
+					side_dist_x += deltaDistX;
+					map_x -= step_x;
+					side = 0;
+				}
+				else
+				{
+					side_dist_y += deltaDistY;
+					map_y -= step_y;
+					side = 1;
+				}
 			}
 			if (main->gm.map[map_y / CELL_SIZE][map_x / CELL_SIZE] != '0')
 				{
@@ -256,7 +304,7 @@ int	render_next_frame(t_main *main)
 				side = -1;
 				break;
 			}
-			my_mlx_pixel_put(&main->mini_map, (float)(map_x*MAP_CELL_SIZE / CELL_SIZE), (float)(map_y*MAP_CELL_SIZE / CELL_SIZE), 0xFFAA99);
+			my_mlx_pixel_put(&main->mini_map, (float)(map_x*MAP_CELL_SIZE / CELL_SIZE), (float)(map_y*MAP_CELL_SIZE / CELL_SIZE), 0xEAEAEAEA - ((map_x + map_y)));
 		}
 		double wall_hit_dist;
 		if (side == 0)
