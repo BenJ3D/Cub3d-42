@@ -213,7 +213,7 @@ int	render_next_frame(t_main *main)
       int side; //was a NS or a EW wall hit?
 
       //calculate step and initial sideDist
-		if (ray_dir_x < 0)
+		if (rayDirX < 0)
 		{
 			step_x = -1;
 			side_dist_x = (main->x - map_x) * deltaDistX;
@@ -223,7 +223,7 @@ int	render_next_frame(t_main *main)
 			step_x = 1;
 			side_dist_x = (map_x + 1.0 - main->x) * deltaDistX;
 		}
-		if (ray_dir_y < 0)
+		if (rayDirY < 0)
 		{
 			step_y = -1;
 			side_dist_y = (main->y - map_y) * deltaDistY;
@@ -235,76 +235,29 @@ int	render_next_frame(t_main *main)
 		}
 		while (hit == 0)
 		{
-			if (rayDirX > 0 && rayDirY > 0)
+			if (side_dist_x < side_dist_y)
 			{
-				if (side_dist_x < side_dist_y)
-				{
-					side_dist_x += deltaDistX;
-					map_x += step_x;
-					side = 0;
-				}
-				else
-				{
-					side_dist_y += deltaDistY;
-					map_y += step_y;
-					side = 1;
-				}
-			}
-			else if (rayDirX < 0 && rayDirY > 0)
-			{
-				if (side_dist_x < side_dist_y)
-				{
-					side_dist_x += deltaDistX;
-					map_x -= step_x;
-					side = 0;
-				}
-				else
-				{
-					side_dist_y += deltaDistY;
-					map_y += step_y;
-					side = 1;
-				}
-			}
-			else if (rayDirX > 0 && rayDirY < 0)
-			{
-				if (side_dist_x < side_dist_y)
-				{
-					side_dist_x += deltaDistX;
-					map_x += step_x;
-					side = 0;
-				}
-				else
-				{
-					side_dist_y += deltaDistY;
-					map_y -= step_y;
-					side = 1;
-				}
+				side_dist_x += deltaDistX;
+				map_x += step_x;
+				side = 0;
 			}
 			else
 			{
-				if (side_dist_x < side_dist_y)
-				{
-					side_dist_x += deltaDistX;
-					map_x -= step_x;
-					side = 0;
-				}
-				else
-				{
-					side_dist_y += deltaDistY;
-					map_y -= step_y;
-					side = 1;
-				}
+				side_dist_y += deltaDistY;
+				map_y += step_y;
+				side = 1;
 			}
+			my_mlx_pixel_put(&main->mini_map, (float)(map_x*MAP_CELL_SIZE / CELL_SIZE), (float)(map_y*MAP_CELL_SIZE / CELL_SIZE), 0xEAEAEAEAEA);
 			if (main->gm.map[map_y / CELL_SIZE][map_x / CELL_SIZE] != '0')
 				{
 					hit = 1;
 				}
-			else if (map_x / CELL_SIZE > main->ps.map.maxh - 2 || map_x < 0 || map_y / CELL_SIZE > main->ps.map.maxw - 1 || map_y < 0)
+			else if (map_x / CELL_SIZE > main->ps.map.maxh - 1 || map_x <= 0 || map_y / CELL_SIZE > main->ps.map.maxw - 1 || map_y <= 0)
 			{
+				printf("%f,%f\n", map_x, map_y);
 				side = -1;
 				break;
 			}
-			my_mlx_pixel_put(&main->mini_map, (float)(map_x*MAP_CELL_SIZE / CELL_SIZE), (float)(map_y*MAP_CELL_SIZE / CELL_SIZE), 0xEAEAEAEA - ((map_x + map_y)));
 		}
 		double wall_hit_dist;
 		if (side == 0)
@@ -312,7 +265,7 @@ int	render_next_frame(t_main *main)
 		else if (side == 1)
 			wall_hit_dist = side_dist_y - deltaDistY;
 		else
-			continue ;
+			break ;
 		int line_height = (int)(SCREEN_HEIGHT / wall_hit_dist);
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
