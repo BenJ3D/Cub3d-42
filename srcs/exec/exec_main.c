@@ -231,23 +231,19 @@ void	draw_background(t_main *game)
 // 	}
 // }
 
-int	render_next_frame(t_main *main)
+void	render(t_main *main)
 {
 	int x;
-	double cam_x;
-	double ray_dir_x;
-	double ray_dir_y;
 
 	x = 0;
-	update_velocity(main);
-	move_player(main);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->background.img, 0, 0);
+	draw_minimap(main); // A OPTI
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
 		double cameraX = 2 * x / (double)(SCREEN_HEIGHT)-1;		  // x-coordinate in camera space
-		double rayDirX = main->delta_x + 0 * cameraX; // 0 = planeX
+		double rayDirX = main->delta_x + main->plane_x * cameraX; // 0 = planeX
 		double rayDirY = main->delta_y + main->plane_y * cameraX; // FOV HORIZONTAL = PLANEY
+		//printf("%sRayDir X et Y : %f, %f //%s player Angle : %f\n", COLOR_GREEN, rayDirX, rayDirY, COLOR_CYAN, main->player_angle);
 
 		// which box of the map we're in
 		int mapX = (int)(main->x);
@@ -258,8 +254,8 @@ int	render_next_frame(t_main *main)
 		double sideDistY;
 
 		// length of ray from one x or y-side to next x or y-side
-		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double deltaDistX = (rayDirX == 0.0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0.0) ? 1e30 : fabs(1 / rayDirY);
 		double perpWallDist;
 
 		// what direction to step in x or y-direction (either +1 or -1)
@@ -278,7 +274,7 @@ int	render_next_frame(t_main *main)
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 2.0 - main->x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - main->x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
@@ -288,7 +284,7 @@ int	render_next_frame(t_main *main)
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 2.0 - main->y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - main->y) * deltaDistY;
 		}
 		while (hit == 0)
 		{
@@ -304,7 +300,7 @@ int	render_next_frame(t_main *main)
 				mapY += stepY;
 				side = 1;
 			}
-			my_mlx_pixel_put(&main->img, (float)(mapX * MAP_CELL_SIZE / CELL_SIZE), (float)(mapY * MAP_CELL_SIZE / CELL_SIZE), 0xFFFFFF);
+			my_mlx_pixel_put(&main->mini_map, (float)(mapX * MAP_CELL_SIZE / CELL_SIZE), (float)(mapY * MAP_CELL_SIZE / CELL_SIZE), 0xFFFFFF);
 			if (main->gm.map[mapY / CELL_SIZE][mapX / CELL_SIZE] != '0')
 			{
 				hit = 1;
@@ -335,7 +331,7 @@ int	render_next_frame(t_main *main)
 		{
 			j++;
 			if (j > draw_start && j < draw_end)
-				my_mlx_pixel_put(&main->img, x, j, main->gm.img_no.addr + ((mapX % 64) * main->gm.img_no.line_length + (j / main->gm.img_no.height) * 4));
+				my_mlx_pixel_put(&main->img, x, j, ((int *)main->gm.img_no.addr + ((mapX % 64) * main->gm.img_no.line_length + (j / main->gm.img_no.height) * 4)));
 			else
 				my_mlx_pixel_put(&main->img, x, j, 0xFF000000);
 		}
@@ -344,8 +340,14 @@ int	render_next_frame(t_main *main)
 		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	draw_minimap(main); // A OPTI
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
+}
 
+int	render_next_frame(t_main *main)
+{
+	update_velocity(main);
+	move_player(main);
+	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->background.img, 0, 0);
 	// dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
 	// mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 }
@@ -406,4 +408,6 @@ void	exec_main(t_main *game)
 
 	game->delta_x = cos(game->player_angle) * 5;
 	game->delta_y = sin(game->player_angle) * 5;
+	game->delta_x = -1; game->delta_y = 0;
+	game->plane_x = 0; game->plane_y = 0.50;
 }

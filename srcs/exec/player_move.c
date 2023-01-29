@@ -133,16 +133,21 @@ void	move_right(t_main *game)
 
 void	move_player(t_main *game)
 {
-	if (game->move_tab[0])
-		move_forward(game);
-	if (game->move_tab[1])
-		move_backward(game);
-	if (game->move_tab[2])
-		move_left(game);
-	if (game->move_tab[3])
-		move_right(game);
-	if (game->move_tab[4])
-		rotate_right(game);
-	if (game->move_tab[5])
-		rotate_left(game);
+	if (game->move_tab[0] || game->move_tab[1] || game->move_tab[2] || \
+	game->move_tab[3] || game->move_tab[4] || game->move_tab[5])
+	{
+		render(game);
+		if (game->move_tab[0])
+			move_forward(game);
+		if (game->move_tab[1])
+			move_backward(game);
+		if (game->move_tab[2])
+			move_left(game);
+		if (game->move_tab[3])
+			move_right(game);
+		if (game->move_tab[4])
+			rotate_right(game);
+		if (game->move_tab[5])
+			rotate_left(game);
+	}
 }

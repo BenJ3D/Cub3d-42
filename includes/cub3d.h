@@ -226,6 +226,9 @@ void		ft_err_display_and_exit(int errtype, t_main *main);
 void		dbg_display_all_parameter_value(t_main *main);
 void		dbg_display_velocity(t_main *main);
 
+
+void	render(t_main *main);
+
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
 # define COLOR_GREEN	"\001\033[0;32m\002"
