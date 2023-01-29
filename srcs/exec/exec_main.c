@@ -171,6 +171,66 @@ void	draw_background(t_main *game)
 // 	}
 // }
 
+// t_vector2_f dda(t_main *game, t_vector2_f dest)
+// {
+// 	static const t_vector2_d origin = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
+// 	t_vector2_d map = origin; // Position used to check tab value
+// 	t_vector2_f dir = {dest.x - origin.x, dest.y - origin.y};
+
+// 	t_vector2_f side_dist; // Origin point offset to the nearest int positon
+// 	t_vector2_f delta_dist; // Length of the hyptenuse
+
+// 	delta_dist.x = (dir.x == 0) ? 1e30 : fabs(1.0f / dir.x); // 1e30 is a large value
+// 	delta_dist.y = (dir.y == 0) ? 1e30 : fabs(1.0f / dir.y);
+
+// 	t_vector2_f step;
+// 	if (dir.x < 0)
+// 	{
+// 		step.x = -1; // Calculating X step (depending on the direction)
+// 		side_dist.x = (origin.x - map.x) * delta_dist.x; // Calculating X gap to the nearest integer coordinate
+// 	}
+// 	else
+// 	{
+// 		step.x = 1;
+// 		side_dist.x = (map.x + 1.0f - origin.x) * delta_dist.x;
+// 	}
+
+// 	if (dir.y < 0)
+// 	{
+// 		step.y = -1; // Calculating Y step (depending on the direction)
+// 		side_dist.y = (origin.y - map.y) * delta_dist.y; // Calculating Y gap to the nearest integer coordinate
+// 	}
+// 	else
+// 	{
+// 		step.y = 1;
+// 		side_dist.y = (map.y + 1.0f - origin.y) * delta_dist.y;
+// 	}
+// 	while (1)
+// 	{
+// 		if (side_dist.x < side_dist.y)
+// 		{
+// 			side_dist.x += delta_dist.x;
+// 			map.x += step.x;
+// 		}
+// 		else
+// 		{
+// 			side_dist.y += delta_dist.y;
+// 			map.y += step.y;
+// 		}
+
+// 		// Converting pixel coordinates to tab coordinates
+// 		t_vector2_d cell = {
+// 			map.x / data->cell_size,
+// 			map.y / data->cell_size
+// 		};
+
+// 		if (data->tab[cell.y][cell.x] == 1) // Is a wall
+// 		{
+// 			return (vector_d_to_f(map));
+// 		}
+// 	}
+// }
+
 int	render_next_frame(t_main *main)
 {
 	int x;
@@ -182,90 +242,87 @@ int	render_next_frame(t_main *main)
 	update_velocity(main);
 	move_player(main);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->background.img, 0, 0);
-	draw_minimap(main); // A OPTI
-	int side;
-	main->plane_y = FOV_HORIZONTAL;
 	while (x < SCREEN_WIDTH)
 	{
-		 //calculate ray position and direction
-      double cameraX = 2*x/(double)(SCREEN_HEIGHT)-1; //x-coordinate in camera space
-      double rayDirX = main->delta_x + 0 * cameraX; // 0 = planeX
-      double rayDirY = main->delta_y + 0.78 * cameraX; // FOV HORIZONTAL = PLANEY
+		// calculate ray position and direction
+		double cameraX = 2 * x / (double)(SCREEN_HEIGHT)-1;		  // x-coordinate in camera space
+		double rayDirX = main->delta_x + 0 * cameraX; // 0 = planeX
+		double rayDirY = main->delta_y + main->plane_y * cameraX; // FOV HORIZONTAL = PLANEY
 
-      //which box of the map we're in
-      int map_x = (int)(main->x + 0.5);
-      int map_y = (int)(main->y + 0.5);
+		// which box of the map we're in
+		int mapX = (int)(main->x);
+		int mapY = (int)(main->y);
 
-      //length of ray from current position to next x or y-side
-      double side_dist_x;
-      double side_dist_y;
+		// length of ray from current position to next x or y-side
+		double sideDistX;
+		double sideDistY;
 
-      //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-      double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-      double perpWallDist;
+		// length of ray from one x or y-side to next x or y-side
+		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double perpWallDist;
 
-      //what direction to step in x or y-direction (either +1 or -1)
-      int step_x;
-      int step_y;
+		// what direction to step in x or y-direction (either +1 or -1)
+		int stepX;
+		int stepY;
 
-      int hit = 0; //was there a wall hit?
-      int side; //was a NS or a EW wall hit?
+		int hit = 0; // was there a wall hit?
+		int side;	 // was a NS or a EW wall hit?
 
-      //calculate step and initial sideDist
+		// calculate step and initial sideDist
 		if (rayDirX < 0)
 		{
-			step_x = -1;
-			side_dist_x = (main->x - map_x) * deltaDistX;
+			stepX = -1;
+			sideDistX = (main->x - mapX) * deltaDistX;
 		}
 		else
 		{
-			step_x = 1;
-			side_dist_x = (map_x + 1.0 - main->x) * deltaDistX;
+			stepX = 1;
+			sideDistX = (mapX + 2.0 - main->x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
-			step_y = -1;
-			side_dist_y = (main->y - map_y) * deltaDistY;
+			stepY = -1;
+			sideDistY = (main->y - mapY) * deltaDistY;
 		}
 		else
 		{
-			step_y = 1;
-			side_dist_y = (map_y + 1.0 - main->y) * deltaDistY;
+			stepY = 1;
+			sideDistY = (mapY + 2.0 - main->y) * deltaDistY;
 		}
 		while (hit == 0)
 		{
-			if (side_dist_x < side_dist_y)
+			if (sideDistX < sideDistY)
 			{
-				side_dist_x += deltaDistX;
-				map_x += step_x;
+				sideDistX += deltaDistX;
+				mapX += stepX;
 				side = 0;
 			}
 			else
 			{
-				side_dist_y += deltaDistY;
-				map_y += step_y;
+				sideDistY += deltaDistY;
+				mapY += stepY;
 				side = 1;
 			}
-			if (main->gm.map[map_y / CELL_SIZE][map_x / CELL_SIZE] != '0')
+			my_mlx_pixel_put(&main->img, (float)(mapX * MAP_CELL_SIZE / CELL_SIZE), (float)(mapY * MAP_CELL_SIZE / CELL_SIZE), 0xFFFFFF);
+			if (main->gm.map[mapY / CELL_SIZE][mapX / CELL_SIZE] != '0')
 			{
-				my_mlx_pixel_put(&main->mini_map, (float)(map_x*MAP_CELL_SIZE / CELL_SIZE), (float)(map_y*MAP_CELL_SIZE / CELL_SIZE), 0xFFFFFF);
 				hit = 1;
 			}
-			else if (map_x / CELL_SIZE > main->ps.map.maxh - 1 || map_x <= 0 || map_y / CELL_SIZE > main->ps.map.maxw - 1 || map_y <= 0)
+			else if (mapY / CELL_SIZE > main->ps.map.maxh - 1 || mapX <= 0 || mapX / CELL_SIZE > main->ps.map.maxw - 1 || mapY <= 0)
 			{
-				printf("%f,%f\n", map_x, map_y);
+				printf("%d,%d\n", mapX, mapY);
 				side = -1;
 				break;
 			}
 		}
 		double wall_hit_dist;
 		if (side == 0)
-			wall_hit_dist = side_dist_x - deltaDistX;
+			wall_hit_dist = sideDistX - deltaDistX;
 		else if (side == 1)
-			wall_hit_dist = side_dist_y - deltaDistY;
+			wall_hit_dist = sideDistY - deltaDistY;
 		else
-			break ;
+			break;
 		int line_height = (int)(SCREEN_HEIGHT / wall_hit_dist);
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
@@ -273,12 +330,24 @@ int	render_next_frame(t_main *main)
 		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
+		int j = 0;
+		while (j != SCREEN_HEIGHT)
+		{
+			j++;
+			if (j > draw_start && j < draw_end)
+				my_mlx_pixel_put(&main->img, x, j, main->gm.img_no.addr + ((mapX % 64) * main->gm.img_no.line_length + (j / main->gm.img_no.height) * 4));
+			else
+				my_mlx_pixel_put(&main->img, x, j, 0xFF000000);
+		}
+		
 		x++;
-		//printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
+		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
-	
-	//dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
-	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
+	draw_minimap(main); // A OPTI
+
+	// dbg_display_velocity(main); //TODO:TODO:TODO:TODO:TODO:FIXME:FIXME:FIXME:FIXME:
+	// mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -313,7 +382,7 @@ void	exec_main(t_main *game)
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
 	printf("%d,%d\n", game->gm.playstart.x, game->gm.playstart.y);
 	game->plane_x = 0;
-	game->plane_y = 0.66;
+	game->plane_y = FOV_HORIZONTAL;
 	//game->mlx_win = mlx_new_window(game->mlx, game->ps.map.maxw * MAP_CELL_SIZE, game->ps.map.maxh * MAP_CELL_SIZE, "cub3D");
 	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 
@@ -335,15 +404,6 @@ void	exec_main(t_main *game)
 	&game->img.line_length, &game->img.end);
 	game->img.bpp /= 8; // SECURITER TODO
 
-	int i;
-	i = 0;
-
 	game->delta_x = cos(game->player_angle) * 5;
 	game->delta_y = sin(game->player_angle) * 5;
-	// game->raycast = init_raycast();
-	// game->fov =  MY_PI * (FOV_HORIZONTAL / 180.);
-	// while (i < SCREEN_WIDTH)
-	// {
-	// 	i++;
-	// }
 }

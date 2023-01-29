@@ -41,18 +41,22 @@ double	assure_360_deg_angle(double a)
 
 void	rotate_right(t_main *game)
 {
-	game->player_angle += MAX_VELOCITY * 0.075;
-	game->player_angle = assure_360_deg_angle(game->player_angle);
-	game->delta_x = cos(game->player_angle) * 3;
-	game->delta_y = sin(game->player_angle) * 3;
+	double old_delta_x = game->delta_x;
+	game->delta_x = game->delta_x * cos(0.075) - game->delta_y * sin(0.075);
+	game->delta_y = old_delta_x * sin(0.075) + game->delta_y * cos(0.075);
+	double old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(0.075) - game->plane_y * sin(0.075);
+	game->plane_y = old_plane_x * sin(0.075) + game->plane_y * cos(0.075);
 }
 
 void	rotate_left(t_main *game)
 {
-	game->player_angle -= MAX_VELOCITY * 0.075;
-	game->player_angle = assure_360_deg_angle(game->player_angle);
-	game->delta_x = cos(game->player_angle) * 3;
-	game->delta_y = sin(game->player_angle) * 3;
+	double old_delta_x = game->delta_x;
+	game->delta_x = game->delta_x * cos(-0.075) - game->delta_y * sin(-0.075);
+	game->delta_y = old_delta_x * sin(-0.075) + game->delta_y * cos(-0.075);
+	double old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(-0.075) - game->plane_y * sin(-0.075);
+	game->plane_y = old_plane_x * sin(-0.075) + game->plane_y * cos(-0.075);
 }
 
 void	move_forward(t_main *game)
