@@ -327,21 +327,22 @@ void	render(t_main *main)
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 		int j = 0;
+		int new_x = SCREEN_WIDTH - x;
 		while (j != SCREEN_HEIGHT)
 		{
 			j++;
 			if (j >= draw_start && j <= draw_end)
 			{
 				if (side == 1)
-					my_mlx_pixel_put(&main->img, x, j, 0xCCAF00);
+					my_mlx_pixel_put(&main->img, new_x, j, 0xCCAF00);
 				else
-					my_mlx_pixel_put(&main->img, x, j, (0xCCAF00 / 2));
+					my_mlx_pixel_put(&main->img, new_x, j, (0xCCAF00 / 2));
 			}
 			else if (j > SCREEN_HEIGHT / 2)
-				my_mlx_pixel_put(&main->img, x, j, colour_to_nb(\
+				my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
 				main->gm.c_rgb.x,main->gm.c_rgb.y,main->gm.c_rgb.z));
 			else
-				my_mlx_pixel_put(&main->img, x, j, colour_to_nb(\
+				my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
 				main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z));
 		}
 		
