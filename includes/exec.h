@@ -15,8 +15,6 @@
 # include "cub3d.h"
 # include "struct_parsing.h"
 
-# define MY_PI 3.141592653589793116f
-
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 20
 

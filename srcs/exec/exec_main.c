@@ -240,7 +240,7 @@ void	render(t_main *main)
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
-		double cameraX = 2 * x / (double)(SCREEN_HEIGHT)-1;		  // x-coordinate in camera space
+		double cameraX = 2 * x / (double)(SCREEN_HEIGHT) - 1; // x-coordinate in camera space
 		double rayDirX = main->delta_x + main->plane_x * cameraX; // 0 = planeX
 		double rayDirY = main->delta_y + main->plane_y * cameraX; // FOV HORIZONTAL = PLANEY
 		//printf("%sRayDir X et Y : %f, %f //%s player Angle : %f\n", COLOR_GREEN, rayDirX, rayDirY, COLOR_CYAN, main->player_angle);
@@ -319,7 +319,7 @@ void	render(t_main *main)
 			wall_hit_dist = sideDistY - deltaDistY;
 		else
 			break;
-		int line_height = (int)(SCREEN_HEIGHT / wall_hit_dist);
+		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017));
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
 			draw_start = 0;
@@ -330,10 +330,19 @@ void	render(t_main *main)
 		while (j != SCREEN_HEIGHT)
 		{
 			j++;
-			if (j > draw_start && j < draw_end)
-				my_mlx_pixel_put(&main->img, x, j, ((int *)main->gm.img_no.addr + ((mapX % 64) * main->gm.img_no.line_length + (j / main->gm.img_no.height) * 4)));
+			if (j >= draw_start && j <= draw_end)
+			{
+				if (side == 1)
+					my_mlx_pixel_put(&main->img, x, j, 0xCCAF00);
+				else
+					my_mlx_pixel_put(&main->img, x, j, (0xCCAF00 / 2));
+			}
+			else if (j > SCREEN_HEIGHT / 2)
+				my_mlx_pixel_put(&main->img, x, j, colour_to_nb(\
+				main->gm.c_rgb.x,main->gm.c_rgb.y,main->gm.c_rgb.z));
 			else
-				my_mlx_pixel_put(&main->img, x, j, 0xFF000000);
+				my_mlx_pixel_put(&main->img, x, j, colour_to_nb(\
+				main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z));
 		}
 		
 		x++;
@@ -388,17 +397,11 @@ void	exec_main(t_main *game)
 	//game->mlx_win = mlx_new_window(game->mlx, game->ps.map.maxw * MAP_CELL_SIZE, game->ps.map.maxh * MAP_CELL_SIZE, "cub3D");
 	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 
-	game->background.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	game->background.addr = mlx_get_data_addr(game->background.img, &game->background.bpp, \
-	&game->background.line_length, &game->background.end);
-	game->background.bpp /= 8; // SECURITER TODO
-
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	//game->mini_map.img = mlx_new_image(game->mlx, coef * game->ps.map.maxw, coef * game->ps.map.maxh);
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.img, \
 	&game->mini_map.bpp, &game->mini_map.line_length, &game->mini_map.end);
 	game->mini_map.bpp /= 8; // SECURITER TODO
-	draw_background(game);
 	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->background.img, 0, 0);
 	draw_minimap(game);
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
