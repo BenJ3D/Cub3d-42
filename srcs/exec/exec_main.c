@@ -30,12 +30,15 @@ int	key_press(int keycode, t_main *main)
 		main->move_tab[4] = 1;
 	if (keycode == KEY_LEFT)
 		main->move_tab[5] = 1;
+	if (keycode == KEY_UP)
+		main->move_tab[6] = 1;
+	if (keycode == KEY_DOWN)
+		main->move_tab[7] = 1;
 	return (0);
 }
 
 int	key_release(int keycode, t_main *main)
 {
-	// printf("Key release : %d\n", keycode);
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
 	if (keycode == KEY_W)
@@ -50,6 +53,10 @@ int	key_release(int keycode, t_main *main)
 		main->move_tab[4] = 0;
 	if (keycode == KEY_LEFT)
 		main->move_tab[5] = 0;
+	if (keycode == KEY_UP)
+		main->move_tab[6] = 0;
+	if (keycode == KEY_DOWN)
+		main->move_tab[7] = 0;
 	return (0);
 }
 
@@ -231,6 +238,53 @@ void	draw_background(t_main *game)
 // 	}
 // }
 
+void	put_pixel_from_ray(t_main *main, t_data *img, int posX, int posY, int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDist, int x)
+{
+	int j = 0;
+	int new_x = SCREEN_WIDTH - x;
+	double wallX;
+	int dst_height = (int)(img->height * ((draw_end - draw_start) / img->height));
+	char *dst;
+
+	// algo lodev
+	if (side == 0)
+		wallX = posY + perpWallDist * rayDirY;
+	else
+		wallX = posX + perpWallDist * rayDirX;
+	wallX -= floor(wallX);
+	int texX = (int)(wallX * (double)(img->width));
+	if (side == 0 && rayDirX > 0)
+		texX = img->width - texX - 1;
+	if (side == 1 && rayDirY < 0)
+		texX = img->width - texX - 1;
+	double step = 1.0 * img->height / SCREEN_HEIGHT;
+	// Starting texture coordinate
+	float texPos = (draw_start - (float)(SCREEN_HEIGHT/perpWallDist) / 2 + SCREEN_HEIGHT / 2) * step;
+	int texY = (int)texPos & (img->height - 1);
+	printf(" dst height : %f /----/  x : %d y : %d \n", texPos, texX, texY);
+
+	while (j != SCREEN_HEIGHT)
+	{
+		j++;
+		if (j  >= draw_start * main->up_down && j * main->up_down <= draw_end)
+		{
+			texY = (int)texPos & (img->height - 1);
+        	texPos += step;
+			 dst = img->addr + (img->height * texY + texX) * img->line_length + (1) * (img->bpp);
+			 if (side == 1)
+				my_mlx_pixel_put(&main->img, new_x, j, (unsigned int)dst);
+			else
+				my_mlx_pixel_put(&main->img, new_x, j, (unsigned int)dst);
+		}
+		else if (j * main->up_down > SCREEN_HEIGHT / 2)
+			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
+			main->gm.c_rgb.x,main->gm.c_rgb.y,main->gm.c_rgb.z));
+		else
+			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
+			main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z));
+	}
+}
+
 void	render(t_main *main)
 {
 	int x;
@@ -319,38 +373,23 @@ void	render(t_main *main)
 			wall_hit_dist = sideDistY - deltaDistY;
 		else
 			break;
-		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017));
+		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017 * main->up_down));
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
 			draw_start = 0;
 		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		int j = 0;
-		int new_x = SCREEN_WIDTH - x;
-		while (j != SCREEN_HEIGHT)
-		{
-			j++;
-			if (j >= draw_start && j <= draw_end)
-			{
-				if (side == 1)
-					my_mlx_pixel_put(&main->img, new_x, j, 0xCCAF00);
-				else
-					my_mlx_pixel_put(&main->img, new_x, j, (0xCCAF00 / 2));
-			}
-			else if (j > SCREEN_HEIGHT / 2)
-				my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
-				main->gm.c_rgb.x,main->gm.c_rgb.y,main->gm.c_rgb.z));
-			else
-				my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
-				main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z));
-		}
-		
+		if (side == 0)
+			put_pixel_from_ray(main, &main->gm.img_no, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x);
+		else if (side == 1)
+			put_pixel_from_ray(main, &main->gm.img_we, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x);
 		x++;
 		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_ea.img, 0, 0);
+	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
 }
 
 int	render_next_frame(t_main *main)
@@ -413,5 +452,6 @@ void	exec_main(t_main *game)
 	game->delta_x = cos(game->player_angle) * 5;
 	game->delta_y = sin(game->player_angle) * 5;
 	game->delta_x = -1; game->delta_y = 0;
-	game->plane_x = 0; game->plane_y = 0.50;
+	game->plane_x = 0; game->plane_y = 0.66;
+	game->up_down = 1;
 }

@@ -58,6 +58,8 @@
 # ifdef __linux__
 #  define KEY_RIGHT 65363
 #  define KEY_LEFT 65361
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
 #  define KEY_W 119
 #  define KEY_S 115
 #  define KEY_A 100
@@ -165,6 +167,7 @@ typedef struct s_main
 	float			delta_y;
 	float			plane_x;
 	float			plane_y;
+	double			up_down;
 	t_raycast		raycast;
 	int				move_tab[10];
 }				t_main;

@@ -131,12 +131,26 @@ void	move_right(t_main *game)
 		game->y = new_y;
 }
 
+void	look_up(t_main *game)
+{
+	game->up_down -= 0.001;
+	if (game->up_down < 0.5)
+		game->up_down = 0.5;
+}
+
+void	look_down(t_main *game)
+{
+	game->up_down += 0.001;
+	if (game->up_down > 1.15)
+		game->up_down = 1.15;
+}
+
 void	move_player(t_main *game)
 {
 	if (game->move_tab[0] || game->move_tab[1] || game->move_tab[2] || \
-	game->move_tab[3] || game->move_tab[4] || game->move_tab[5])
+	game->move_tab[3] || game->move_tab[4] || game->move_tab[5] || \
+	game->move_tab[6] || game->move_tab[7])
 	{
-		render(game);
 		if (game->move_tab[0])
 			move_forward(game);
 		if (game->move_tab[1])
@@ -149,5 +163,10 @@ void	move_player(t_main *game)
 			rotate_right(game);
 		if (game->move_tab[5])
 			rotate_left(game);
+		if (game->move_tab[6])
+			look_up(game);
+		if (game->move_tab[7])
+			look_down(game);
+		render(game);
 	}
 }
