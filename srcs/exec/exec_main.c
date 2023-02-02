@@ -239,7 +239,7 @@ void	draw_background(t_main *game)
 // }
 
 void	put_pixel_from_ray(t_main *main, t_data *img, int posX, int posY, \
-int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDist, int x, int line_height)
+int side, int draw_start, int draw_end, double rayDirX, double rayDirY, float perpWallDist, int x, int line_height)
 {
 	int j = 0;
 	int new_x = SCREEN_WIDTH - x;
@@ -249,9 +249,9 @@ int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDi
 	float	wallx;
 
 	if (side == 0)
-		wallx = main->y + perpWallDist * rayDirY;
+		wallx = posY + perpWallDist * rayDirY;
 	else
-		wallx = main->x + perpWallDist * rayDirX;
+		wallx = posX + perpWallDist * rayDirX;
 	wallx -= floorf(wallx);
 	int texX = (int)(wallx * img->height);
 	if (side == 0 && rayDirX > 0)
@@ -262,7 +262,8 @@ int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDi
 	float texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 	int texY = (int)texPos & (img->height - 1);
 
-	//printf(" dst height : %f /----/  x : %d y : %d \n", texPos, 1, (j-draw_start));
+	//printf(" dst height : %f /----/  x : %d y : %d \n", wallx, texX, texY);
+	//printf("texX : %d\n",rayDirX);
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
@@ -380,13 +381,9 @@ void	render(t_main *main)
 			draw_end = SCREEN_HEIGHT - 1;
 		//i fking forgot perpWallDist i'm dumb
 		if (side == 0)
-			perpWallDist = (main->ps.map.maxw * CELL_SIZE - main->x +
-								   (1 - stepX) / 2) /
-								  rayDirX;
+			perpWallDist = (main->ps.map.maxw - main->x + (1 - stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (main->ps.map.maxh * CELL_SIZE - main->y +
-								   (1 - stepY) / 2) /
-								  rayDirY;
+			perpWallDist = (main->ps.map.maxh - main->y + (1 - stepY) / 2) / rayDirY;
 		if (perpWallDist == 0)
 			perpWallDist = 0.1;
 		//end of dumb section
