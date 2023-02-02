@@ -258,11 +258,11 @@ int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDi
 		texX = img->width - texX - 1;
 	if (side == 1 && rayDirY < 0)
 		texX = img->width - texX - 1;
-	double step = 1.0 * img->height / line_height;
+	float step = 1.0 * img->height / line_height;
 	float texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 	int texY = (int)texPos & (img->height - 1);
 
-	printf(" dst height : %f /----/  x : %d y : %d \n", texPos, 1, (j-draw_start));
+	//printf(" dst height : %f /----/  x : %d y : %d \n", texPos, 1, (j-draw_start));
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
@@ -398,7 +398,8 @@ void	render(t_main *main)
 		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_ea.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_no.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_we.img, main->gm.img_no.width, 0);
 	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
 }
 
