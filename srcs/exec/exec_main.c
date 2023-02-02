@@ -238,8 +238,8 @@ void	draw_background(t_main *game)
 // 	}
 // }
 
-void	put_pixel_from_ray(t_main *main, t_data *img, int posX, int posY, \
-int side, int draw_start, int draw_end, double rayDirX, double rayDirY, float perpWallDist, int x, int line_height)
+void	put_pixel_from_ray(t_main *main, t_data *img, double posX, double posY, \
+int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double perpWallDist, int x, int line_height)
 {
 	int j = 0;
 	int new_x = SCREEN_WIDTH - x;
@@ -249,10 +249,10 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, float pe
 	float	wallx;
 
 	if (side == 0)
-		wallx = posY + perpWallDist * rayDirY;
+		wallx = main->y + perpWallDist * rayDirY;
 	else
 		wallx = posX + perpWallDist * rayDirX;
-	wallx -= floorf(wallx);
+	wallx -= floor(wallx);
 	int texX = (int)(wallx * img->height);
 	if (side == 0 && rayDirX > 0)
 		texX = img->width - texX - 1;
@@ -289,7 +289,7 @@ void	render(t_main *main)
 	int x;
 
 	x = 0;
-	draw_minimap(main); // A OPTI
+	//draw_minimap(main); // A OPTI
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
@@ -372,7 +372,7 @@ void	render(t_main *main)
 			wall_hit_dist = sideDistY - deltaDistY;
 		else
 			break;
-		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017));
+		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.020));
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
 			draw_start = 0;

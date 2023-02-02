@@ -36,13 +36,13 @@ int	ft_start_parsing(t_main *main)
 static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
 	if (main->ps.charplayer == 'S')
-		main->player_angle = (3 * MY_PI) / 2;
+		main->player_angle = (3 * M_PI) / 2;
 	if (main->ps.charplayer == 'N')
-		main->player_angle = MY_PI / 2;
+		main->player_angle = M_PI / 2;
 	if (main->ps.charplayer == 'W')
-		main->player_angle = MY_PI;
+		main->player_angle = M_PI;
 	if (main->ps.charplayer == 'E')
-		main->player_angle = 2 * MY_PI;
+		main->player_angle = 2 * M_PI;
 	main->gm.playstart.x = y;
 	main->gm.playstart.y = i;
 	main->gm.map[i][y] = '0';

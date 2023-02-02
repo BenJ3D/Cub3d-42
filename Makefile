@@ -52,7 +52,7 @@ $(NAME): $(OBJS) $(HEADER) Makefile
 	@$(MAKE) -C $(MLX_PATH) -j
 	@$(MAKE) -C $(LIBFT_PATH) -j
 	@$(MAKE) -C $(GNL_PATH) -j
-	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT)  $(CFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)
