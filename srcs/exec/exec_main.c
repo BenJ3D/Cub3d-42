@@ -238,50 +238,48 @@ void	draw_background(t_main *game)
 // 	}
 // }
 
-void	put_pixel_from_ray(t_main *main, t_data *img, int posX, int posY, int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDist, int x)
+void	put_pixel_from_ray(t_main *main, t_data *img, int posX, int posY, \
+int side, int draw_start, int draw_end, int rayDirX, int rayDirY, int perpWallDist, int x, int line_height)
 {
 	int j = 0;
 	int new_x = SCREEN_WIDTH - x;
-	double wallX;
-	int dst_height = (int)(img->height * ((draw_end - draw_start) / img->height));
 	char *dst;
+	int *new_addr = (int *)img->addr;
 
-	// algo lodev
+	float	wallx;
+
 	if (side == 0)
-		wallX = posY + perpWallDist * rayDirY;
+		wallx = main->y + perpWallDist * rayDirY;
 	else
-		wallX = posX + perpWallDist * rayDirX;
-	wallX -= floor(wallX);
-	int texX = (int)(wallX * (double)(img->width));
+		wallx = main->x + perpWallDist * rayDirX;
+	wallx -= floorf(wallx);
+	int texX = (int)(wallx * img->height);
 	if (side == 0 && rayDirX > 0)
 		texX = img->width - texX - 1;
 	if (side == 1 && rayDirY < 0)
 		texX = img->width - texX - 1;
-	double step = 1.0 * img->height / SCREEN_HEIGHT;
-	// Starting texture coordinate
-	float texPos = (draw_start - (float)(SCREEN_HEIGHT/perpWallDist) / 2 + SCREEN_HEIGHT / 2) * step;
+	double step = 1.0 * img->height / line_height;
+	float texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 	int texY = (int)texPos & (img->height - 1);
-	printf(" dst height : %f /----/  x : %d y : %d \n", texPos, texX, texY);
 
+	printf(" dst height : %f /----/  x : %d y : %d \n", texPos, 1, (j-draw_start));
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
-		if (j  >= draw_start * main->up_down && j * main->up_down <= draw_end)
+		if (j >= draw_start && j <= draw_end)
 		{
 			texY = (int)texPos & (img->height - 1);
-        	texPos += step;
-			 dst = img->addr + (img->height * texY + texX) * img->line_length + (1) * (img->bpp);
-			 if (side == 1)
-				my_mlx_pixel_put(&main->img, new_x, j, (unsigned int)dst);
+			texPos += step;
+			//dst = img->addr + ((j-draw_start) * img->line_length + 1 * img->bpp);
+			if (side == 1)
+				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 			else
-				my_mlx_pixel_put(&main->img, new_x, j, (unsigned int)dst);
+				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 		}
-		else if (j * main->up_down > SCREEN_HEIGHT / 2)
-			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
-			main->gm.c_rgb.x,main->gm.c_rgb.y,main->gm.c_rgb.z));
+		else if (j > SCREEN_HEIGHT / 2)
+			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 		else
-			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(\
-			main->gm.f_rgb.x,main->gm.f_rgb.y,main->gm.f_rgb.z));
+			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
 	}
 }
 
@@ -373,17 +371,29 @@ void	render(t_main *main)
 			wall_hit_dist = sideDistY - deltaDistY;
 		else
 			break;
-		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017 * main->up_down));
+		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.017));
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
 			draw_start = 0;
 		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
+		//i fking forgot perpWallDist i'm dumb
 		if (side == 0)
-			put_pixel_from_ray(main, &main->gm.img_no, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x);
+			perpWallDist = (main->ps.map.maxw * CELL_SIZE - main->x +
+								   (1 - stepX) / 2) /
+								  rayDirX;
+		else
+			perpWallDist = (main->ps.map.maxh * CELL_SIZE - main->y +
+								   (1 - stepY) / 2) /
+								  rayDirY;
+		if (perpWallDist == 0)
+			perpWallDist = 0.1;
+		//end of dumb section
+		if (side == 0)
+			put_pixel_from_ray(main, &main->gm.img_no, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
 		else if (side == 1)
-			put_pixel_from_ray(main, &main->gm.img_we, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x);
+			put_pixel_from_ray(main, &main->gm.img_we, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
 		x++;
 		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
