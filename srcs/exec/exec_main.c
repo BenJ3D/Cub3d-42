@@ -249,9 +249,9 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	float	wallx;
 
 	if (side == 0)
-		wallx = main->y + perpWallDist * rayDirY;
+		wallx = main->y + perpWallDist * 0.005 * rayDirY;
 	else
-		wallx = posX + perpWallDist * rayDirX;
+		wallx = main->x + perpWallDist * 0.005* rayDirX;
 	wallx -= floor(wallx);
 	int texX = (int)(wallx * img->height);
 	if (side == 0 && rayDirX > 0)
@@ -267,7 +267,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
-		if (j >= draw_start && j <= draw_end)
+		if (j * main->up_down >= draw_start && j * main->up_down <= draw_end)
 		{
 			texY = (int)texPos & (img->height - 1);
 			texPos += step;
@@ -277,7 +277,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 			else
 				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 		}
-		else if (j > SCREEN_HEIGHT / 2)
+		else if (j * main->up_down > SCREEN_HEIGHT / 2)
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 		else
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
@@ -289,7 +289,7 @@ void	render(t_main *main)
 	int x;
 
 	x = 0;
-	//draw_minimap(main); // A OPTI
+	draw_minimap(main); // A OPTI
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
@@ -397,7 +397,7 @@ void	render(t_main *main)
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_no.img, 0, 0);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_we.img, main->gm.img_no.width, 0);
-	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
 }
 
 int	render_next_frame(t_main *main)
