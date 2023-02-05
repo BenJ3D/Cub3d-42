@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/12/09 16:24:45 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 13:09:01 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void		move_forward(t_main *game);
 
 void		update_velocity(t_main *main);
 
-int	render_next_frame(t_main *main);
+int			render_next_frame(t_main *main);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
@@ -210,6 +210,7 @@ int			ft_pars_map(char *buf, t_main *main);
 int			ft_pars_norm_map(t_main *main);
 int			ft_pars_check_wall(t_main *main);
 void		ft_pars_check_player_pos(t_main *main);
+char		*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main);
 
 /* init mlx */
 void		ft_init_mlx_img(t_main *main);

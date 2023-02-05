@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 12:36:57 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 12:56:02 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_pars_map(char *buf, t_main *main)
 	main->ps.map.maxh++;
 	return (EXIT_SUCCESS);
 }
-
 
 int	ft_pars_norm_map(t_main *main)
 {

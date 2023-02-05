@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 12:39:30 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 12:56:38 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,6 @@ void	ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main)
 			ft_err_display_and_exit(ERR_PARAM_INVALID, main);
 		i++;
 	}
-}
-
-/**
- * @brief return 1 if only digit
- * 
- * @param str 
- * @return int 
- */
-static int	ft_str_has_only_digit(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
 }
 
 void	ft_pars_check_range_rgb(t_vector vec, t_main *main)

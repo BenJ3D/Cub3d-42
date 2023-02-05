@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 12:39:36 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 12:56:47 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,28 @@ int	ft_pars_check_type_file(const char *path, const char *filetype)
 		y--;
 	}
 	return (0);
+}
+
+/**
+ * @brief return 1 if only digit
+ * 
+ * @param str 
+ * @return int 
+ */
+static int	ft_str_has_only_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }
 
 t_vector	ft_get_rgb_value(char *buf, t_main *main)
