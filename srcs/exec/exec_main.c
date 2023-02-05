@@ -249,10 +249,10 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	float	wallx;
 
 	if (side == 0)
-		wallx = main->y + perpWallDist * 0.005 * rayDirY;
+		wallx = main->y / CELL_SIZE + perpWallDist / CELL_SIZE * rayDirY;
 	else
-		wallx = main->x + perpWallDist * 0.005* rayDirX;
-	wallx -= floor(wallx);
+		wallx = main->x / CELL_SIZE + perpWallDist / CELL_SIZE * rayDirX;
+	wallx -= floorf(wallx);
 	int texX = (int)(wallx * img->height);
 	if (side == 0 && rayDirX > 0)
 		texX = img->width - texX - 1;
@@ -267,7 +267,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
-		if (j * main->up_down >= draw_start && j * main->up_down <= draw_end)
+		if (j >= draw_start / main->up_down && j <= draw_end / main->up_down)
 		{
 			texY = (int)texPos & (img->height - 1);
 			texPos += step;
@@ -289,7 +289,7 @@ void	render(t_main *main)
 	int x;
 
 	x = 0;
-	draw_minimap(main); // A OPTI
+	//draw_minimap(main); // A OPTI
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
@@ -372,7 +372,7 @@ void	render(t_main *main)
 			wall_hit_dist = sideDistY - deltaDistY;
 		else
 			break;
-		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist * 0.020));
+		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist / (CELL_SIZE - 16)));
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_start < 0)
 			draw_start = 0;
@@ -381,9 +381,9 @@ void	render(t_main *main)
 			draw_end = SCREEN_HEIGHT - 1;
 		//i fking forgot perpWallDist i'm dumb
 		if (side == 0)
-			perpWallDist = (main->ps.map.maxw - main->x + (1 - stepX) / 2) / rayDirX;
+			perpWallDist = (mapX - main->x + (1 - stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (main->ps.map.maxh - main->y + (1 - stepY) / 2) / rayDirY;
+			perpWallDist = (mapY - main->y + (1 - stepY) / 2) / rayDirY;
 		if (perpWallDist == 0)
 			perpWallDist = 0.1;
 		//end of dumb section
@@ -397,7 +397,7 @@ void	render(t_main *main)
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_no.img, 0, 0);
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_we.img, main->gm.img_no.width, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
+	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
 }
 
 int	render_next_frame(t_main *main)

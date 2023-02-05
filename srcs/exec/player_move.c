@@ -141,8 +141,8 @@ void	look_up(t_main *game)
 void	look_down(t_main *game)
 {
 	game->up_down += 0.001;
-	if (game->up_down > 1.15)
-		game->up_down = 1.15;
+	if (game->up_down > 1.0)
+		game->up_down = 1.0;
 }
 
 void	move_player(t_main *game)
