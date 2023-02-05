@@ -259,7 +259,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	if (side == 1 && rayDirY < 0)
 		texX = img->width - texX - 1;
 	float step = 1.0 * img->height / line_height;
-	float texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+	float texPos = (draw_start - SCREEN_HEIGHT / 2 * main->up_down + line_height / 2) * step;
 	int texY = (int)texPos & (img->height - 1);
 
 	//printf(" dst height : %f /----/  x : %d y : %d \n", wallx, texX, texY);
@@ -267,7 +267,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 	while (j != SCREEN_HEIGHT)
 	{
 		j++;
-		if (j >= draw_start / main->up_down && j <= draw_end / main->up_down)
+		if (j >= draw_start && j <= draw_end)
 		{
 			texY = (int)texPos & (img->height - 1);
 			texPos += step;
@@ -277,7 +277,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 			else
 				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 		}
-		else if (j * main->up_down > SCREEN_HEIGHT / 2)
+		else if (j > SCREEN_HEIGHT / 2 * main->up_down)
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 		else
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
@@ -373,10 +373,10 @@ void	render(t_main *main)
 		else
 			break;
 		int line_height = (int)(SCREEN_HEIGHT / (wall_hit_dist / (CELL_SIZE - 16)));
-		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
+		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2 *main->up_down;
 		if (draw_start < 0)
 			draw_start = 0;
-		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
+		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2 *main->up_down;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 		//i fking forgot perpWallDist i'm dumb
