@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 14:32:43 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 14:58:27 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_pars_norm_map2(t_main *main, t_vector *v)
 				v->x = 0;
 			}
 		}
-		// printf("line %03i = %s\n", v->i, main->gm.map[v->i]);
 		v->i++;
 	}
 }
@@ -80,7 +79,6 @@ int	ft_pars_norm_map(t_main *main)
 	main->gm.map[vec.i] = ft_calloc_cub(main->ps.map.maxw + 3, \
 														sizeof(char *), main);
 	ft_memset(main->gm.map[vec.i], EMPTY, main->ps.map.maxw + 1);
-	// printf("line %03i = %s\n", vec.i, main->gm.map[vec.i]);
 	return (EXIT_SUCCESS);
 }
 

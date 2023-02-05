@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 14:10:42 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 14:38:48 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main)
 	t_vector		v;
 
 	ft_bzero(&v, sizeof(t_vector));
-	printf("DBG vector vi = %i, vy =  %i\ni2 = %i\n", v.i, v.y, *i2);
 	v.i = *i2;
 	while (buf[v.i] && ft_isspace(buf[v.i]))
 		v.i++;
