@@ -53,4 +53,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-libs/mlx_linux/test/mlx-test
