@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/27 16:18:03 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:39:30 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,39 +96,3 @@ void	ft_err_rgb(int errtype, char *tofree, t_main *main)
 	free (tofree);
 	ft_err_display_and_exit(errtype, main);
 }
-
-t_vector	ft_get_rgb_value(char *buf, t_main *main)
-{
-	t_vector	vec;
-
-	ft_bzero(&vec, sizeof(t_vector));
-	while(vec.s < 3)
-	{
-		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
-		if (ft_str_has_only_digit(vec.tmp))
-			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
-		if (ft_str_has_only_digit(vec.tmp) || ft_strlen(vec.tmp) > 4)
-			ft_err_rgb(ERR_PARAM_TO_HIGH, vec.tmp, main);
-		if (vec.s == 0)
-			vec.x = ft_atoi(vec.tmp);
-		else if (vec.s == 1)
-			vec.y = ft_atoi(vec.tmp);
-		else if (vec.s == 2)
-			vec.z = ft_atoi(vec.tmp);
-		vec.s++;
-		free(vec.tmp);
-		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
-		if ((vec.s < 3 && ft_strncmp(vec.tmp, ",", 2)) \
-									|| (vec.s >= 3 && vec.tmp[0] != '\0'))
-			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
-		free (vec.tmp);
-	}
-	return (vec);
-}
-
-void	ft_action_for_texture_param(int paramtype)
-{
-	
-}
-
-		// main->gm.img_ea = ft_init_mlx_img(buf + i + ft_strlen(PARAM_EA), main);

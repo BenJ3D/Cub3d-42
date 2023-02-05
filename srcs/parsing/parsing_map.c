@@ -6,17 +6,24 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 01:11:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:36:57 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+typedef struct s_vector3
+{
+	int	i;
+	int	y;
+	int	x;
+}		t_vector3;
+
 int	ft_pars_map(char *buf, t_main *main)
 {
 	int		i;
 	char	*tmp;
-	
+
 	i = 0;
 	while (ft_isspace(buf[i]))
 		i++;
@@ -41,18 +48,19 @@ int	ft_pars_map(char *buf, t_main *main)
 	return (EXIT_SUCCESS);
 }
 
+
 int	ft_pars_norm_map(t_main *main)
 {
 	int	i;
 	int	y;
 	int	x;
-	
+
 	main->ps.map.maxh += 3;
 	main->gm.map = ft_calloc_cub(main->ps.map.maxh, sizeof(char **), main);
 	i = 0;
 	y = 0;
 	x = 0;
-	while(main->ps.map.maptmp[y] && i < main->ps.map.maxh)
+	while (main->ps.map.maptmp[y] && i < main->ps.map.maxh)
 	{
 		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 3, sizeof(char *), main);
 		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 1);
@@ -86,14 +94,14 @@ int	ft_pars_norm_map(t_main *main)
  * @param main 
  * @return int 
  */
-int	ft_pars_check_wall(t_main *main) //TODO:TODO:TODO:TODO:TODO:TODO:
+int	ft_pars_check_wall(t_main *main)
 {
 	int	i;
 	int	y;
 
 	i = 1;
 	y = 0;
-	while(main->gm.map[i])
+	while (main->gm.map[i])
 	{
 		while (main->gm.map[i][y])
 		{
@@ -103,11 +111,7 @@ int	ft_pars_check_wall(t_main *main) //TODO:TODO:TODO:TODO:TODO:TODO:
 				|| main->gm.map[i][y + 1] == EMPTY \
 				|| main->gm.map[i - 1][y] == EMPTY \
 				|| main->gm.map[i + 1][y] == EMPTY)
-				{
-					printf("dbg fm map c = %c\n", main->gm.map[i][y]);
-					printf("y - 1  = %c\n", main->gm.map[i][y - 1]);
 					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
-				}
 			}
 			y++;
 		}

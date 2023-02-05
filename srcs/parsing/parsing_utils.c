@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/07 13:24:25 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:39:36 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_pars_check_has_chars(char c, char *legalchars, t_main *main)
 	if (!c)
 		return (EXIT_FAILURE);
 	i = 0;
-	while(legalchars[i])
+	while (legalchars[i])
 	{
 		if (c == legalchars[i] || ft_isspace_no_nl(c))
 			return (EXIT_SUCCESS);
@@ -44,7 +44,7 @@ int	ft_pars_openfile(const char *path)
 {
 	int		fd;
 	char	*errline;
-	
+
 	fd = open(path, O_RDONLY);
 	if (fd < 3)
 	{
@@ -80,4 +80,33 @@ int	ft_pars_check_type_file(const char *path, const char *filetype)
 		y--;
 	}
 	return (0);
+}
+
+t_vector	ft_get_rgb_value(char *buf, t_main *main)
+{
+	t_vector	vec;
+
+	ft_bzero(&vec, sizeof(t_vector));
+	while (vec.s < 3)
+	{
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if (ft_str_has_only_digit(vec.tmp))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		if (ft_str_has_only_digit(vec.tmp) || ft_strlen(vec.tmp) > 4)
+			ft_err_rgb(ERR_PARAM_TO_HIGH, vec.tmp, main);
+		if (vec.s == 0)
+			vec.x = ft_atoi(vec.tmp);
+		else if (vec.s == 1)
+			vec.y = ft_atoi(vec.tmp);
+		else if (vec.s == 2)
+			vec.z = ft_atoi(vec.tmp);
+		vec.s++;
+		free(vec.tmp);
+		vec.tmp = ft_get_next_word_custom_i(buf, &vec.i, main);
+		if ((vec.s < 3 && ft_strncmp(vec.tmp, ",", 2)) \
+									|| (vec.s >= 3 && vec.tmp[0] != '\0'))
+			ft_err_rgb(ERR_PARAM_INVALID, vec.tmp, main);
+		free (vec.tmp);
+	}
+	return (vec);
 }
