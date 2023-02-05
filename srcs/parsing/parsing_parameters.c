@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 12:56:38 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/05 14:10:42 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 char	*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main)
 {
-	char			*tmp;
-	int				i;
-	int				y;
-	int				x;
+	t_vector		v;
 
-	i = *i2;
-	y = 0;
-	x = 0;
-	while (buf[i] && ft_isspace(buf[i]))
-		i++;
-	if (buf[i] == ',')
+	ft_bzero(&v, sizeof(t_vector));
+	printf("DBG vector vi = %i, vy =  %i\ni2 = %i\n", v.i, v.y, *i2);
+	v.i = *i2;
+	while (buf[v.i] && ft_isspace(buf[v.i]))
+		v.i++;
+	if (buf[v.i] == ',')
 	{
-		*i2 = i + 1;
+		*i2 = v.i + 1;
 		return (ft_strdup(","));
 	}
-	y = i;
-	while (buf[y] && !ft_isspace(buf[y]) && buf[y] != ',')
-		y++;
-	y = y - i;
-	tmp = ft_calloc_cub(y + 1, sizeof(char), main);
-	while (buf[i] && y-- > 0)
-		tmp[x++] = buf[i++];
-	tmp[x] = '\0';
-	*i2 = i;
-	return (tmp);
+	v.y = v.i;
+	while (buf[v.y] && !ft_isspace(buf[v.y]) && buf[v.y] != ',')
+		v.y++;
+	v.y = v.y - v.i;
+	v.tmp = ft_calloc_cub(v.y + 1, sizeof(char), main);
+	while (buf[v.i] && v.y-- > 0)
+		v.tmp[v.x++] = buf[v.i++];
+	v.tmp[v.x] = '\0';
+	*i2 = v.i;
+	return (v.tmp);
 }
 
 void	ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main)

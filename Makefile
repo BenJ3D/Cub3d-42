@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/12/07 13:17:09 by bducrocq         ###   ########.fr        #
+#    Updated: 2023/02/05 13:46:53 by bducrocq         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCEXT      := c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJS = ${SOURCES:.c=.o}
 
-CFLAGS = -g3 -O3 # -Wall -Wextra -Werror
+CFLAGS = -g3 -O3 -Wall -Wextra #-Werror
 SANITIZE =# -fsanitize=address
 CC = cc $(SANITIZE)
 
