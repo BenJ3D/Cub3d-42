@@ -289,7 +289,7 @@ void	render(t_main *main)
 	int x;
 
 	x = 0;
-	//draw_minimap(main); // A OPTI
+	draw_minimap(main); // A OPTI
 	while (x < SCREEN_WIDTH)
 	{
 		// calculate ray position and direction
@@ -387,17 +387,21 @@ void	render(t_main *main)
 		if (perpWallDist == 0)
 			perpWallDist = 0.1;
 		//end of dumb section
-		if (side == 0)
+		if (side == 1 && mapY < main->y)
 			put_pixel_from_ray(main, &main->gm.img_no, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
 		else if (side == 1)
+			put_pixel_from_ray(main, &main->gm.img_so, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
+		else if (mapX > main->x && side == 0)
 			put_pixel_from_ray(main, &main->gm.img_we, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
+		else
+			put_pixel_from_ray(main, &main->gm.img_ea, main->x, main->y, side, draw_start, draw_end, rayDirX, rayDirY, perpWallDist, x, line_height);
 		x++;
 		// printf("%sSide dist : %lf / %f\n %sDelta : %f / %f\n",COLOR_GREEN, side_dist_x, side_dist_y, COLOR_CYAN, deltaDistX, deltaDistY);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_no.img, 0, 0);
-	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_we.img, main->gm.img_no.width, 0);
-	//mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_ea.img, 700, 0);
+	// mlx_put_image_to_window(main->mlx, main->mlx_win, main->gm.img_we.img, main->gm.img_no.width, 0);
+	mlx_put_image_to_window(main->mlx, main->mlx_win, main->mini_map.img, 0, 0);
 }
 
 int	render_next_frame(t_main *main)
