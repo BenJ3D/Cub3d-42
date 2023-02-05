@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2022/12/10 15:40:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 15:33:48 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	draw_background(t_main *game)
 		{
 			if (h > SCREEN_HEIGHT / 2)
 				my_mlx_pixel_put(&game->background, w, h, colour_to_nb(\
-				game->gm.c_rgb.x,game->gm.c_rgb.y,game->gm.c_rgb.z));
+				game->gm.f_rgb.x,game->gm.f_rgb.y,game->gm.f_rgb.z));
 			else
 				my_mlx_pixel_put(&game->background, w, h, colour_to_nb(\
-				game->gm.f_rgb.x,game->gm.f_rgb.y,game->gm.f_rgb.z));
+				game->gm.c_rgb.x,game->gm.c_rgb.y,game->gm.c_rgb.z));
 		}
 	}
 }
@@ -278,9 +278,9 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 		}
 		else if (j > SCREEN_HEIGHT / 2 * main->up_down)
-			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
-		else
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
+		else
+			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 	}
 }
 
