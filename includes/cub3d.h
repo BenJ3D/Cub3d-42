@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/06 21:27:51 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 21:56:12 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_game
 	t_data			img_ea;
 	int				cell_size;
 	t_vector		playstart;	//xy = position plyaer start
-	t_i_vector		start_rot;
+	t_d_vector		start_rot;
 }	t_game;
 
 typedef struct s_main

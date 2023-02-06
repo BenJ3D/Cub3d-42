@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/06 21:27:36 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 21:55:54 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
 	if (main->ps.charplayer == 'S')
 	{
-		main->gm.start_rot.x = 0;
-		main->gm.start_rot.y = -1;
+		main->gm.start_rot.x = 0.0;
+		main->gm.start_rot.y = -1.0;
 	}
 	if (main->ps.charplayer == 'N')
 	{
-		main->gm.start_rot.x = 0;
-		main->gm.start_rot.y = 1;
+		main->gm.start_rot.x = 0.0;
+		main->gm.start_rot.y = 1.0;
 	}
 	if (main->ps.charplayer == 'W')
 	{
-		main->gm.start_rot.x = -1;
-		main->gm.start_rot.y = 0;
+		main->gm.start_rot.x = -1.0;
+		main->gm.start_rot.y = 0.0;
 	}
 	if (main->ps.charplayer == 'E')
 	{
-		main->gm.start_rot.x = 1;
-		main->gm.start_rot.y = 0;
+		main->gm.start_rot.x = 1.0;
+		main->gm.start_rot.y = 0.0;
 	}
 	main->gm.playstart.x = y;
 	main->gm.playstart.y = i;
