@@ -178,7 +178,7 @@ typedef struct s_main
 	t_data		mini_map;
 	t_data		img;
 	t_data		background;
-	t_pars		ps; //tout pour le parsing
+	t_pars		ps;
 	t_game		gm; //setup regles avec les couleurs, resolution, path textures/map etc
 	void		*mlx;
 	void		*mlx_win;
