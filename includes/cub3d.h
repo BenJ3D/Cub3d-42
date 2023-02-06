@@ -41,7 +41,7 @@
 
 # ifndef LEGITCHAR
 // #  define LEGITCHAR "SNEW01"
-#  define LEGITCHAR "SNEW01P" // bonus
+#  define LEGITCHAR "SNEW01" // bonus
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position
