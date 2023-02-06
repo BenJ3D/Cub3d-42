@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/10 16:40:10 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:27:36 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,25 @@ int	ft_start_parsing(t_main *main)
 static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
 	if (main->ps.charplayer == 'S')
-		main->player_angle = (3 * M_PI) / 2;
+	{
+		main->gm.start_rot.x = 0;
+		main->gm.start_rot.y = -1;
+	}
 	if (main->ps.charplayer == 'N')
-		main->player_angle = M_PI / 2;
+	{
+		main->gm.start_rot.x = 0;
+		main->gm.start_rot.y = 1;
+	}
 	if (main->ps.charplayer == 'W')
-		main->player_angle = M_PI;
+	{
+		main->gm.start_rot.x = -1;
+		main->gm.start_rot.y = 0;
+	}
 	if (main->ps.charplayer == 'E')
-		main->player_angle = 2 * M_PI;
+	{
+		main->gm.start_rot.x = 1;
+		main->gm.start_rot.y = 0;
+	}
 	main->gm.playstart.x = y;
 	main->gm.playstart.y = i;
 	main->gm.map[i][y] = '0';
