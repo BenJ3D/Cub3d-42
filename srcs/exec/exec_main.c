@@ -68,6 +68,7 @@ int	key_release(int keycode, t_main *main)
 
 int	stop_mlx(int keycode, t_main *main)
 {
+	(void)keycode;
 	exit(0);
 	return (0);
 }
@@ -336,10 +337,9 @@ void	exec_main(t_main *game)
 {
 	game->x = game->gm.playstart.x * CELL_SIZE + 32;
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
-	game->plane_x = 0;
-	game->plane_y = FOV_HORIZONTAL;
-	game->delta_x = -1;
-	game->delta_y = 0;
+	game->delta_x = game->gm.start_rot.x;
+	game->delta_y = game->gm.start_rot.y;
+	printf("%f,%f\n", game->delta_x, game->delta_y);
 	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
 	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, \

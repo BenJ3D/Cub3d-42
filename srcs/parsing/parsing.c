@@ -33,17 +33,36 @@ int	ft_start_parsing(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
+float	calc_n_and_s(t_main *game, int neg, double rot)
+{
+	float	old_delta_x;
+	float	old_plane_x;
+
+	old_delta_x = game->gm.start_rot.x;
+	old_plane_x = game->plane_x;
+	game->gm.start_rot.x = game->gm.start_rot.x * cos(rot * neg) - \
+	game->gm.start_rot.y * sin(rot * neg);
+	game->gm.start_rot.y = old_delta_x * sin(rot * neg) + \
+	game->gm.start_rot.y * cos(rot * neg);
+	game->plane_x = game->plane_x * cos(rot * neg) - \
+	game->plane_y * sin(rot * neg);
+	game->plane_y = old_plane_x * sin(rot * neg) + \
+	game->plane_y * cos(rot * neg);
+}
+
 static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
 	if (main->ps.charplayer == 'S')
 	{
-		main->gm.start_rot.x = 0.0;
-		main->gm.start_rot.y = -1.0;
+		main->gm.start_rot.x = -1.0;
+		main->gm.start_rot.y = 0.0;
+		calc_n_and_s(main, -1, 1.471);
 	}
 	if (main->ps.charplayer == 'N')
 	{
-		main->gm.start_rot.x = 0.0;
-		main->gm.start_rot.y = 1.0;
+		main->gm.start_rot.x = -1.0;
+		main->gm.start_rot.y = 0.0;
+		calc_n_and_s(main, 1, 1.671);
 	}
 	if (main->ps.charplayer == 'W')
 	{
