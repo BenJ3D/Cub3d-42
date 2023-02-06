@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2023/02/05 14:58:27 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 20:55:47 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_pars_check_wall(t_main *main)
 	{
 		while (main->gm.map[i][y])
 		{
-			if (main->gm.map[i][y] == FLOOR)
+			if (main->gm.map[i][y] == FLOOR || main->gm.map[i][y] == DOOR)
 			{
 				if (main->gm.map[i][y - 1] == EMPTY \
 				|| main->gm.map[i][y + 1] == EMPTY \

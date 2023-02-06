@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/06 20:35:25 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 20:59:12 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@
 // # define SPEED 1
 
 # ifndef LEGITCHAR
-#  define LEGITCHAR "SNEW01"
+// #  define LEGITCHAR "SNEW01"
+#  define LEGITCHAR "SNEW01P" // bonus
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
 # define CUBEXT ".cub"		//extension requise pour la map
 # define IMGEXT ".xpm"		//extension requise pour les images
+# define DOOR 'P'
 # define WALL '1'
 # define EMPTY '-'		//char de substitution dans les vides de la map
 
