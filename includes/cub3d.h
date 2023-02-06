@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/12/07 13:48:11 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:56:12 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# define LEGITCHAR "SNEW01"	//authorized character in map
+# ifndef LEGITCHAR
+#  define LEGITCHAR "SNEW01"
+# endif
+
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
 # define CUBEXT ".cub"		//extension requise pour la map
 # define IMGEXT ".xpm"		//extension requise pour les images
+# define DOOR 'P'
 # define WALL '1'
 # define EMPTY '-'		//char de substitution dans les vides de la map
 
@@ -58,10 +62,14 @@
 # ifdef __linux__
 #  define KEY_RIGHT 65363
 #  define KEY_LEFT 65361
+#  define KEY_UP 65362
+#  define KEY_DOWN 65364
+#  define KEY_PLUS 65451
+#  define KEY_MINUS 65453
 #  define KEY_W 119
 #  define KEY_S 115
-#  define KEY_A 97
-#  define KEY_D 100
+#  define KEY_A 100
+#  define KEY_D 113
 #  define DOORS 101 // E
 #  define ESC 65307
 # endif
@@ -78,10 +86,53 @@
 #  define ESC 53
 # endif
 
-typedef struct s_render
+typedef struct s_ray {
+	struct s_data		*texture;
+	float				a_tan;
+	float				x;
+	float				y;
+	float				x_offset;
+	float				y_offset;
+	int					map_x;
+	int					map_y;
+	int					depth_of_field;
+	float				traveled_dst;
+}	t_ray;
+
+typedef struct s_d_vector
 {
-	float	other;
-}	t_render;
+	double	x;
+	double	y;
+}	t_d_vector;
+
+typedef struct s_i_vector
+{
+	int	x;
+	int	y;
+}	t_i_vector;
+
+typedef struct s_raycast {
+	int			x;
+	double		camera_x;
+	t_d_vector	ray_dir;
+	t_i_vector	map;
+	t_d_vector	side_dist;
+	t_d_vector	delta_dist;
+	double		perp_wall_dist;
+	t_i_vector	step;
+	int			hit;
+	int			side;
+	double		wall_hit_dist;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	float		wallx;
+	t_i_vector	tex;
+	float		tex_step;
+	float		tex_pos;
+	float		f_step;
+	double		fov;
+}	t_raycast;
 
 /**
  * @brief xyz = RGB values
@@ -95,7 +146,8 @@ typedef struct s_vector
 	int				i;
 	int				s;
 	char			*tmp;
-}				t_vector;
+}	t_vector;
+
 typedef struct s_data
 {
 	void			*img;
@@ -105,7 +157,7 @@ typedef struct s_data
 	int				end;
 	int				width;
 	int				height;
-}				t_data;
+}	t_data;
 
 typedef struct s_game
 {
@@ -118,23 +170,33 @@ typedef struct s_game
 	t_data			img_ea;
 	int				cell_size;
 	t_vector		playstart;	//xy = position plyaer start
-}				t_game;
+	t_d_vector		start_rot;
+}	t_game;
 
 typedef struct s_main
 {
-	t_render		render;
-	t_data			img;
-	t_pars			ps; //tout pour le parsing
-	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
-	void			*mlx;
-	void			*mlx_win;
-	int				win_h;
-	int				win_w;
-	float			velocity;
-	float			x;
-	float			y;
-	int				keyboard[200];
-}				t_main;
+	t_data		mini_map;
+	t_data		img;
+	t_data		background;
+	t_pars		ps;
+	t_game		gm; //setup regles avec les couleurs, resolution, path textures/map etc
+	void		*mlx;
+	void		*mlx_win;
+	int			win_h;
+	int			win_w;
+	float		velocity;
+	float		x;
+	float		y;
+	double		fov;
+	float		player_angle;
+	float		delta_x;
+	float		delta_y;
+	float		plane_x;
+	float		plane_y;
+	double		up_down;
+	t_raycast	raycast;
+	int			move_tab[10];
+}	t_main;
 
 /* exec utils */
 float		deg_to_rad(float i_deg);
@@ -145,6 +207,7 @@ int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
 int			stop_mlx(int keycode, t_main *main);
 
+void		move_player(t_main *game);
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);
@@ -152,7 +215,7 @@ void		move_forward(t_main *game);
 
 void		update_velocity(t_main *main);
 
-int	render_next_frame(t_main *main);
+int			render_next_frame(t_main *main);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);
@@ -173,6 +236,7 @@ int			ft_pars_map(char *buf, t_main *main);
 int			ft_pars_norm_map(t_main *main);
 int			ft_pars_check_wall(t_main *main);
 void		ft_pars_check_player_pos(t_main *main);
+char		*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main);
 
 /* init mlx */
 void		ft_init_mlx_img(t_main *main);
@@ -191,6 +255,9 @@ void		ft_err_display_and_exit(int errtype, t_main *main);
 /* ft dbg //TODO: del before final push */
 void		dbg_display_all_parameter_value(t_main *main);
 void		dbg_display_velocity(t_main *main);
+
+
+void	render(t_main *main);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"

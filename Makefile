@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+         #
+#    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2022/12/07 13:17:09 by bducrocq         ###   ########.fr        #
+#    Updated: 2023/02/05 13:46:53 by bducrocq         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCEXT      := c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJS = ${SOURCES:.c=.o}
 
-CFLAGS = -g3 # -Wall -Wextra -Werror
+CFLAGS = -g3 -O3 -Wall -Wextra #-Werror
 SANITIZE =# -fsanitize=address
 CC = cc $(SANITIZE)
 
@@ -36,7 +36,8 @@ LIBFT = libs/libft/libft.a
 GNL = libs/gnl/gnl.a
 LIBFT_PATH = libs/libft
 GNL_PATH = libs/gnl
-HEADER   = includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
+HEADER   = includes/exec.h includes/struct_parsing.h includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
+
 
 ifeq ($(OS), Linux)
 	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
@@ -48,11 +49,14 @@ endif
 
 all : $(NAME)
 
-$(NAME): $(OBJS) $(HEADER) Makefile
-	$(MAKE) -C $(MLX_PATH)
-	$(MAKE) -C $(LIBFT_PATH)
-	$(MAKE) -C $(GNL_PATH)
-	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT)  $(CFLAGS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(MAKE) -C $(MLX_PATH) -j
+	@$(MAKE) -C $(LIBFT_PATH) -j
+	@$(MAKE) -C $(GNL_PATH) -j
+	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
+
+%.o: %.c ${INCLUDES} Makefile
+	${CC} ${CFLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)

@@ -26,13 +26,13 @@ void	dbg_display_all_parameter_value(t_main *main)
 void	dbg_display_velocity(t_main *main)
 {
 	printf ("\n\n");
-	if (main->keyboard[KEY_A] == 1)
+	if (main->move_tab[KEY_A] == 1)
 		printf ("key press A\n");
-	else if (main->keyboard[KEY_D] == 1)
+	else if (main->move_tab[KEY_D] == 1)
 		printf ("key press D\n");
-	else if (main->keyboard[KEY_W] == 1)
+	else if (main->move_tab[KEY_W] == 1)
 		printf ("key press W\n");
-	else if (main->keyboard[KEY_S] == 1)
+	else if (main->move_tab[KEY_S] == 1)
 		printf ("key press S\n");
 	else
 		printf ("key press NONE\n");

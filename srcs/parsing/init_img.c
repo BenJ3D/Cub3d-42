@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/07 13:34:50 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:33:13 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ void	ft_init_mlx_img(t_main *main)
 		ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
 	if (ft_pars_openfile(main->ps.txtpath.path_ea) < 0)
 		ft_err_display_and_exit(ERR_TXTMISSING_EA, main);
-		
 	if (ft_pars_check_type_file(main->ps.txtpath.path_we, IMGEXT))
 		ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
 	if (ft_pars_openfile(main->ps.txtpath.path_we) < 0)
 		ft_err_display_and_exit(ERR_TXTMISSING_WE, main);
-
 	if (ft_pars_check_type_file(main->ps.txtpath.path_so, IMGEXT))
 		ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
 	if (ft_pars_openfile(main->ps.txtpath.path_so) < 0)
 		ft_err_display_and_exit(ERR_TXTMISSING_SO, main);
-
 	if (ft_pars_check_type_file(main->ps.txtpath.path_no, IMGEXT))
 		ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
 	if (ft_pars_openfile(main->ps.txtpath.path_no) < 0)
