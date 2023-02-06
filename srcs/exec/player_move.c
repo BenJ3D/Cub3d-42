@@ -14,7 +14,6 @@
 
 int	is_wall_coliding(t_main *game, float x, float y)
 {
-	//printf("pos : %d, %d | CHAR : '%c'\n", (int)(y / CELL_SIZE), (int)(x / CELL_SIZE), game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)]);
 	if (x < 1 || (int)(x / CELL_SIZE) + 1 >= game->ps.map.maxw
 		|| y < 1 || (int)(y / CELL_SIZE) + 2 >= game->ps.map.maxh)
 		return (1);
@@ -27,36 +26,24 @@ int	is_wall_coliding(t_main *game, float x, float y)
 	return (0);
 }
 
-double	assure_360_deg_angle(double a)
-{
-	double	two_pi;
-
-	two_pi = 2 * M_PI;
-	if (a >= two_pi)
-		a -= (two_pi);
-	if (a < 0)
-		a += (two_pi);
-	return (a);
-}
-
 void	rotate_right(t_main *game)
 {
-	double old_delta_x = game->delta_x;
-	game->delta_x = game->delta_x * cos(0.075) - game->delta_y * sin(0.075);
-	game->delta_y = old_delta_x * sin(0.075) + game->delta_y * cos(0.075);
-	double old_plane_x = game->plane_x;
-	game->plane_x = game->plane_x * cos(0.075) - game->plane_y * sin(0.075);
-	game->plane_y = old_plane_x * sin(0.075) + game->plane_y * cos(0.075);
+	float old_delta_x = game->delta_x;
+	game->delta_x = game->delta_x * cos(ROT_SPEED) - game->delta_y * sin(ROT_SPEED);
+	game->delta_y = old_delta_x * sin(ROT_SPEED) + game->delta_y * cos(ROT_SPEED);
+	float old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(ROT_SPEED) - game->plane_y * sin(ROT_SPEED);
+	game->plane_y = old_plane_x * sin(ROT_SPEED) + game->plane_y * cos(ROT_SPEED);
 }
 
 void	rotate_left(t_main *game)
 {
-	double old_delta_x = game->delta_x;
-	game->delta_x = game->delta_x * cos(-0.075) - game->delta_y * sin(-0.075);
-	game->delta_y = old_delta_x * sin(-0.075) + game->delta_y * cos(-0.075);
-	double old_plane_x = game->plane_x;
-	game->plane_x = game->plane_x * cos(-0.075) - game->plane_y * sin(-0.075);
-	game->plane_y = old_plane_x * sin(-0.075) + game->plane_y * cos(-0.075);
+	float old_delta_x = game->delta_x;
+	game->delta_x = game->delta_x * cos(-ROT_SPEED) - game->delta_y * sin(-ROT_SPEED);
+	game->delta_y = old_delta_x * sin(-ROT_SPEED) + game->delta_y * cos(-ROT_SPEED);
+	float old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(-ROT_SPEED) - game->plane_y * sin(-ROT_SPEED);
+	game->plane_y = old_plane_x * sin(-ROT_SPEED) + game->plane_y * cos(-ROT_SPEED);
 }
 
 void	move_forward(t_main *game)
@@ -100,8 +87,8 @@ void	move_left(t_main *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = game->x + cos(game->player_angle + M_PI_2) * game->velocity;
-	new_y = game->y + sin(game->player_angle + M_PI_2) * game->velocity;
+	new_x = game->x - game->delta_x * game->velocity;
+	new_y = game->y + game->delta_y * game->velocity;
 	if (!is_wall_coliding(game, new_x, new_y))
 	{
 		game->x = new_x;
@@ -118,8 +105,8 @@ void	move_right(t_main *game)
 	float	new_x;
 	float	new_y;
 
-	new_x = game->x + cos(game->player_angle - M_PI_2) * game->velocity;
-	new_y = game->y + sin(game->player_angle - M_PI_2) * game->velocity;
+	new_x = game->x + game->delta_x * game->velocity;
+	new_y = game->y - game->delta_y * game->velocity;
 	if (!is_wall_coliding(game, new_x, new_y))
 	{
 		game->x = new_x;
@@ -131,14 +118,14 @@ void	move_right(t_main *game)
 		game->y = new_y;
 }
 
-void	look_up(t_main *game)
+void	look_down(t_main *game)
 {
 	game->up_down -= 0.006;
 	if (game->up_down < 0.01)
 		game->up_down = 0.01;
 }
 
-void	look_down(t_main *game)
+void	look_up(t_main *game)
 {
 	game->up_down += 0.006;
 	if (game->up_down > 1.99)

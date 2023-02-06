@@ -16,7 +16,7 @@
 # include "struct_parsing.h"
 
 # define CELL_SIZE 64
-# define MAP_CELL_SIZE 20
+# define MAP_CELL_SIZE 10
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024
@@ -41,6 +41,10 @@
 
 # ifndef MAX_VELOCITY
 #  define MAX_VELOCITY 1.4
+# endif
+
+# ifndef ROT_SPEED
+#  define ROT_SPEED 0.05
 # endif
 
 # ifndef COEF_ACCELERATION

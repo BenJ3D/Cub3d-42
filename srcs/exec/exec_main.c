@@ -277,7 +277,7 @@ int side, int draw_start, int draw_end, double rayDirX, double rayDirY, double p
 			else
 				my_mlx_pixel_put(&main->img, new_x, j, new_addr[texY * img->height + texX]);
 		}
-		else if (j > SCREEN_HEIGHT / 2 * main->up_down)
+		else if (j < SCREEN_HEIGHT / 2 * main->up_down)
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 		else
 			my_mlx_pixel_put(&main->img, new_x, j, colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
