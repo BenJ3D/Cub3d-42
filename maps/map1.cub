@@ -1,9 +1,9 @@
 C 15,23 ,11
-F 42,055,15
-EA ./assets/textures/wall_1.xpm
-NO ./assets/textures/wood.xpm
-SO ./assets/textures/wall_3.xpm 
-WE ./assets/textures/wall_4.xpm 
+F 62,73,98
+EA ./assets/textures/wall/M1_512x512.xpm
+NO ./assets/textures/wall/M1_512x512.xpm
+SO ./assets/textures/wall/M1_512x512.xpm
+WE ./assets/textures/wall/M1_512x512.xpm
   1  
 1101
 10N1
