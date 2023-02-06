@@ -25,10 +25,5 @@ void	update_velocity(t_main *main)
 			main->velocity = MAX_VELOCITY;
 	}
 	else
-	{
-		// if (main->velocity > 0.1)
-		// 	main->velocity *= COEF_DECELERATION;
-		// if (main->velocity < 0.1)
 		main->velocity = 0;
-	}
 }

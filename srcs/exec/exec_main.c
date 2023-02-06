@@ -338,7 +338,8 @@ void	exec_main(t_main *game)
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
 	game->plane_x = 0;
 	game->plane_y = FOV_HORIZONTAL;
-	game->delta_x = -1; game->delta_y = 0;
+	game->delta_x = -1;
+	game->delta_y = 0;
 	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
 	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, \
@@ -353,4 +354,5 @@ void	exec_main(t_main *game)
 	game->img.bpp /= 8; // SECURITER TODO
 	game->up_down = 1;
 	game->fov = FOV_HORIZONTAL;
+	render(game);
 }

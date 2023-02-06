@@ -18,32 +18,48 @@ int	is_wall_coliding(t_main *game, float x, float y)
 		|| y < 1 || (int)(y / CELL_SIZE) + 2 >= game->ps.map.maxh)
 		return (1);
 	if (game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)] == '1' || \
-	game->gm.map[((int)ceil(y + MAX_VELOCITY + 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
-	game->gm.map[((int)ceil(y - MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
-	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / CELL_SIZE] == '1' || \
-	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - MAX_VELOCITY - 1)) / CELL_SIZE] == '1')
+	game->gm.map[((int)ceil(y + MAX_VELOCITY + 1)) / \
+	CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || game->gm.map[((int)ceil(y - \
+	MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
+	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / \
+	CELL_SIZE] == '1' || game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - \
+	MAX_VELOCITY - 1)) / CELL_SIZE] == '1')
 		return (1);
 	return (0);
 }
 
 void	rotate_right(t_main *game)
 {
-	float old_delta_x = game->delta_x;
-	game->delta_x = game->delta_x * cos(ROT_SPEED) - game->delta_y * sin(ROT_SPEED);
-	game->delta_y = old_delta_x * sin(ROT_SPEED) + game->delta_y * cos(ROT_SPEED);
-	float old_plane_x = game->plane_x;
-	game->plane_x = game->plane_x * cos(ROT_SPEED) - game->plane_y * sin(ROT_SPEED);
-	game->plane_y = old_plane_x * sin(ROT_SPEED) + game->plane_y * cos(ROT_SPEED);
+	float	old_delta_x;
+	float	old_plane_x;
+
+	old_delta_x = game->delta_x;
+	old_plane_x = game->plane_x;
+	game->delta_x = game->delta_x * cos(ROT_SPEED) - \
+	game->delta_y * sin(ROT_SPEED);
+	game->delta_y = old_delta_x * sin(ROT_SPEED) + \
+	game->delta_y * cos(ROT_SPEED);
+	game->plane_x = game->plane_x * cos(ROT_SPEED) - \
+	game->plane_y * sin(ROT_SPEED);
+	game->plane_y = old_plane_x * sin(ROT_SPEED) + \
+	game->plane_y * cos(ROT_SPEED);
 }
 
 void	rotate_left(t_main *game)
 {
-	float old_delta_x = game->delta_x;
-	game->delta_x = game->delta_x * cos(-ROT_SPEED) - game->delta_y * sin(-ROT_SPEED);
-	game->delta_y = old_delta_x * sin(-ROT_SPEED) + game->delta_y * cos(-ROT_SPEED);
-	float old_plane_x = game->plane_x;
-	game->plane_x = game->plane_x * cos(-ROT_SPEED) - game->plane_y * sin(-ROT_SPEED);
-	game->plane_y = old_plane_x * sin(-ROT_SPEED) + game->plane_y * cos(-ROT_SPEED);
+	float	old_delta_x;
+	float	old_plane_x;
+
+	old_delta_x = game->delta_x;
+	old_plane_x = game->plane_x;
+	game->delta_x = game->delta_x * cos(-ROT_SPEED) - \
+	game->delta_y * sin(-ROT_SPEED);
+	game->delta_y = old_delta_x * sin(-ROT_SPEED) + \
+	game->delta_y * cos(-ROT_SPEED);
+	game->plane_x = game->plane_x * cos(-ROT_SPEED) - \
+	game->plane_y * sin(-ROT_SPEED);
+	game->plane_y = old_plane_x * sin(-ROT_SPEED) + \
+	game->plane_y * cos(-ROT_SPEED);
 }
 
 void	move_forward(t_main *game)

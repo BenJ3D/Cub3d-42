@@ -22,11 +22,6 @@
 #  define RENDER_DIST 1024
 # endif
 
-# ifndef FOV_VERTICAL
-#  define FOV_VERTICAL 58.75f
-# endif
-
-//89 is better for optimisation because 90 can load 3 side of a 1/4 circle.
 # ifndef FOV_HORIZONTAL
 #  define FOV_HORIZONTAL 0.5
 # endif
@@ -55,16 +50,7 @@
 #  define COEF_DECELERATION 0.94
 # endif
 
-// to optimise the performance we will limit the render to only 60 frame/sec
-// 1 divided by 60 = 16.667 microsec
-// for BONUS
 # ifndef BONUS
-#  define BONUS 1
-#  include <time.h>
-#  ifndef FRAME_TIME
-#   define FRAME_TIME 16667
-#  endif
-# else
 #  define BONUS 0
 # endif
 
