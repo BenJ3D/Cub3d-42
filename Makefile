@@ -38,6 +38,7 @@ LIBFT_PATH = libs/libft
 GNL_PATH = libs/gnl
 HEADER   = includes/exec.h includes/struct_parsing.h includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
 
+
 ifeq ($(OS), Linux)
 	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
 	MLX_PATH = libs/mlx_linux
@@ -48,11 +49,14 @@ endif
 
 all : $(NAME)
 
-$(NAME): $(OBJS) $(HEADER) Makefile
+$(NAME): $(OBJS)
 	@$(MAKE) -C $(MLX_PATH) -j
 	@$(MAKE) -C $(LIBFT_PATH) -j
 	@$(MAKE) -C $(GNL_PATH) -j
 	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
+
+%.o: %.c ${INCLUDES} Makefile
+	${CC} ${CFLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)

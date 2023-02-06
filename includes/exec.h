@@ -16,7 +16,7 @@
 # include "struct_parsing.h"
 
 # define CELL_SIZE 64
-# define MAP_CELL_SIZE 20
+# define MAP_CELL_SIZE 10
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024
@@ -28,7 +28,7 @@
 
 //89 is better for optimisation because 90 can load 3 side of a 1/4 circle.
 # ifndef FOV_HORIZONTAL
-#  define FOV_HORIZONTAL 0.66
+#  define FOV_HORIZONTAL 0.5
 # endif
 
 # ifndef SCREEN_HEIGHT
@@ -41,6 +41,10 @@
 
 # ifndef MAX_VELOCITY
 #  define MAX_VELOCITY 1.4
+# endif
+
+# ifndef ROT_SPEED
+#  define ROT_SPEED 0.025
 # endif
 
 # ifndef COEF_ACCELERATION

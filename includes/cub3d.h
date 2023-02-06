@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/05 13:09:01 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 20:35:25 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# define LEGITCHAR "SNEW01"	//authorized character in map
+# ifndef LEGITCHAR
+#  define LEGITCHAR "SNEW01"
+# endif
+
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
 # define CUBEXT ".cub"		//extension requise pour la map
@@ -60,6 +63,8 @@
 #  define KEY_LEFT 65361
 #  define KEY_UP 65362
 #  define KEY_DOWN 65364
+#  define KEY_PLUS 65451
+#  define KEY_MINUS 65453
 #  define KEY_W 119
 #  define KEY_S 115
 #  define KEY_A 100
@@ -93,21 +98,40 @@ typedef struct s_ray {
 	float				traveled_dst;
 }	t_ray;
 
-typedef struct s_raycast {
-	int					ray_count;
-	double				ray_angle;
-	int					map_x;
-	int					map_y;
-	int					map_pos;
-	t_ray				horizontal_ray;
-	t_ray				vertical_ray;
-	t_ray				winning_ray;
-}	t_raycast;
-
-typedef struct s_render
+typedef struct s_d_vector
 {
-	float	other;
-}	t_render;
+	double	x;
+	double	y;
+}	t_d_vector;
+
+typedef struct s_i_vector
+{
+	int	x;
+	int	y;
+}	t_i_vector;
+
+typedef struct s_raycast {
+	int			x;
+	double		camera_x;
+	t_d_vector	ray_dir;
+	t_i_vector	map;
+	t_d_vector	side_dist;
+	t_d_vector	delta_dist;
+	double		perp_wall_dist;
+	t_i_vector	step;
+	int			hit;
+	int			side;
+	double		wall_hit_dist;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	float		wallx;
+	t_i_vector	tex;
+	float		tex_step;
+	float		tex_pos;
+	float		f_step;
+	double		fov;
+}	t_raycast;
 
 /**
  * @brief xyz = RGB values
@@ -121,7 +145,8 @@ typedef struct s_vector
 	int				i;
 	int				s;
 	char			*tmp;
-}				t_vector;
+}	t_vector;
+
 typedef struct s_data
 {
 	void			*img;
@@ -131,7 +156,7 @@ typedef struct s_data
 	int				end;
 	int				width;
 	int				height;
-}				t_data;
+}	t_data;
 
 typedef struct s_game
 {
@@ -144,33 +169,32 @@ typedef struct s_game
 	t_data			img_ea;
 	int				cell_size;
 	t_vector		playstart;	//xy = position plyaer start
-}				t_game;
+}	t_game;
 
 typedef struct s_main
 {
-	t_render		render;
-	t_data			mini_map;
-	t_data			img;
-	t_data			background;
-	t_pars			ps; //tout pour le parsing
-	t_game			gm; //setup regles avec les couleurs, resolution, path textures/map etc
-	void			*mlx;
-	void			*mlx_win;
-	int				win_h;
-	int				win_w;
-	float			velocity;
-	float			x;
-	float			y;
-	double			fov;
-	float			player_angle;
-	float			delta_x;
-	float			delta_y;
-	float			plane_x;
-	float			plane_y;
-	double			up_down;
-	t_raycast		raycast;
-	int				move_tab[10];
-}				t_main;
+	t_data		mini_map;
+	t_data		img;
+	t_data		background;
+	t_pars		ps; //tout pour le parsing
+	t_game		gm; //setup regles avec les couleurs, resolution, path textures/map etc
+	void		*mlx;
+	void		*mlx_win;
+	int			win_h;
+	int			win_w;
+	float		velocity;
+	float		x;
+	float		y;
+	double		fov;
+	float		player_angle;
+	float		delta_x;
+	float		delta_y;
+	float		plane_x;
+	float		plane_y;
+	double		up_down;
+	t_raycast	raycast;
+	int			move_tab[10];
+}	t_main;
 
 /* exec utils */
 float		deg_to_rad(float i_deg);
