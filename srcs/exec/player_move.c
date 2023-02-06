@@ -102,9 +102,15 @@ void	move_left(t_main *game)
 {
 	float	new_x;
 	float	new_y;
+	float	tmp_delta_x;
+	float	tmp_delta_y;
 
-	new_x = game->x - game->delta_x * game->velocity;
-	new_y = game->y + game->delta_y * game->velocity;
+	tmp_delta_x = game->delta_x * cos(M_PI_2) - \
+	game->delta_y * sin(M_PI_2);
+	tmp_delta_y = game->delta_x * sin(M_PI_2) + \
+	game->delta_y * cos(M_PI_2);
+	new_x = game->x + tmp_delta_x * game->velocity;
+	new_y = game->y + tmp_delta_y * game->velocity;
 	if (!is_wall_coliding(game, new_x, new_y))
 	{
 		game->x = new_x;
@@ -120,9 +126,15 @@ void	move_right(t_main *game)
 {
 	float	new_x;
 	float	new_y;
+	float	tmp_delta_x;
+	float	tmp_delta_y;
 
-	new_x = game->x + game->delta_x * game->velocity;
-	new_y = game->y - game->delta_y * game->velocity;
+	tmp_delta_x = game->delta_x * cos(-M_PI_2) - \
+	game->delta_y * sin(-M_PI_2);
+	tmp_delta_y = game->delta_x * sin(-M_PI_2) + \
+	game->delta_y * cos(-M_PI_2);
+	new_x = game->x + tmp_delta_x * game->velocity;
+	new_y = game->y + tmp_delta_y * game->velocity;
 	if (!is_wall_coliding(game, new_x, new_y))
 	{
 		game->x = new_x;
