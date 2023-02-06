@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 23:28:08 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:33:43 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	ft_set_parameters_with_file(t_main *main)
 		buf = get_next_line(main->ps.map_fd);
 	}
 	free (buf);
-	dbg_display_all_parameter_value(main); //FIXME:
 	ret = ft_check_if_map_has_player(main);
 	if (ret == 0)
 		ft_err_display_and_exit(ERR_PLAYER_MISSING, main);

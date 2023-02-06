@@ -234,6 +234,7 @@ int			ft_pars_map(char *buf, t_main *main);
 int			ft_pars_norm_map(t_main *main);
 int			ft_pars_check_wall(t_main *main);
 void		ft_pars_check_player_pos(t_main *main);
+char		*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main);
 
 /* init mlx */
 void		ft_init_mlx_img(t_main *main);

@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/11/25 01:11:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 14:58:27 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_pars_map(char *buf, t_main *main)
 {
 	int		i;
 	char	*tmp;
-	
+
 	i = 0;
 	while (ft_isspace(buf[i]))
 		i++;
@@ -28,7 +28,7 @@ int	ft_pars_map(char *buf, t_main *main)
 			ft_err_display_and_exit(ERR_MAP_UNKNOWN_CHAR, main);
 		i++;
 	}
-	if (main->ps.map.maxw < ft_strlen(buf))
+	if (main->ps.map.maxw < (int)ft_strlen(buf))
 		main->ps.map.maxw = ft_strlen(buf);
 	if (!main->ps.map.maptmp)
 		tmp = ft_strdup(buf);
@@ -41,42 +41,44 @@ int	ft_pars_map(char *buf, t_main *main)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_pars_norm_map(t_main *main)
+void	ft_pars_norm_map2(t_main *main, t_vector *v)
 {
-	int	i;
-	int	y;
-	int	x;
-	
-	main->ps.map.maxh += 3;
-	main->gm.map = ft_calloc_cub(main->ps.map.maxh, sizeof(char **), main);
-	i = 0;
-	y = 0;
-	x = 0;
-	while(main->ps.map.maptmp[y] && i < main->ps.map.maxh)
+	while (main->ps.map.maptmp[v->y] && v->i < main->ps.map.maxh)
 	{
-		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 3, sizeof(char *), main);
-		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 1);
-		if (i > 0)
+		main->gm.map[v->i] = ft_calloc_cub(main->ps.map.maxw + 3, \
+														sizeof(char *), main);
+		ft_memset(main->gm.map[v->i], EMPTY, main->ps.map.maxw + 1);
+		if (v->i > 0)
 		{
-			while (main->ps.map.maptmp[y] && main->ps.map.maptmp[y] != '\n')
+			while (main->ps.map.maptmp[v->y] \
+			&& main->ps.map.maptmp[v->y] != '\n')
 			{
-				if (!ft_isspace(main->ps.map.maptmp[y]))
-					main->gm.map[i][x + 1] = main->ps.map.maptmp[y];
-				y++;
-				x++;
+				if (!ft_isspace(main->ps.map.maptmp[v->y]))
+					main->gm.map[v->i][v->x + 1] = main->ps.map.maptmp[v->y];
+				v->y++;
+				v->x++;
 			}
-			if (main->ps.map.maptmp[y] && main->ps.map.maptmp[y] == '\n')
+			if (main->ps.map.maptmp[v->y] && main->ps.map.maptmp[v->y] == '\n')
 			{
-				y++;
-				x = 0;
+				v->y++;
+				v->x = 0;
 			}
 		}
-		printf("line %03i = %s\n", i, main->gm.map[i]);
-			i++;
+		v->i++;
 	}
-		main->gm.map[i] = ft_calloc_cub(main->ps.map.maxw + 3, sizeof(char *), main);
-		ft_memset(main->gm.map[i], EMPTY, main->ps.map.maxw + 1);
-		printf("line %03i = %s\n", i, main->gm.map[i]);
+}
+
+int	ft_pars_norm_map(t_main *main)
+{
+	t_vector	vec;
+
+	main->ps.map.maxh += 3;
+	main->gm.map = ft_calloc_cub(main->ps.map.maxh, sizeof(char **), main);
+	ft_bzero(&vec, sizeof(t_vector));
+	ft_pars_norm_map2(main, &vec);
+	main->gm.map[vec.i] = ft_calloc_cub(main->ps.map.maxw + 3, \
+														sizeof(char *), main);
+	ft_memset(main->gm.map[vec.i], EMPTY, main->ps.map.maxw + 1);
 	return (EXIT_SUCCESS);
 }
 
@@ -86,14 +88,14 @@ int	ft_pars_norm_map(t_main *main)
  * @param main 
  * @return int 
  */
-int	ft_pars_check_wall(t_main *main) //TODO:TODO:TODO:TODO:TODO:TODO:
+int	ft_pars_check_wall(t_main *main)
 {
 	int	i;
 	int	y;
 
 	i = 1;
 	y = 0;
-	while(main->gm.map[i])
+	while (main->gm.map[i])
 	{
 		while (main->gm.map[i][y])
 		{
@@ -103,11 +105,7 @@ int	ft_pars_check_wall(t_main *main) //TODO:TODO:TODO:TODO:TODO:TODO:
 				|| main->gm.map[i][y + 1] == EMPTY \
 				|| main->gm.map[i - 1][y] == EMPTY \
 				|| main->gm.map[i + 1][y] == EMPTY)
-				{
-					printf("dbg fm map c = %c\n", main->gm.map[i][y]);
-					printf("y - 1  = %c\n", main->gm.map[i][y - 1]);
 					ft_err_display_and_exit(ERR_MAP_WALLNOCLOSE, main);
-				}
 			}
 			y++;
 		}

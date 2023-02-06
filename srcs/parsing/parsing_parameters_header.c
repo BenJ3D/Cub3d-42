@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_parameters_header.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 01:33:53 by bducrocq          #+#    #+#             */
-/*   Updated: 2022/12/07 13:12:29 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:48:03 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	ft_pars_headerfile_c_f(char *buf, int i, t_main *main);
 void	ft_pars_headerfile(char *buf, t_main *main)
 {
 	int		i;
-	int		type;
-	char	*tmp;
 
 	i = 0;
 	while (ft_isspace(buf[i]))
