@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/12/09 16:24:45 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/06 20:35:25 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# define LEGITCHAR "SNEW01"	//authorized character in map
+# ifndef LEGITCHAR
+#  define LEGITCHAR "SNEW01"
+# endif
+
 # define PLAYERSTART "SNEW"	// char for player start position
 # define FLOOR '0'	// char for player start position
 # define CUBEXT ".cub"		//extension requise pour la map
