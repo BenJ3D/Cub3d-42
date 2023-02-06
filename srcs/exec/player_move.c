@@ -118,25 +118,32 @@ void	move_right(t_main *game)
 		game->y = new_y;
 }
 
-void	look_down(t_main *game)
+void	look_change(t_main *game)
 {
-	game->up_down -= 0.006;
-	if (game->up_down < 0.01)
-		game->up_down = 0.01;
+	if (game->move_tab[7] && game->up_down > -2)
+		game->up_down -= 0.008;
+	if (game->move_tab[6] && game->up_down < 3)
+		game->up_down += 0.008;
 }
 
-void	look_up(t_main *game)
+void	change_fov(t_main *game)
 {
-	game->up_down += 0.006;
-	if (game->up_down > 1.99)
-		game->up_down = 1.99;
+	game->plane_x = 0;
+	game->delta_x = -1;
+	game->delta_y = 0;
+	if (game->move_tab[8] && game->fov < 0.80)
+		game->fov += 0.005;
+	if (game->move_tab[9] && game->fov > 0.30)
+		game->fov -= 0.005;
+	game->plane_y = game->fov;
 }
 
 void	move_player(t_main *game)
 {
 	if (game->move_tab[0] || game->move_tab[1] || game->move_tab[2] || \
 	game->move_tab[3] || game->move_tab[4] || game->move_tab[5] || \
-	game->move_tab[6] || game->move_tab[7])
+	game->move_tab[6] || game->move_tab[7] || game->move_tab[8] || \
+	game->move_tab[9])
 	{
 		if (game->move_tab[0])
 			move_forward(game);
@@ -150,10 +157,10 @@ void	move_player(t_main *game)
 			rotate_right(game);
 		if (game->move_tab[5])
 			rotate_left(game);
-		if (game->move_tab[6])
-			look_up(game);
-		if (game->move_tab[7])
-			look_down(game);
+		if (game->move_tab[6] || game->move_tab[7])
+			look_change(game);
+		if (game->move_tab[8] || game->move_tab[9])
+			change_fov(game);
 		render(game);
 	}
 }

@@ -28,7 +28,7 @@
 
 //89 is better for optimisation because 90 can load 3 side of a 1/4 circle.
 # ifndef FOV_HORIZONTAL
-#  define FOV_HORIZONTAL 0.66
+#  define FOV_HORIZONTAL 0.5
 # endif
 
 # ifndef SCREEN_HEIGHT
@@ -44,7 +44,7 @@
 # endif
 
 # ifndef ROT_SPEED
-#  define ROT_SPEED 0.05
+#  define ROT_SPEED 0.025
 # endif
 
 # ifndef COEF_ACCELERATION

@@ -31,5 +31,4 @@ void	update_velocity(t_main *main)
 		// if (main->velocity < 0.1)
 		main->velocity = 0;
 	}
-	//printf("velocity : %f\n",main->velocity);
 }
