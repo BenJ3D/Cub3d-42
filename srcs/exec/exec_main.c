@@ -121,13 +121,8 @@ void	draw_background(t_main *game)
 	}
 }
 
-void	put_pixel_from_ray(t_main *main, t_data *img, int new_x)
+void	init_put_pixel_ray(t_main *main, t_data *img)
 {
-	int	j;
-	int	*new_addr;
-
-	j = 0;
-	new_addr = (int *)img->addr;
 	if (main->raycast.side == 0)
 		main->raycast.wallx = main->y / CELL_SIZE + \
 		main->raycast.perp_wall_dist / CELL_SIZE * main->raycast.ray_dir.y;
@@ -144,9 +139,16 @@ void	put_pixel_from_ray(t_main *main, t_data *img, int new_x)
 	main->raycast.tex_pos = (main->raycast.draw_start - SCREEN_HEIGHT / 2 * \
 	main->up_down + main->raycast.line_height / 2) * main->raycast.f_step;
 	main->raycast.tex.y = (int)main->raycast.tex_pos & (img->height - 1);
-	while (j != SCREEN_HEIGHT)
+}
+
+void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
+{
+	int	*new_addr;
+
+	new_addr = (int *)img->addr;
+	init_put_pixel_ray(main, img);
+	while (++j < SCREEN_HEIGHT)
 	{
-		j++;
 		if (j >= main->raycast.draw_start && j <= main->raycast.draw_end)
 		{
 			main->raycast.tex.y = (int)main->raycast.tex_pos & \
@@ -287,13 +289,13 @@ void	select_wall_to_put_pixel(t_main *main, int x)
 	if (main->raycast.perp_wall_dist == 0)
 		main->raycast.perp_wall_dist = 0.1;
 	if (main->raycast.side == 1 && main->raycast.map.y < main->y)
-		put_pixel_from_ray(main, &main->gm.img_no, x);
+		put_pixel_from_ray(main, &main->gm.img_no, x, -1);
 	else if (main->raycast.side == 1)
-		put_pixel_from_ray(main, &main->gm.img_so, x);
+		put_pixel_from_ray(main, &main->gm.img_so, x, -1);
 	else if (main->raycast.map.x > main->x && main->raycast.side == 0)
-		put_pixel_from_ray(main, &main->gm.img_we, x);
+		put_pixel_from_ray(main, &main->gm.img_we, x, -1);
 	else
-		put_pixel_from_ray(main, &main->gm.img_ea, x);
+		put_pixel_from_ray(main, &main->gm.img_ea, x, -1);
 }
 
 void	render(t_main *main)
