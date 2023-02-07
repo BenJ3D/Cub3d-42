@@ -68,8 +68,12 @@ int	key_release(int keycode, t_main *main)
 
 int	stop_mlx(int keycode, t_main *main)
 {
+
 	(void)keycode;
-	(void)main;
+
+
+	// ft_free_all_and_exit(main); //provoque segfault car *main est non valid
+	// (void)main;
 	exit(0);
 	return (0);
 }
