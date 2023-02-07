@@ -1,8 +1,14 @@
 C 17,17,17
 F 43,52,62
+<<<<<<< Updated upstream
 EA ./assets/textures/wall/M1.xpm
 NO ./assets/textures/wall/M3.xpm
 SO ./assets/textures/wall/M5.xpm
+=======
+EA ./assets/textures/wall/M2.xpm
+NO ./assets/textures/wall/M2.xpm
+SO ./assets/textures/wall/M2.xpm
+>>>>>>> Stashed changes
 WE ./assets/textures/wall/M2.xpm
   1  
 1101

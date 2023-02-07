@@ -190,6 +190,5 @@ void	move_player(t_main *game)
 		if (game->move_tab[8] || game->move_tab[9])
 			change_fov(game);
 		render(game);
-		printf("%f, %f\n", game->delta_x, game->delta_y);
 	}
 }

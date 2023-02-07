@@ -16,7 +16,7 @@
 # include "struct_parsing.h"
 
 # define CELL_SIZE 64
-# define MAP_CELL_SIZE 10
+# define MAP_CELL_SIZE 4
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024
