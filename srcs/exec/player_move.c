@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 08:26:23 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/07 13:49:35 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 14:57:32 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,6 @@ void	move_player(t_main *game)
 			look_change(game);
 		if (game->move_tab[8] || game->move_tab[9])
 			change_fov(game);
-		render(game);
+		render(game, 0, -1);
 	}
 }

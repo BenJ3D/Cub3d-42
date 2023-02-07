@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/07 13:44:07 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 14:57:49 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void		dbg_display_all_parameter_value(t_main *main);
 void		dbg_display_velocity(t_main *main);
 
 
-void	render(t_main *main);
+void	render(t_main *main, int x, double i);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"
