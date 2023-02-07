@@ -27,8 +27,8 @@ SRCEXT      := c
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJS = ${SOURCES:.c=.o}
 
-CFLAGS = -g3 -O3 -Wall -Wextra #-Werror
-SANITIZE =# -fsanitize=address
+CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
+SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 
 OS	= $(shell uname)

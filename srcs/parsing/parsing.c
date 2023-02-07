@@ -33,7 +33,7 @@ int	ft_start_parsing(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
-float	calc_n_and_s(t_main *game, int neg, double rot)
+void	calc_n_and_s(t_main *game, int neg, double rot)
 {
 	float	old_delta_x;
 	float	old_plane_x;

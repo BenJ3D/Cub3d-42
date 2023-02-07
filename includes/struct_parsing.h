@@ -86,6 +86,7 @@ typedef struct s_pars
 	int				param_count;
 	t_textpath		txtpath;
 	t_map			map;
+	char			**ptrbuf;
 }			t_pars;
 
 #endif

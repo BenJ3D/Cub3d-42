@@ -17,7 +17,7 @@ void	ft_free_tab_char(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab)
+	if (tab == NULL)
 		return ;
 	while (tab[i])
 		free(tab[i++]);
@@ -45,13 +45,19 @@ void	ft_destroy_all_img(t_main *main)
 
 void	ft_free_all(t_main *main)
 {
+	if (main->ps.ptrbuf != NULL)
+		free(*main->ps.ptrbuf);
 	free(main->ps.map_path);
 	ft_free_tab_char(main->gm.map);
 	free(main->ps.map.maptmp);
-	ft_destroy_all_img(main);
-	mlx_destroy_window(main->mlx, main->mlx_win);
-	mlx_destroy_display(main->mlx);
-	free(main->mlx);
+	if (main->mlx != NULL)
+	{
+		ft_destroy_all_img(main);
+		if (main->mlx_win)
+			mlx_destroy_window(main->mlx, main->mlx_win);
+		mlx_destroy_display(main->mlx);
+		free(main->mlx);
+	}
 	//destroy img mlx / mlx
 }
 
