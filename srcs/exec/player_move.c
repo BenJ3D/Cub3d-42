@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 08:26:23 by abucia            #+#    #+#             */
-/*   Updated: 2022/11/27 17:47:55 by bducrocq         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:49:35 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,9 @@ void	move_right(t_main *game)
 void	look_change(t_main *game)
 {
 	if (game->move_tab[7] && game->up_down > -2)
-		game->up_down -= 0.008;
+		game->up_down -= 0.03;
 	if (game->move_tab[6] && game->up_down < 3)
-		game->up_down += 0.008;
+		game->up_down += 0.03;
 }
 
 void	change_fov(t_main *game)

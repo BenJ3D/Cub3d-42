@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/06 21:56:12 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 13:44:07 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <errno.h>
 
 /* Game Settings */
-// # define HEIGHT 768
-// # define WIDTH 768
+// # define SCREEN_HEIGHT 1080
+// # define SCREEN_WIDTH 1920
 // # define ROTATION_SPEED 0.04
 // # define ONE_DEGREE_RAD 0.00116355333
 // # define BLOCK_SIZE 32
