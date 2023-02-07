@@ -322,6 +322,7 @@ void	put_minimap(t_main *main)
 	t_i_vector	img;
 	t_i_vector	map;
 	t_i_vector	render;
+	double		i;
 
 	new_addr = (int *)main->mini_map.addr;
 	if (SCREEN_WIDTH / 6 > SCREEN_HEIGHT / 2)
@@ -333,24 +334,21 @@ void	put_minimap(t_main *main)
 		img.y = -1;
 		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - (SCREEN_WIDTH / 6) / 2;
 		while (++img.y < SCREEN_WIDTH / 6)
-		{
 			if (++map.y < SCREEN_WIDTH && calc_mini_pix(&render, map, main) == 1)
-			{
 				if (translucid_minimap(new_addr[render.x + render.y]))
-				{
-					if ((int)main->ray.addr[(map.y + (SCREEN_WIDTH / 6) / 2) * main->ray.line_length + (map.x + (SCREEN_WIDTH / 6) / 2) * main->ray.bpp] == 0xFFFFFF)
-						my_mlx_pixel_put(&main->img, img.x - 24, img.y + 24, \
-						0xFFFFFF);
-					else
-						my_mlx_pixel_put(&main->img, img.x - 24, img.y + 24, \
-						new_addr[render.x + render.y]);
-				}
-			}
-			
-		}
+					my_mlx_pixel_put(&main->img, img.x - 24, img.y + 24, \
+					new_addr[render.x + render.y]);
 		img.x++;
 		map.x++;
 	}
+	i = -1;
+	while (i < 3)
+	{
+		i += 0.2;
+		//printf("%f\n", i);
+		my_mlx_pixel_put(&main->img, (SCREEN_WIDTH - (SCREEN_WIDTH / 6) / 2 - 24 + main->delta_x * i), ((SCREEN_WIDTH / 6) / 2 + 24 + main->delta_y * i), 0x00F53F);
+	}
+	
 }
 
 void	render(t_main *main)

@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/07 13:44:49 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/07 14:01:50 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1440
+#  define SCREEN_HEIGHT 1080
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 2560
+#  define SCREEN_WIDTH 1920
 # endif
 
 # ifndef MAX_VELOCITY
