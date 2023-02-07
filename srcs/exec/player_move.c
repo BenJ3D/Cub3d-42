@@ -149,9 +149,9 @@ void	move_right(t_main *game)
 void	look_change(t_main *game)
 {
 	if (game->move_tab[7] && game->up_down > -2)
-		game->up_down -= 0.008;
+		game->up_down -= 0.03;
 	if (game->move_tab[6] && game->up_down < 3)
-		game->up_down += 0.008;
+		game->up_down += 0.03;
 }
 
 void	change_fov(t_main *game)

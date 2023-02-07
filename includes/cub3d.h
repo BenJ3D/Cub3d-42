@@ -32,8 +32,8 @@
 # include <errno.h>
 
 /* Game Settings */
-// # define HEIGHT 768
-// # define WIDTH 768
+// # define SCREEN_HEIGHT 1080
+// # define SCREEN_WIDTH 1920
 // # define ROTATION_SPEED 0.04
 // # define ONE_DEGREE_RAD 0.00116355333
 // # define BLOCK_SIZE 32
