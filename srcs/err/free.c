@@ -34,6 +34,13 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->gm.img_so.img);
 	if (main->gm.img_no.img)
 		mlx_destroy_image(main->mlx, main->gm.img_no.img);
+	if (main->mini_map.img)
+		mlx_destroy_image(main->mlx, main->mini_map.img);
+	if (main->ray.img)
+		mlx_destroy_image(main->mlx, main->ray.img);
+	if (main->img.img)
+		mlx_destroy_image(main->mlx, main->img.img);
+	//TODO: Destroy image porte ? Texture reflet anime ?
 }
 
 void	ft_free_all(t_main *main)
@@ -42,6 +49,9 @@ void	ft_free_all(t_main *main)
 	ft_free_tab_char(main->gm.map);
 	free(main->ps.map.maptmp);
 	ft_destroy_all_img(main);
+	mlx_destroy_window(main->mlx, main->mlx_win);
+	mlx_destroy_display(main->mlx);
+	free(main->mlx);
 	//destroy img mlx / mlx
 }
 

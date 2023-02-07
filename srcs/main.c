@@ -12,7 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-
 int	ft_exec(t_main *main)
 {
 	exec_main(main);
