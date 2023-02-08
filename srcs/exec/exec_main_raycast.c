@@ -33,9 +33,6 @@ int	raycast_to_wall(t_main *main)
 	while (main->raycast.hit == 0)
 	{
 		increase_raycast_step(main);
-		my_mlx_pixel_put(&main->ray, main->raycast.map.x * \
-		MAP_CELL_SIZE / CELL_SIZE, main->raycast.map.y * \
-		MAP_CELL_SIZE / CELL_SIZE, 0xFFFFFF);
 		if (main->gm.map[main->raycast.map.y / CELL_SIZE] \
 		[main->raycast.map.x / CELL_SIZE] != '0')
 			main->raycast.hit = 1;
@@ -54,20 +51,6 @@ int	raycast_to_wall(t_main *main)
 		main->raycast.wall_hit_dist = \
 		main->raycast.side_dist.y - main->raycast.delta_dist.y;
 	return (EXIT_SUCCESS);
-}
-
-void	reboot_ray(t_main *game)
-{
-	int	h;
-	int	w;
-
-	h = -1;
-	while (++h != game->ps.map.maxw * MAP_CELL_SIZE)
-	{
-		w = -1;
-		while (++w != game->ps.map.maxh * MAP_CELL_SIZE)
-			my_mlx_pixel_put(&game->ray, h, w, colour_to_nb(17, 17, 17));
-	}
 }
 
 void	init_put_pixel_ray(t_main *main, t_data *img)

@@ -40,9 +40,11 @@ void	select_step(t_main *main)
 	}
 }
 
-void	render(t_main *main, int x, double i)
+void	render(t_main *main, double i)
 {
-	reboot_ray(main);
+	int x;
+
+	x = 0;
 	put_minimap(main);
 	while (x < SCREEN_WIDTH)
 	{
@@ -51,7 +53,7 @@ void	render(t_main *main, int x, double i)
 		if (raycast_to_wall(main) == EXIT_FAILURE)
 			continue ;
 		define_start_end(main);
-		select_wall_to_put_pixel(main, SCREEN_WIDTH - x);
+		select_wall_to_put_pixel(main, x);
 		x++;
 	}
 	put_minimap(main);

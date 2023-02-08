@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/07 14:01:50 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 16:06:13 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1080
+#  define SCREEN_HEIGHT 1000
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1920
+#  define SCREEN_WIDTH 1400
 # endif
 
 # ifndef MAX_VELOCITY
@@ -43,7 +43,7 @@
 # endif
 
 # ifndef COEF_ACCELERATION
-#  define COEF_ACCELERATION 1.17
+#  define COEF_ACCELERATION 1.14
 # endif
 
 # ifndef COEF_DECELERATION

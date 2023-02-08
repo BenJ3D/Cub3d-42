@@ -38,8 +38,6 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->gm.img_door.img);
 	if (main->mini_map.img)
 		mlx_destroy_image(main->mlx, main->mini_map.img);
-	if (main->ray.img)
-		mlx_destroy_image(main->mlx, main->ray.img);
 	if (main->img.img)
 		mlx_destroy_image(main->mlx, main->img.img);
 	//TODO: Destroy Texture reflet anime ?

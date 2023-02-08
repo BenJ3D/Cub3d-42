@@ -111,14 +111,14 @@ void	move_player(t_main *game)
 			move_left(game);
 		if (game->move_tab[3])
 			move_right(game);
-		if (game->move_tab[4])
-			rotate_right(game);
 		if (game->move_tab[5])
 			rotate_left(game);
+		if (game->move_tab[4])
+			rotate_right(game);
 		if (game->move_tab[6] || game->move_tab[7])
 			look_change(game);
 		if (game->move_tab[8] || game->move_tab[9])
 			change_fov(game);
-		render(game, 0, -1);
+		render(game, -1);
 	}
 }

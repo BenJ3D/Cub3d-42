@@ -181,7 +181,6 @@ typedef struct s_main
 {
 	t_data		mini_map;
 	t_data		img;
-	t_data		ray;
 	t_pars		ps;
 	t_game		gm;
 	void		*mlx;
@@ -213,7 +212,6 @@ int			stop_mlx(int keycode, t_main *main);
 
 int			colour_to_nb(int r, int g, int b);
 void		draw_minimap(t_main *game);
-void		reboot_ray(t_main *game);
 void		init_put_pixel_ray(t_main *main, t_data *img);
 void		put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j);
 void		init_dda(t_main *main, int x);
@@ -227,7 +225,7 @@ int			calc_mini_pix(t_i_vector *vect, t_i_vector map, t_main *main);
 
 int			translucid_minimap(int color);
 void		put_minimap(t_main *main);
-void		render(t_main *main, int x, double i);
+void		render(t_main *main, double i);
 int			render_next_frame(t_main *main);
 
 /* exec player */

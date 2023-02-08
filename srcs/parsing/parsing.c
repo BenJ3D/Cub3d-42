@@ -33,47 +33,45 @@ int	ft_start_parsing(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
-void	calc_n_and_s(t_main *game, int neg, double rot)
+void	calc_n_and_s(t_main *game, double PI)
 {
 	float	old_delta_x;
 	float	old_plane_x;
 
+	game->plane_x = 0;
+	game->plane_y = FOV_HORIZONTAL;
 	old_delta_x = game->gm.start_rot.x;
-	old_plane_x = game->plane_x;
-	game->gm.start_rot.x = game->gm.start_rot.x * cos(rot * neg) - \
-	game->gm.start_rot.y * sin(rot * neg);
-	game->gm.start_rot.y = old_delta_x * sin(rot * neg) + \
-	game->gm.start_rot.y * cos(rot * neg);
-	game->plane_x = game->plane_x * cos(rot * neg) - \
-	game->plane_y * sin(rot * neg);
-	game->plane_y = old_plane_x * sin(rot * neg) + \
-	game->plane_y * cos(rot * neg);
+	old_plane_x = 0;
+	game->gm.start_rot.x = game->gm.start_rot.x * cos(PI) - \
+	game->gm.start_rot.y * sin(PI);
+	game->gm.start_rot.y = old_delta_x * sin(PI) + \
+	game->gm.start_rot.y * cos(PI);
+	game->plane_x = game->plane_x * cos(PI) - \
+	game->plane_y * sin(PI);
+	game->plane_y = old_plane_x * sin(PI) + \
+	game->plane_y * cos(PI);
 }
 
 static void	ft_set_player_pos_angle(t_main *main, int i, int y)
 {
+	main->gm.start_rot.y = 0.0;
 	if (main->ps.charplayer == 'S')
 	{
-		main->gm.start_rot.x = -1.0;
-		main->gm.start_rot.y = 0.0;
-		calc_n_and_s(main, -1, 1.471);
+		main->gm.start_rot.x = 1.0;
+		calc_n_and_s(main, M_PI_2);
 	}
 	if (main->ps.charplayer == 'N')
 	{
-		main->gm.start_rot.x = -1.0;
-		main->gm.start_rot.y = 0.0;
-		calc_n_and_s(main, 1, 1.671);
+		main->gm.start_rot.x = 1.0;
+		calc_n_and_s(main, -M_PI_2);
 	}
 	if (main->ps.charplayer == 'W')
 	{
-		main->gm.start_rot.x = -1.0;
-		main->gm.start_rot.y = 0.0;
+		main->gm.start_rot.x = 1.0;
+		calc_n_and_s(main, M_PI);
 	}
 	if (main->ps.charplayer == 'E')
-	{
 		main->gm.start_rot.x = 1.0;
-		main->gm.start_rot.y = 0.0;
-	}
 	main->gm.playstart.x = y;
 	main->gm.playstart.y = i;
 	main->gm.map[i][y] = '0';

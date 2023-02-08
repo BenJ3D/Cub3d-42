@@ -39,13 +39,8 @@ void	exec_main(t_main *game)
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
 	game->img.bpp /= 8;
-	game->ray.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
-	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
-	game->ray.addr = mlx_get_data_addr(game->ray.img, &game->ray.bpp, \
-	&game->ray.line_length, &game->ray.end);
-	game->ray.bpp /= 8;
 	game->up_down = 1;
 	game->fov = FOV_HORIZONTAL;
 	draw_minimap(game);
-	render(game, 0, -1);
+	render(game, -1);
 }
