@@ -175,6 +175,7 @@ typedef struct s_game
 	int				cell_size;
 	t_vector		playstart;
 	t_d_vector		start_rot;
+	float			pi;
 }	t_game;
 
 typedef struct s_main
@@ -248,6 +249,7 @@ void		look_down(t_main *game);
 void		open_door(t_main *game);
 
 /* Parsing */
+void		calc_n_and_s(t_main *game, double pi, double fov);
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
 t_vector	ft_get_rgb_value(char *buf, t_main *main);

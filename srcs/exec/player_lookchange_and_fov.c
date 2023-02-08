@@ -26,14 +26,13 @@ void	look_down(t_main *game)
 
 void	change_fov(t_main *game)
 {
-	game->plane_x = game->gm.start_rot.x;
-	game->delta_x = 1;
-	game->delta_y = 0;
 	if (game->mov_t[8] && game->fov < 0.80)
 		game->fov += 0.005;
 	if (game->mov_t[9] && game->fov > 0.30)
 		game->fov -= 0.005;
-	game->plane_y = game->gm.start_rot.x + game->fov;
+	calc_n_and_s(game, game->gm.pi, game->fov);
+	game->delta_x = game->gm.start_rot.x;
+	game->delta_y = game->gm.start_rot.y;
 }
 
 void	open_door(t_main *game)
