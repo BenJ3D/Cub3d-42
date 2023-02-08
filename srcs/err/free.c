@@ -34,13 +34,15 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->gm.img_so.img);
 	if (main->gm.img_no.img)
 		mlx_destroy_image(main->mlx, main->gm.img_no.img);
+	if (main->gm.img_door.img)
+		mlx_destroy_image(main->mlx, main->gm.img_door.img);
 	if (main->mini_map.img)
 		mlx_destroy_image(main->mlx, main->mini_map.img);
 	if (main->ray.img)
 		mlx_destroy_image(main->mlx, main->ray.img);
 	if (main->img.img)
 		mlx_destroy_image(main->mlx, main->img.img);
-	//TODO: Destroy image porte ? Texture reflet anime ?
+	//TODO: Destroy Texture reflet anime ?
 }
 
 void	ft_free_all(t_main *main)

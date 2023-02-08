@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/08 02:31:36 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 03:29:20 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@
 # define PARAM_EA "EA"		//texture wall East
 # define PARAM_C "C"		//ceiling color
 # define PARAM_F "F"		//floor color
+
+# define IMG_DOOR "./assets/textures/door/door.xpm"
 
 /* Linux Keys */
 # ifdef __linux__
@@ -169,6 +171,7 @@ typedef struct s_game
 	t_data			img_so;
 	t_data			img_we;
 	t_data			img_ea;
+	t_data			img_door;
 	int				cell_size;
 	t_vector		playstart;
 	t_d_vector		start_rot;

@@ -54,7 +54,7 @@ SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
 OBJS = ${SOURCES:.c=.o}
 
 CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
-SANITIZE = -fsanitize=address
+SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
