@@ -3,64 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 08:26:23 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/07 14:57:32 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 02:23:44 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	is_wall_coliding(t_main *game, float x, float y)
-{
-	if (x < 1 || (int)(x / CELL_SIZE) + 1 >= game->ps.map.maxw
-		|| y < 1 || (int)(y / CELL_SIZE) + 2 >= game->ps.map.maxh)
-		return (1);
-	if (game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)] == '1' || \
-	game->gm.map[((int)ceil(y + MAX_VELOCITY + 1)) / \
-	CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || game->gm.map[((int)ceil(y - \
-	MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
-	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / \
-	CELL_SIZE] == '1' || game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - \
-	MAX_VELOCITY - 1)) / CELL_SIZE] == '1')
-		return (1);
-	return (0);
-}
-
-void	rotate_right(t_main *game)
-{
-	float	old_delta_x;
-	float	old_plane_x;
-
-	old_delta_x = game->delta_x;
-	old_plane_x = game->plane_x;
-	game->delta_x = game->delta_x * cos(ROT_SPEED) - \
-	game->delta_y * sin(ROT_SPEED);
-	game->delta_y = old_delta_x * sin(ROT_SPEED) + \
-	game->delta_y * cos(ROT_SPEED);
-	game->plane_x = game->plane_x * cos(ROT_SPEED) - \
-	game->plane_y * sin(ROT_SPEED);
-	game->plane_y = old_plane_x * sin(ROT_SPEED) + \
-	game->plane_y * cos(ROT_SPEED);
-}
-
-void	rotate_left(t_main *game)
-{
-	float	old_delta_x;
-	float	old_plane_x;
-
-	old_delta_x = game->delta_x;
-	old_plane_x = game->plane_x;
-	game->delta_x = game->delta_x * cos(-ROT_SPEED) - \
-	game->delta_y * sin(-ROT_SPEED);
-	game->delta_y = old_delta_x * sin(-ROT_SPEED) + \
-	game->delta_y * cos(-ROT_SPEED);
-	game->plane_x = game->plane_x * cos(-ROT_SPEED) - \
-	game->plane_y * sin(-ROT_SPEED);
-	game->plane_y = old_plane_x * sin(-ROT_SPEED) + \
-	game->plane_y * cos(-ROT_SPEED);
-}
 
 void	move_forward(t_main *game)
 {
@@ -144,26 +94,6 @@ void	move_right(t_main *game)
 		game->x = new_x;
 	else if (!is_wall_coliding(game, game->x, new_y))
 		game->y = new_y;
-}
-
-void	look_change(t_main *game)
-{
-	if (game->move_tab[7] && game->up_down > -2)
-		game->up_down -= 0.03;
-	if (game->move_tab[6] && game->up_down < 3)
-		game->up_down += 0.03;
-}
-
-void	change_fov(t_main *game)
-{
-	game->plane_x = 0;
-	game->delta_x = -1;
-	game->delta_y = 0;
-	if (game->move_tab[8] && game->fov < 0.80)
-		game->fov += 0.005;
-	if (game->move_tab[9] && game->fov > 0.30)
-		game->fov -= 0.005;
-	game->plane_y = game->fov;
 }
 
 void	move_player(t_main *game)

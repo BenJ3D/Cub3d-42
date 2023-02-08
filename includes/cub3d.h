@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/08 01:57:34 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 02:24:57 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,15 +208,6 @@ int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
 int			stop_mlx(int keycode, t_main *main);
 
-void		move_player(t_main *game);
-void		move_backward(t_main *game);
-void		move_right(t_main *game);
-void		move_left(t_main *game);
-void		move_forward(t_main *game);
-
-void		update_velocity(t_main *main);
-
-
 int			colour_to_nb(int r, int g, int b);
 void		draw_minimap(t_main *game);
 void		reboot_ray(t_main *game);
@@ -236,6 +227,21 @@ void		put_minimap(t_main *main);
 void		render(t_main *main, int x, double i);
 int			render_next_frame(t_main *main);
 
+/* exec player */
+void		move_player(t_main *game);
+void		move_backward(t_main *game);
+void		move_right(t_main *game);
+void		move_left(t_main *game);
+void		move_forward(t_main *game);
+
+void		rotate_right(t_main *game);
+void		rotate_left(t_main *game);
+
+void		update_velocity(t_main *main);
+
+int			is_wall_coliding(t_main *game, float x, float y);
+void		change_fov(t_main *game);
+void		look_change(t_main *game);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

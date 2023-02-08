@@ -12,48 +12,55 @@
 
 #include "../../includes/cub3d.h"
 
-void	increase_raycast_step(t_main *main)
+void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
 {
-	if (main->raycast.side_dist.x < main->raycast.side_dist.y)
+	int	*new_addr;
+
+	new_addr = (int *)img->addr;
+	init_put_pixel_ray(main, img);
+	while (++j < SCREEN_HEIGHT)
 	{
-		main->raycast.side_dist.x += main->raycast.delta_dist.x;
-		main->raycast.map.x += main->raycast.step.x;
-		main->raycast.side = 0;
-	}
-	else
-	{
-		main->raycast.side_dist.y += main->raycast.delta_dist.y;
-		main->raycast.map.y += main->raycast.step.y;
-		main->raycast.side = 1;
+		if (j >= main->raycast.draw_start && j <= main->raycast.draw_end)
+		{
+			main->raycast.tex.y = (int)main->raycast.tex_pos & \
+			(img->height - 1);
+			main->raycast.tex_pos += main->raycast.f_step;
+			if (main->raycast.side == 1)
+				my_mlx_pixel_put(&main->img, new_x, j, \
+				new_addr[main->raycast.tex.y * \
+				img->height + main->raycast.tex.x]);
+			else
+				my_mlx_pixel_put(&main->img, new_x, j, \
+				new_addr[main->raycast.tex.y * \
+				img->height + main->raycast.tex.x]);
+		}
+		else if (j < SCREEN_HEIGHT / 2 * main->up_down)
+			my_mlx_pixel_put(&main->img, new_x, j, \
+			colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
+		else
+			my_mlx_pixel_put(&main->img, new_x, j, \
+			colour_to_nb(main->gm.f_rgb.x, main->gm.f_rgb.y, main->gm.f_rgb.z));
 	}
 }
 
-int	raycast_to_wall(t_main *main)
+void	init_dda(t_main *main, int x)
 {
-	while (main->raycast.hit == 0)
-	{
-		increase_raycast_step(main);
-		my_mlx_pixel_put(&main->ray, main->raycast.map.x * \
-		MAP_CELL_SIZE / CELL_SIZE, main->raycast.map.y * \
-		MAP_CELL_SIZE / CELL_SIZE, 0xFFFFFF);
-		if (main->gm.map[main->raycast.map.y / CELL_SIZE] \
-		[main->raycast.map.x / CELL_SIZE] != '0')
-			main->raycast.hit = 1;
-		else if (main->raycast.map.y / CELL_SIZE > main->ps.map.maxh - 1 || \
-		main->raycast.map.x <= 0 || main->raycast.map.x / CELL_SIZE > \
-		main->ps.map.maxw - 1 || main->raycast.map.y <= 0)
-		{
-			main->raycast.side = -1;
-			return (EXIT_FAILURE);
-		}
-	}
-	if (main->raycast.side == 0)
-		main->raycast.wall_hit_dist = \
-		main->raycast.side_dist.x - main->raycast.delta_dist.x;
-	else if (main->raycast.side == 1)
-		main->raycast.wall_hit_dist = \
-		main->raycast.side_dist.y - main->raycast.delta_dist.y;
-	return (EXIT_SUCCESS);
+	main->raycast.camera_x = 2 * x / (double)(SCREEN_HEIGHT) - 1;
+	main->raycast.ray_dir.x = main->delta_x + main->plane_x * \
+	main->raycast.camera_x;
+	main->raycast.ray_dir.y = main->delta_y + main->plane_y * \
+	main->raycast.camera_x;
+	main->raycast.map.x = (int)(main->x);
+	main->raycast.map.y = (int)(main->y);
+	if (main->raycast.ray_dir.x == 0.0)
+		main->raycast.delta_dist.x = 1e30;
+	else
+		main->raycast.delta_dist.x = fabs(1 / main->raycast.ray_dir.x);
+	if (main->raycast.ray_dir.y == 0.0)
+		main->raycast.delta_dist.y = 1e30;
+	else
+		main->raycast.delta_dist.y = fabs(1 / main->raycast.ray_dir.y);
+	main->raycast.hit = 0;
 }
 
 void	define_start_end(t_main *main)
@@ -88,16 +95,4 @@ void	select_wall_to_put_pixel(t_main *main, int x)
 		put_pixel_from_ray(main, &main->gm.img_we, x, -1);
 	else
 		put_pixel_from_ray(main, &main->gm.img_ea, x, -1);
-}
-
-int	calc_mini_pix(t_i_vector *vect, t_i_vector map, t_main *main)
-{
-	vect->x = map.y % ((main->ps.map.maxh - 1) * MAP_CELL_SIZE);
-	if (vect->x < 0 || map.y > (main->ps.map.maxh - 1) * MAP_CELL_SIZE)
-		return (-1);
-	vect->x *= main->ps.map.maxw * MAP_CELL_SIZE;
-	vect->y = map.x % (main->ps.map.maxw * MAP_CELL_SIZE);
-	if (vect->y < 0 || map.x > main->ps.map.maxw * MAP_CELL_SIZE)
-		return (-1);
-	return (1);
 }

@@ -1,48 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_main_other3.c                                 :+:      :+:    :+:   */
+/*   exec_main_and_renderframe.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 09:23:05 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/08 01:46:58 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 02:14:53 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	translucid_minimap(int color)
+void	select_step(t_main *main)
 {
-	if (color == colour_to_nb(17, 17, 17))
-		return (0);
-	return (1);
-}
-
-void	put_minimap(t_main *main)
-{
-	int			*new_addr;
-	t_i_vector	img;
-	t_i_vector	map;
-	t_i_vector	render;
-
-	new_addr = (int *)main->mini_map.addr;
-	if (SCREEN_WIDTH / 6 > SCREEN_HEIGHT / 2)
-		return ;
-	img.x = SCREEN_WIDTH - (SCREEN_WIDTH / 6);
-	map.x = main->x * MAP_CELL_SIZE / CELL_SIZE - (SCREEN_WIDTH / 6) / 2;
-	while (img.x < SCREEN_WIDTH)
+	if (main->raycast.ray_dir.x < 0)
 	{
-		img.y = -1;
-		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - (SCREEN_WIDTH / 6) / 2;
-		while (++img.y < SCREEN_WIDTH / 6)
-			if (++map.y < SCREEN_WIDTH && \
-			calc_mini_pix(&render, map, main) == 1)
-				if (translucid_minimap(new_addr[render.x + render.y]))
-					my_mlx_pixel_put(&main->img, img.x - 24, img.y + 24, \
-					new_addr[render.x + render.y]);
-		img.x++;
-		map.x++;
+		main->raycast.step.x = -1;
+		main->raycast.side_dist.x = (main->x - main->raycast.map.x) \
+		* main->raycast.delta_dist.x;
+	}
+	else
+	{
+		main->raycast.step.x = 1;
+		main->raycast.side_dist.x = (main->raycast.map.x + 1.0 - main->x) \
+		* main->raycast.delta_dist.x;
+	}
+	if (main->raycast.ray_dir.y < 0)
+	{
+		main->raycast.step.y = -1;
+		main->raycast.side_dist.y = (main->y - main->raycast.map.y) \
+		* main->raycast.delta_dist.y;
+	}
+	else
+	{
+		main->raycast.step.y = 1;
+		main->raycast.side_dist.y = (main->raycast.map.y + 1.0 - main->y) \
+		* main->raycast.delta_dist.y;
 	}
 }
 
@@ -76,12 +70,4 @@ int	render_next_frame(t_main *main)
 	update_velocity(main);
 	move_player(main);
 	return (1);
-}
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bpp));
-	*(unsigned int *)dst = color;
 }
