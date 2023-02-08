@@ -96,6 +96,10 @@ fclean: clean
 	rm -rf $(NAME)
 	$(MAKE) fclean -C $(LIBFT_PATH)
 	$(MAKE) fclean -C $(GNL_PATH)
-re:	fclean all
+re:	fclean
+	${MAKE} -C $(MLX_PATH) re -j
+	${MAKE} -C $(LIBFT_PATH) re -j
+	${MAKE} -C $(GNL_PATH) re -j
+	${MAKE} -C ./ norm
 
 .PHONY:	all clean fclean re
