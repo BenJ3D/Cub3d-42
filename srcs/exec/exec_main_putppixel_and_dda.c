@@ -46,9 +46,9 @@ void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
 void	init_dda(t_main *main, int x)
 {
 	main->raycast.camera_x = 2 * x / (double)(SCREEN_HEIGHT) - 1;
-	main->raycast.ray_dir.x = main->delta_x + main->plane_x * \
+	main->raycast.ray_dir.x = main->delta_x + 0.2 + main->plane_x * \
 	main->raycast.camera_x;
-	main->raycast.ray_dir.y = main->delta_y + main->plane_y * \
+	main->raycast.ray_dir.y = main->delta_y + 0.2 + main->plane_y * \
 	main->raycast.camera_x;
 	main->raycast.map.x = (int)(main->x);
 	main->raycast.map.y = (int)(main->y);
