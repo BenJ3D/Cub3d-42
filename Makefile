@@ -73,12 +73,15 @@ else
 	MLX_PATH = libs/mlx_mac
 endif
 
-all : $(NAME)
+all :
+	${MAKE} -C $(MLX_PATH) -j
+	${MAKE} -C $(LIBFT_PATH) -j
+	${MAKE} -C $(GNL_PATH) -j
+	${MAKE} -C ./ norm
+
+norm : $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C $(MLX_PATH) -j
-	@$(MAKE) -C $(LIBFT_PATH) -j
-	@$(MAKE) -C $(GNL_PATH) -j
 	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
 
 %.o: %.c ${INCLUDES} Makefile ./libs/libft/Makefile $(HEADER)

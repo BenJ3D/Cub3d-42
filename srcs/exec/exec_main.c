@@ -20,6 +20,7 @@ int	stop_mlx(t_main *main)
 
 void	exec_main(t_main *game)
 {
+	change_fov(game);
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, \
 	"cub3D");
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
