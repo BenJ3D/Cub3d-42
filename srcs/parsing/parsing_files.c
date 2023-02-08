@@ -21,6 +21,8 @@ int	ft_check_if_map_has_player(t_main *main)
 	i = 0;
 	ret = 0;
 	str = ft_strdup(main->ps.map.maptmp);
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		while (str[i] && ft_isspace(str[i]))
