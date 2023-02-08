@@ -18,17 +18,43 @@
 # $< "include one prerequisite"
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
+# SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 
 NAME = cub3d
 
 
 SRCDIR      := srcs
 SRCEXT      := c
-SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
+				./srcs/parsing/parsing_parameters_header.c \
+				./srcs/parsing/parsing_utils.c \
+				./srcs/parsing/init_img.c \
+				./srcs/parsing/parsing.c \
+				./srcs/parsing/parsing_parameters.c \
+				./srcs/parsing/parsing_files.c \
+				./srcs/parsing/parsing_map.c \
+				./srcs/exec/exec_main_minimap.c \
+				./srcs/exec/exec_main_raycast.c \
+				./srcs/exec/exec_main_keypress_release.c \
+				./srcs/exec/exec_main_tools.c \
+				./srcs/exec/player_move_rotate.c \
+				./srcs/exec/velocity.c \
+				./srcs/exec/player_coliding.c \
+				./srcs/exec/exec_main_renderframe.c \
+				./srcs/exec/exec_main.c \
+				./srcs/exec/player_lookchange_and_fov.c \
+				./srcs/exec/exec_main_putppixel_and_dda.c \
+				./srcs/exec/player_move.c \
+				./srcs/err/free.c \
+				./srcs/err/cub3d_error.c \
+				./srcs/main.c
+
+
+
 OBJS = ${SOURCES:.c=.o}
 
 CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
-SANITIZE = #-fsanitize=address
+SANITIZE = -fsanitize=address
 CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
@@ -55,7 +81,7 @@ $(NAME): $(OBJS)
 	@$(MAKE) -C $(GNL_PATH) -j
 	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
 
-%.o: %.c ${INCLUDES} Makefile
+%.o: %.c ${INCLUDES} Makefile ./libs/libft/Makefile $(HEADER)
 	${CC} ${CFLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:

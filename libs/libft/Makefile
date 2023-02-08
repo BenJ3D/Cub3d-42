@@ -16,7 +16,7 @@ DEBUG=0
 
 CC = gcc
 CFLAGS      := -Wall -Wextra -Werror
-SANITIZE    := -fsanitize=address
+SANITIZE    :=# -fsanitize=address
 LLDBFLAG    := -g3
 
 AR = ar rcs
