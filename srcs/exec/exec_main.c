@@ -20,23 +20,24 @@ int	stop_mlx(t_main *main)
 
 void	exec_main(t_main *game)
 {
+	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, \
+	"cub3D");
+	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
+	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 	ft_bzero(game->mov_t, 11);
-	game->mov_t[10] = 0;
+	if (!game->img.img || game->mini_map.img)
+		stop_mlx(game);
 	game->x = game->gm.playstart.x * CELL_SIZE + 32;
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
 	game->delta_x = game->gm.start_rot.x;
 	game->delta_y = game->gm.start_rot.y;
-	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
-	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
-	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, \
-	"cub3D");
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.img, \
 	&game->mini_map.bpp, &game->mini_map.line_length, &game->mini_map.end);
-	game->mini_map.bpp /= 8;
-	draw_minimap(game);
-	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
+	game->mini_map.bpp /= 8;
+	draw_minimap(game);
 	game->img.bpp /= 8;
 	game->up_down = 1;
 	game->fov = FOV_HORIZONTAL;
