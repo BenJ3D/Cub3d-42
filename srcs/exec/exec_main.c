@@ -12,12 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-int	stop_mlx(int keycode, t_main *main)
+int	stop_mlx(t_main *main)
 {
-	(void)keycode;
-	// ft_free_all_and_exit(main); //provoque segfault car *main est non valid
-	(void)main;
-	exit(0);
+	ft_free_all_and_exit(main);
 	return (0);
 }
 

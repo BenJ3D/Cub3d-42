@@ -208,7 +208,7 @@ void		exec_main(t_main *game);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
-int			stop_mlx(int keycode, t_main *main);
+int			stop_mlx(t_main *main);
 
 int			colour_to_nb(int r, int g, int b);
 void		draw_minimap(t_main *game);
