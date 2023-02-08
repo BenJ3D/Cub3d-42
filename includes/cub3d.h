@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/08 02:24:57 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 02:31:36 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,14 +163,14 @@ typedef struct s_data
 typedef struct s_game
 {
 	char			**map;
-	t_vector		c_rgb; // ceiling color RGB (xyz)
-	t_vector		f_rgb; // floor color RGB (xyz)
+	t_vector		c_rgb;
+	t_vector		f_rgb;
 	t_data			img_no;
 	t_data			img_so;
 	t_data			img_we;
 	t_data			img_ea;
 	int				cell_size;
-	t_vector		playstart;	//xy = position plyaer start
+	t_vector		playstart;
 	t_d_vector		start_rot;
 }	t_game;
 
@@ -180,7 +180,7 @@ typedef struct s_main
 	t_data		img;
 	t_data		ray;
 	t_pars		ps;
-	t_game		gm; //setup regles avec les couleurs, resolution, path textures/map etc
+	t_game		gm;
 	void		*mlx;
 	void		*mlx_win;
 	int			win_h;
@@ -275,15 +275,8 @@ void		ft_free_all_and_exit(t_main *main);
 void		ft_free_all_and_exit_err(t_main *main, int error);
 
 /* Error display */
-void		ft_err_display(int errtype, t_main *main); //FIXME: unless ?
+void		ft_err_display(int errtype, t_main *main);
 void		ft_err_display_and_exit(int errtype, t_main *main);
-
-/* ft dbg //TODO: del before final push */
-void		dbg_display_all_parameter_value(t_main *main);
-void		dbg_display_velocity(t_main *main);
-
-
-void	render(t_main *main, int x, double i);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"

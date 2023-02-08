@@ -14,14 +14,8 @@
 # define STRUCT_PARSING_H
 
 # include "cub3d.h"
-# ifdef __linux__
-#  define PATH_MAX 4096 // for linux because syslimits dont work
-# else
-#  ifdef __APPLE__
-#    include <sys/syslimits.h> //only work on mac
-#  else
-#   define PATH_MAX 1024
-#  endif
+# ifndef PATH_MAX
+#  define PATH_MAX 4096
 # endif
 
 enum e_errtype
