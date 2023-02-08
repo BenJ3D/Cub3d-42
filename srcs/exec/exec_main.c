@@ -26,7 +26,7 @@ void	exec_main(t_main *game)
 	game->mini_map.img = mlx_new_image(game->mlx, game->ps.map.maxw * \
 	MAP_CELL_SIZE, (game->ps.map.maxh - 1) * MAP_CELL_SIZE);
 	ft_bzero(game->mov_t, 11);
-	if (!game->img.img || game->mini_map.img)
+	if (!game->img.img || !game->mini_map.img)
 		stop_mlx(game);
 	game->x = game->gm.playstart.x * CELL_SIZE + 32;
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
