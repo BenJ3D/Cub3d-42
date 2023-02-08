@@ -20,9 +20,9 @@ int	key_press(int keycode, t_main *main)
 		main->move_tab[0] = 1;
 	if (keycode == KEY_S)
 		main->move_tab[1] = 1;
-	if (keycode == KEY_A)
-		main->move_tab[2] = 1;
 	if (keycode == KEY_D)
+		main->move_tab[2] = 1;
+	if (keycode == KEY_A)
 		main->move_tab[3] = 1;
 	if (keycode == KEY_RIGHT)
 		main->move_tab[4] = 1;
@@ -47,9 +47,9 @@ int	key_release(int keycode, t_main *main)
 		main->move_tab[0] = 0;
 	if (keycode == KEY_S)
 		main->move_tab[1] = 0;
-	if (keycode == KEY_A)
-		main->move_tab[2] = 0;
 	if (keycode == KEY_D)
+		main->move_tab[2] = 0;
+	if (keycode == KEY_A)
 		main->move_tab[3] = 0;
 	if (keycode == KEY_RIGHT)
 		main->move_tab[4] = 0;
