@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/07 14:57:49 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 01:57:34 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@
 #  define KEY_MINUS 65453
 #  define KEY_W 119
 #  define KEY_S 115
-#  define KEY_A 100
-#  define KEY_D 113
+#  define KEY_A 97
+#  define KEY_Q 113
+#  define KEY_D 100
 #  define DOORS 101 // E
 #  define ESC 65307
 # endif
@@ -199,8 +200,8 @@ typedef struct s_main
 }	t_main;
 
 /* exec utils */
-float		deg_to_rad(float i_deg);
-float		rad_to_deg(float i_rad);
+float		deg_to_rad(float i_deg); // FIXME: introuvable ?
+float		rad_to_deg(float i_rad); // FIXME: introuvable ?
 void		exec_main(t_main *game);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			key_release(int keycode, t_main *main);
@@ -215,7 +216,26 @@ void		move_forward(t_main *game);
 
 void		update_velocity(t_main *main);
 
+
+int			colour_to_nb(int r, int g, int b);
+void		draw_minimap(t_main *game);
+void		reboot_ray(t_main *game);
+void		init_put_pixel_ray(t_main *main, t_data *img);
+void		put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j);
+void		init_dda(t_main *main, int x);
+void		select_step(t_main *main);
+
+void		increase_raycast_step(t_main *main);
+int			raycast_to_wall(t_main *main);
+void		define_start_end(t_main *main);
+void		select_wall_to_put_pixel(t_main *main, int x);
+int			calc_mini_pix(t_i_vector *vect, t_i_vector map, t_main *main);
+
+int			translucid_minimap(int color);
+void		put_minimap(t_main *main);
+void		render(t_main *main, int x, double i);
 int			render_next_frame(t_main *main);
+
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

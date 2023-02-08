@@ -16,7 +16,7 @@ int	ft_exec(t_main *main)
 {
 	exec_main(main);
 	mlx_hook(main->mlx_win, 2, 1L << 0, &key_press, main);
-	mlx_hook(main->mlx_win, 17, 1L << 0, &stop_mlx, main); //sanitize ???!???
+	mlx_hook(main->mlx_win, 17, 1L << 0, &stop_mlx, main); // SEGV et LEAKS si ft free in stop mlx car main nest pas/plus valid
 	mlx_hook(main->mlx_win, 3, 1L << 1, &key_release, main);
 	mlx_loop_hook(main->mlx, render_next_frame, main);
 	mlx_loop(main->mlx);
@@ -26,7 +26,7 @@ int	ft_exec(t_main *main)
 int	main(int ac, char **av)
 {
 	t_main	main;
-
+ 
 	ft_bzero(&main, sizeof(t_main));
 	main.plane_x = 0;
 	main.plane_y = FOV_HORIZONTAL;
