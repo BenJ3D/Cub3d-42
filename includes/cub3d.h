@@ -40,7 +40,7 @@
 // # define SPEED 1
 
 # ifndef LEGITCHAR
-#  define LEGITCHAR "SNEW01"
+#  define LEGITCHAR "PSNEW01"
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position
@@ -73,7 +73,7 @@
 #  define KEY_A 97
 #  define KEY_Q 113
 #  define KEY_D 100
-#  define DOORS 101 // E
+#  define KEY_DOOR 101 // E
 #  define ESC 65307
 # endif
 
@@ -243,6 +243,7 @@ void		update_velocity(t_main *main);
 int			is_wall_coliding(t_main *game, float x, float y);
 void		change_fov(t_main *game);
 void		look_change(t_main *game);
+void		open_door(t_main *game);
 
 /* Parsing */
 int			ft_start_parsing(t_main *main);

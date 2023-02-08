@@ -46,9 +46,9 @@ void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
 void	init_dda(t_main *main, int x)
 {
 	main->raycast.camera_x = 2 * x / (double)(SCREEN_HEIGHT) - 1;
-	main->raycast.ray_dir.x = main->delta_x + 0.2 + main->plane_x * \
+	main->raycast.ray_dir.x = main->delta_x + main->plane_x * \
 	main->raycast.camera_x;
-	main->raycast.ray_dir.y = main->delta_y + 0.2 + main->plane_y * \
+	main->raycast.ray_dir.y = main->delta_y + main->plane_y * \
 	main->raycast.camera_x;
 	main->raycast.map.x = (int)(main->x);
 	main->raycast.map.y = (int)(main->y);
@@ -87,7 +87,10 @@ void	select_wall_to_put_pixel(t_main *main, int x)
 		(1 - main->raycast.step.y) / 2) / main->raycast.ray_dir.y;
 	if (main->raycast.perp_wall_dist == 0)
 		main->raycast.perp_wall_dist = 0.1;
-	if (main->raycast.side == 1 && main->raycast.map.y < main->y)
+	if (main->gm.map[main->raycast.map.y / CELL_SIZE] \
+	[main->raycast.map.x / CELL_SIZE] == 'P')
+		put_pixel_from_ray(main, &main->gm.img_door, x, -1);
+	else if (main->raycast.side == 1 && main->raycast.map.y < main->y)
 		put_pixel_from_ray(main, &main->gm.img_no, x, -1);
 	else if (main->raycast.side == 1)
 		put_pixel_from_ray(main, &main->gm.img_so, x, -1);

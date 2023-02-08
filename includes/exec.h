@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/08 16:06:13 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 18:00:33 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "struct_parsing.h"
 
 # define CELL_SIZE 64
-# define MAP_CELL_SIZE 4
+# define MAP_CELL_SIZE 10
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024

@@ -31,3 +31,19 @@ void	change_fov(t_main *game)
 		game->fov -= 0.005;
 	game->plane_y = game->fov;
 }
+
+void	open_door(t_main *game)
+{
+	double	i;
+
+	i = 0.2;
+	while (i < 1.9)
+	{
+		if (game->gm.map[(int)(game->y / CELL_SIZE + game->delta_y * i)][(int)(game->x / CELL_SIZE + game->delta_x * i)] == 'P')
+		{
+		game->gm.map[(int)(game->y / CELL_SIZE + game->delta_y * i)][(int)(game->x / CELL_SIZE + game->delta_x * i)] = '0';
+			break;
+		}
+		i += 0.02;
+	}
+}

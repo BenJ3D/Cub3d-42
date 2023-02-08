@@ -101,7 +101,7 @@ void	move_player(t_main *game)
 	if (game->move_tab[0] || game->move_tab[1] || game->move_tab[2] || \
 	game->move_tab[3] || game->move_tab[4] || game->move_tab[5] || \
 	game->move_tab[6] || game->move_tab[7] || game->move_tab[8] || \
-	game->move_tab[9])
+	game->move_tab[9] || game->move_tab[10])
 	{
 		if (game->move_tab[0])
 			move_forward(game);
@@ -119,6 +119,8 @@ void	move_player(t_main *game)
 			look_change(game);
 		if (game->move_tab[8] || game->move_tab[9])
 			change_fov(game);
+		if (game->move_tab[10])
+			open_door(game);
 		render(game, -1);
 	}
 }

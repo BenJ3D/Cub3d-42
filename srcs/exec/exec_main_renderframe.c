@@ -45,7 +45,6 @@ void	render(t_main *main, double i)
 	int x;
 
 	x = 0;
-	put_minimap(main);
 	while (x < SCREEN_WIDTH)
 	{
 		init_dda(main, x);

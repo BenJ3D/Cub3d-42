@@ -36,6 +36,8 @@ int	key_press(int keycode, t_main *main)
 		main->move_tab[8] = 1;
 	if (keycode == KEY_MINUS)
 		main->move_tab[9] = 1;
+	if (keycode == KEY_DOOR)
+		main->move_tab[10] = 1;
 	return (0);
 }
 
@@ -63,5 +65,7 @@ int	key_release(int keycode, t_main *main)
 		main->move_tab[8] = 0;
 	if (keycode == KEY_MINUS)
 		main->move_tab[9] = 0;
+	if (keycode == KEY_DOOR)
+		main->move_tab[10] = 0;
 	return (0);
 }

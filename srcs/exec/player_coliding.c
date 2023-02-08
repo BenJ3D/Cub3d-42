@@ -23,7 +23,14 @@ int	is_wall_coliding(t_main *game, float x, float y)
 	MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == '1' || \
 	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / \
 	CELL_SIZE] == '1' || game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - \
-	MAX_VELOCITY - 1)) / CELL_SIZE] == '1')
+	MAX_VELOCITY - 1)) / CELL_SIZE] == '1' || \
+	game->gm.map[(int)(y / CELL_SIZE)][(int)(x / CELL_SIZE)] == 'P' || \
+	game->gm.map[((int)ceil(y + MAX_VELOCITY + 1)) / \
+	CELL_SIZE][(int)(x / CELL_SIZE)] == 'P' || game->gm.map[((int)ceil(y - \
+	MAX_VELOCITY - 1)) / CELL_SIZE][(int)(x / CELL_SIZE)] == 'P' || \
+	game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x + MAX_VELOCITY + 1)) / \
+	CELL_SIZE] == 'P' || game->gm.map[(int)(y / CELL_SIZE)][((int)ceil(x - \
+	MAX_VELOCITY - 1)) / CELL_SIZE] == 'P')
 		return (1);
 	return (0);
 }
