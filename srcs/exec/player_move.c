@@ -98,9 +98,7 @@ void	move_right(t_main *game)
 
 void	move_player(t_main *game)
 {
-	if (game->mov_t[0] || game->mov_t[1] || game->mov_t[2] || game->mov_t[3] \
-	|| game->mov_t[4] || game->mov_t[5] || game->mov_t[6] || game->mov_t[7] || \
-	game->mov_t[8] || game->mov_t[9] || game->mov_t[10])
+	if (check_mov_t(game) == EXIT_SUCCESS)
 	{
 		if (game->mov_t[0])
 			move_forward(game);

@@ -197,7 +197,7 @@ typedef struct s_main
 	float		plane_x;
 	float		plane_y;
 	double		up_down;
-	t_raycast	raycast;
+	t_raycast	cast;
 	int			mov_t[10];
 }	t_main;
 
@@ -227,6 +227,7 @@ int			translucid_minimap(int color);
 void		put_minimap(t_main *main);
 void		render(t_main *main, double i);
 int			render_next_frame(t_main *main);
+int			check_mov_t(t_main *main);
 
 /* exec player */
 void		move_player(t_main *game);

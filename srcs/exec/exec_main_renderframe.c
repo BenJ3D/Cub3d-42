@@ -14,35 +14,35 @@
 
 void	select_step(t_main *main)
 {
-	if (main->raycast.ray_dir.x < 0)
+	if (main->cast.ray_dir.x < 0)
 	{
-		main->raycast.step.x = -1;
-		main->raycast.side_dist.x = (main->x - main->raycast.map.x) \
-		* main->raycast.delta_dist.x;
+		main->cast.step.x = -1;
+		main->cast.side_dist.x = (main->x - main->cast.map.x) \
+		* main->cast.delta_dist.x;
 	}
 	else
 	{
-		main->raycast.step.x = 1;
-		main->raycast.side_dist.x = (main->raycast.map.x + 1.0 - main->x) \
-		* main->raycast.delta_dist.x;
+		main->cast.step.x = 1;
+		main->cast.side_dist.x = (main->cast.map.x + 1.0 - main->x) \
+		* main->cast.delta_dist.x;
 	}
-	if (main->raycast.ray_dir.y < 0)
+	if (main->cast.ray_dir.y < 0)
 	{
-		main->raycast.step.y = -1;
-		main->raycast.side_dist.y = (main->y - main->raycast.map.y) \
-		* main->raycast.delta_dist.y;
+		main->cast.step.y = -1;
+		main->cast.side_dist.y = (main->y - main->cast.map.y) \
+		* main->cast.delta_dist.y;
 	}
 	else
 	{
-		main->raycast.step.y = 1;
-		main->raycast.side_dist.y = (main->raycast.map.y + 1.0 - main->y) \
-		* main->raycast.delta_dist.y;
+		main->cast.step.y = 1;
+		main->cast.side_dist.y = (main->cast.map.y + 1.0 - main->y) \
+		* main->cast.delta_dist.y;
 	}
 }
 
 void	render(t_main *main, double i)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (x < SCREEN_WIDTH)

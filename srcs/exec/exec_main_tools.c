@@ -12,6 +12,15 @@
 
 #include "../../includes/cub3d.h"
 
+int	check_mov_t(t_main *game)
+{
+	if (game->mov_t[0] || game->mov_t[1] || game->mov_t[2] || game->mov_t[3] \
+	|| game->mov_t[4] || game->mov_t[5] || game->mov_t[6] || game->mov_t[7] || \
+	game->mov_t[8] || game->mov_t[9] || game->mov_t[10])
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
 int	calc_mini_pix(t_i_vector *vect, t_i_vector map, t_main *main)
 {
 	vect->x = map.y % ((main->ps.map.maxh - 1) * MAP_CELL_SIZE);

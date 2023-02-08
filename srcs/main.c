@@ -16,7 +16,7 @@ int	ft_exec(t_main *game)
 {
 	exec_main(game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, &key_press, game);
-	mlx_hook(game->mlx_win, 17, 0L, &stop_mlx, game); // SEGV et LEAKS si ft free in stop mlx car game nest pas/plus valid
+	mlx_hook(game->mlx_win, 17, 0L, &stop_mlx, game);
 	mlx_hook(game->mlx_win, 3, 1L << 1, &key_release, game);
 	mlx_loop_hook(game->mlx, render_next_frame, game);
 	mlx_loop(game->mlx);
