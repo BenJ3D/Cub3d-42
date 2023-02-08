@@ -15,25 +15,25 @@
 void	look_up(t_main *game)
 {
 	if (game->up_down < 3)
-		game->up_down += 0.03;
+		game->up_down += LOOK_UP_DOWN;
 }
 
 void	look_down(t_main *game)
 {
 	if (game->up_down > -2)
-		game->up_down -= 0.03;
+		game->up_down -= LOOK_UP_DOWN;
 }
 
 void	change_fov(t_main *game)
 {
-	game->plane_x = 0;
-	game->delta_x = -1;
+	game->plane_x = game->gm.start_rot.x;
+	game->delta_x = 1;
 	game->delta_y = 0;
 	if (game->mov_t[8] && game->fov < 0.80)
 		game->fov += 0.005;
 	if (game->mov_t[9] && game->fov > 0.30)
 		game->fov -= 0.005;
-	game->plane_y = game->fov;
+	game->plane_y = game->gm.start_rot.x + game->fov;
 }
 
 void	open_door(t_main *game)

@@ -113,9 +113,9 @@ void	move_player(t_main *game)
 		if (game->mov_t[4])
 			rotate_right(game);
 		if (game->mov_t[6])
-			look_down(game);
-		if (game->mov_t[7])
 			look_up(game);
+		if (game->mov_t[7])
+			look_down(game);
 		if (game->mov_t[8] || game->mov_t[9])
 			change_fov(game);
 		if (game->mov_t[10])

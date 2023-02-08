@@ -198,7 +198,7 @@ typedef struct s_main
 	float		plane_y;
 	double		up_down;
 	t_raycast	cast;
-	int			mov_t[10];
+	int			mov_t[11];
 }	t_main;
 
 /* exec utils */

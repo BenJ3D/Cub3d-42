@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/08 18:00:33 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 19:54:02 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 10
+# define LOOK_UP_DOWN 0.03
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024
