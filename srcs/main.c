@@ -26,7 +26,7 @@ int	ft_exec(t_main *game)
 int	main(int ac, char **av)
 {
 	t_main	main;
- 
+
 	ft_bzero(&main, sizeof(t_main));
 	main.plane_x = 0;
 	main.plane_y = FOV_HORIZONTAL;

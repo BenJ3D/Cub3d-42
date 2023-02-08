@@ -40,7 +40,6 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->mini_map.img);
 	if (main->img.img)
 		mlx_destroy_image(main->mlx, main->img.img);
-	//TODO: Destroy Texture reflet anime ?
 }
 
 void	ft_free_all(t_main *main)
@@ -58,7 +57,6 @@ void	ft_free_all(t_main *main)
 		mlx_destroy_display(main->mlx);
 		free(main->mlx);
 	}
-	//destroy img mlx / mlx
 }
 
 /**
