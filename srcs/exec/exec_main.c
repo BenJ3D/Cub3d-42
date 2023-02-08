@@ -23,8 +23,8 @@ int	stop_mlx(int keycode, t_main *main)
 
 void	exec_main(t_main *game)
 {
-	ft_bzero(game->move_tab, 11);
-	game->move_tab[10] = 0;
+	ft_bzero(game->mov_t, 11);
+	game->mov_t[10] = 0;
 	game->x = game->gm.playstart.x * CELL_SIZE + 32;
 	game->y = game->gm.playstart.y * CELL_SIZE + 32;
 	game->delta_x = game->gm.start_rot.x;

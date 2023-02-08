@@ -98,28 +98,29 @@ void	move_right(t_main *game)
 
 void	move_player(t_main *game)
 {
-	if (game->move_tab[0] || game->move_tab[1] || game->move_tab[2] || \
-	game->move_tab[3] || game->move_tab[4] || game->move_tab[5] || \
-	game->move_tab[6] || game->move_tab[7] || game->move_tab[8] || \
-	game->move_tab[9] || game->move_tab[10])
+	if (game->mov_t[0] || game->mov_t[1] || game->mov_t[2] || game->mov_t[3] \
+	|| game->mov_t[4] || game->mov_t[5] || game->mov_t[6] || game->mov_t[7] || \
+	game->mov_t[8] || game->mov_t[9] || game->mov_t[10])
 	{
-		if (game->move_tab[0])
+		if (game->mov_t[0])
 			move_forward(game);
-		if (game->move_tab[1])
+		if (game->mov_t[1])
 			move_backward(game);
-		if (game->move_tab[2])
+		if (game->mov_t[2])
 			move_left(game);
-		if (game->move_tab[3])
+		if (game->mov_t[3])
 			move_right(game);
-		if (game->move_tab[5])
+		if (game->mov_t[5])
 			rotate_left(game);
-		if (game->move_tab[4])
+		if (game->mov_t[4])
 			rotate_right(game);
-		if (game->move_tab[6] || game->move_tab[7])
-			look_change(game);
-		if (game->move_tab[8] || game->move_tab[9])
+		if (game->mov_t[6])
+			look_down(game);
+		if (game->mov_t[7])
+			look_up(game);
+		if (game->mov_t[8] || game->mov_t[9])
 			change_fov(game);
-		if (game->move_tab[10])
+		if (game->mov_t[10])
 			open_door(game);
 		render(game, -1);
 	}

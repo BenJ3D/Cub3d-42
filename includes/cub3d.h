@@ -198,7 +198,7 @@ typedef struct s_main
 	float		plane_y;
 	double		up_down;
 	t_raycast	raycast;
-	int			move_tab[10];
+	int			mov_t[10];
 }	t_main;
 
 /* exec utils */
@@ -242,7 +242,8 @@ void		update_velocity(t_main *main);
 
 int			is_wall_coliding(t_main *game, float x, float y);
 void		change_fov(t_main *game);
-void		look_change(t_main *game);
+void		look_up(t_main *game);
+void		look_down(t_main *game);
 void		open_door(t_main *game);
 
 /* Parsing */

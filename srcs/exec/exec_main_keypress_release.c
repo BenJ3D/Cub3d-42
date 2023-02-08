@@ -17,27 +17,27 @@ int	key_press(int keycode, t_main *main)
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
 	if (keycode == KEY_W)
-		main->move_tab[0] = 1;
+		main->mov_t[0] = 1;
 	if (keycode == KEY_S)
-		main->move_tab[1] = 1;
+		main->mov_t[1] = 1;
 	if (keycode == KEY_D)
-		main->move_tab[2] = 1;
+		main->mov_t[2] = 1;
 	if (keycode == KEY_A)
-		main->move_tab[3] = 1;
+		main->mov_t[3] = 1;
 	if (keycode == KEY_RIGHT)
-		main->move_tab[4] = 1;
+		main->mov_t[4] = 1;
 	if (keycode == KEY_LEFT)
-		main->move_tab[5] = 1;
+		main->mov_t[5] = 1;
 	if (keycode == KEY_UP)
-		main->move_tab[6] = 1;
+		main->mov_t[6] = 1;
 	if (keycode == KEY_DOWN)
-		main->move_tab[7] = 1;
+		main->mov_t[7] = 1;
 	if (keycode == KEY_PLUS)
-		main->move_tab[8] = 1;
+		main->mov_t[8] = 1;
 	if (keycode == KEY_MINUS)
-		main->move_tab[9] = 1;
+		main->mov_t[9] = 1;
 	if (keycode == KEY_DOOR)
-		main->move_tab[10] = 1;
+		main->mov_t[10] = 1;
 	return (0);
 }
 
@@ -46,26 +46,26 @@ int	key_release(int keycode, t_main *main)
 	if (keycode == ESC)
 		ft_free_all_and_exit(main);
 	if (keycode == KEY_W)
-		main->move_tab[0] = 0;
+		main->mov_t[0] = 0;
 	if (keycode == KEY_S)
-		main->move_tab[1] = 0;
+		main->mov_t[1] = 0;
 	if (keycode == KEY_D)
-		main->move_tab[2] = 0;
+		main->mov_t[2] = 0;
 	if (keycode == KEY_A)
-		main->move_tab[3] = 0;
+		main->mov_t[3] = 0;
 	if (keycode == KEY_RIGHT)
-		main->move_tab[4] = 0;
+		main->mov_t[4] = 0;
 	if (keycode == KEY_LEFT)
-		main->move_tab[5] = 0;
+		main->mov_t[5] = 0;
 	if (keycode == KEY_UP)
-		main->move_tab[6] = 0;
+		main->mov_t[6] = 0;
 	if (keycode == KEY_DOWN)
-		main->move_tab[7] = 0;
+		main->mov_t[7] = 0;
 	if (keycode == KEY_PLUS)
-		main->move_tab[8] = 0;
+		main->mov_t[8] = 0;
 	if (keycode == KEY_MINUS)
-		main->move_tab[9] = 0;
+		main->mov_t[9] = 0;
 	if (keycode == KEY_DOOR)
-		main->move_tab[10] = 0;
+		main->mov_t[10] = 0;
 	return (0);
 }

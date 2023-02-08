@@ -14,8 +14,8 @@
 
 void	update_velocity(t_main *main)
 {
-	if (main->move_tab[0] == 1 || main->move_tab[1] == 1 \
-	|| main->move_tab[2] == 1 || main->move_tab[3] == 1)
+	if (main->mov_t[0] == 1 || main->mov_t[1] == 1 \
+	|| main->mov_t[2] == 1 || main->mov_t[3] == 1)
 	{
 		if (main->velocity < 0.1f)
 			main->velocity = 0.1f;

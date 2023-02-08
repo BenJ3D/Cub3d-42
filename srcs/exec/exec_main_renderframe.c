@@ -66,8 +66,25 @@ void	render(t_main *main, double i)
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
 }
 
+void	mouse_move(t_main *main)
+{
+	t_i_vector	mouse;
+
+	mlx_mouse_get_pos(main->mlx, main->mlx_win, &mouse.x, &mouse.y);
+	if (mouse.x < SCREEN_WIDTH / 4)
+		rotate_left(main);
+	else if (mouse.x > SCREEN_WIDTH - SCREEN_WIDTH / 4)
+		rotate_right(main);
+	if (mouse.y < SCREEN_HEIGHT / 4)
+		look_up(main);
+	else if (mouse.y > SCREEN_HEIGHT - SCREEN_HEIGHT / 4)
+		look_down(main);
+	render(main, 0);
+}
+
 int	render_next_frame(t_main *main)
 {
+	mouse_move(main);
 	update_velocity(main);
 	move_player(main);
 	return (1);
