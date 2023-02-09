@@ -31,6 +31,7 @@
 # include <string.h>
 # include <errno.h>
 
+
 /* Game Settings */
 // # define SCREEN_HEIGHT 1080
 // # define SCREEN_WIDTH 1920
@@ -174,6 +175,7 @@ typedef struct s_game
 	t_data			img_we;
 	t_data			img_ea;
 	t_data			img_door;
+    t_data          img_reflet[6];
 	int				cell_size;
 	t_vector		playstart;
 	t_d_vector		start_rot;

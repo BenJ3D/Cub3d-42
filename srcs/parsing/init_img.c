@@ -47,6 +47,52 @@ void	ft_make_xmp_to_img(t_main *main)
 	ft_make_bonus_img(main);
 }
 
+void    ft_make_xmp_refletanim(t_main *main)
+{
+    main->gm.img_reflet[0].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame1.xpm", &main->gm.img_reflet[0].width, &main->gm.img_reflet[0].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[0].img, &main->gm.img_reflet[0].bpp, &main->gm.img_reflet[0].line_length, &main->gm.img_reflet[0].end);
+    main->gm.img_reflet[0].bpp /= 8;
+
+    main->gm.img_reflet[1].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame2.xpm", &main->gm.img_reflet[1].width, &main->gm.img_reflet[1].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[1].img, &main->gm.img_reflet[1].bpp, &main->gm.img_reflet[1].line_length, &main->gm.img_reflet[1].end);
+    main->gm.img_reflet[1].bpp /= 8;
+	
+    main->gm.img_reflet[2].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame3.xpm", &main->gm.img_reflet[2].width, &main->gm.img_reflet[2].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[2].img, &main->gm.img_reflet[2].bpp, &main->gm.img_reflet[2].line_length, &main->gm.img_reflet[2].end);
+    main->gm.img_reflet[2].bpp /= 8;
+
+    main->gm.img_reflet[3].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame4.xpm", &main->gm.img_reflet[3].width, &main->gm.img_reflet[3].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[3].img, &main->gm.img_reflet[3].bpp, &main->gm.img_reflet[3].line_length, &main->gm.img_reflet[3].end);
+    main->gm.img_reflet[3].bpp /= 8;
+
+    main->gm.img_reflet[4].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame5.xpm", &main->gm.img_reflet[4].width, &main->gm.img_reflet[4].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[4].img, &main->gm.img_reflet[4].bpp, &main->gm.img_reflet[4].line_length, &main->gm.img_reflet[4].end);
+    main->gm.img_reflet[4].bpp /= 8;
+
+    main->gm.img_reflet[5].img = mlx_xpm_file_to_image(main->mlx, "./assets/textures/refletAnime/Reflet_frame6.xpm", &main->gm.img_reflet[5].width, &main->gm.img_reflet[5].height);
+    main->gm.img_ea.addr = mlx_get_data_addr(main->gm.img_reflet[5].img, &main->gm.img_reflet[5].bpp, &main->gm.img_reflet[5].line_length, &main->gm.img_reflet[5].end);
+    main->gm.img_reflet[5].bpp /= 8;
+
+}
+
+void    ft_init_anim_img(t_main *main)
+{
+	// mais cest pas ca je veux faire xD
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame1.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame2.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame3.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame4.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame5.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+    // if (ft_pars_check_type_file("./assets/textures/refletAnime/Reflet_frame6.xpm", IMGEXT))
+    //     ft_err_display_and_exit(ERR_IMGBADEXTENSION, main);
+	ft_make_xmp_refletanim(main);
+}
+
 void	ft_init_mlx_img(t_main *main)
 {
 	if (ft_pars_check_type_file(main->ps.txtpath.path_ea, IMGEXT))
@@ -67,5 +113,6 @@ void	ft_init_mlx_img(t_main *main)
 		ft_err_display_and_exit(ERR_TXTMISSING_NO, main);
 	if (ft_pars_openfile(IMG_DOOR) < 0)
 		ft_err_display_and_exit(ERR_MLX_FAILINIT, main);
+    ft_init_anim_img(main);
 	ft_make_xmp_to_img(main);
 }
