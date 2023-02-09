@@ -64,6 +64,9 @@ void	render(t_main *main, double i)
 		+ 24 + main->delta_y * i), 0x00F53F);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
+	main->cast.a_time++;
+	if (main->cast.a_time >= 6)
+		main->cast.a_time = 0;
 }
 
 void	mouse_move(t_main *main)

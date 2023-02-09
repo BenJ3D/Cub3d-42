@@ -44,4 +44,5 @@ void	exec_main(t_main *game)
 	game->fov = FOV_HORIZONTAL;
 	draw_minimap(game);
 	render(game, -1);
+	game->cast.a_time = 0;
 }

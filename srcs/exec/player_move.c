@@ -120,6 +120,7 @@ void	move_player(t_main *game)
 			change_fov(game);
 		if (game->mov_t[10])
 			open_door(game);
-		render(game, -1);
+		if (BOOL == 0)
+			render(game, -1);
 	}
 }

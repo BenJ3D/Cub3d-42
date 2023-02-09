@@ -12,25 +12,39 @@
 
 #include "../../includes/cub3d.h"
 
-void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
+void	shiny_texture(t_main *main, t_data *img, int new_x, int j)
 {
 	int	*new_addr;
+	int	*shiny_addr;
 
+	if (BOOL == 1)
+	{
+		shiny_addr = (int *)main->gm.img_reflet[main->cast.a_time].addr;
+		main->cast.s_tex.y = (int)main->cast.s_tex_pos & \
+		(main->gm.img_reflet[main->cast.a_time].height - 1);
+		main->cast.s_tex_pos += main->cast.s_f_step;
+	}
 	new_addr = (int *)img->addr;
-	init_put_pixel_ray(main, img);
+	main->cast.tex.y = (int)main->cast.tex_pos & (img->height - 1);
+	main->cast.tex_pos += main->cast.f_step;
+	if (BOOL == 1 && shiny_addr[main->cast.s_tex.y * \
+	main->gm.img_reflet[main->cast.a_time].height + main->cast.s_tex.x] > 1000)
+		my_mlx_pixel_put(&main->img, new_x, j, 0xFFFFFF);
+	else if (main->cast.side == 1)
+		my_mlx_pixel_put(&main->img, new_x, j,\
+		new_addr[main->cast.tex.y * img->height + main->cast.tex.x]);
+	else
+		my_mlx_pixel_put(&main->img, new_x, j, \
+		new_addr[main->cast.tex.y * img->height + main->cast.tex.x]);
+}
+
+void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
+{
+	init_put_pixel_ray(main, img, &main->gm.img_reflet[main->cast.a_time]);
 	while (++j < SCREEN_HEIGHT)
 	{
 		if (j >= main->cast.draw_start && j <= main->cast.draw_end)
-		{
-			main->cast.tex.y = (int)main->cast.tex_pos & (img->height - 1);
-			main->cast.tex_pos += main->cast.f_step;
-			if (main->cast.side == 1)
-				my_mlx_pixel_put(&main->img, new_x, j, \
-				new_addr[main->cast.tex.y * img->height + main->cast.tex.x]);
-			else
-				my_mlx_pixel_put(&main->img, new_x, j, \
-				new_addr[main->cast.tex.y * img->height + main->cast.tex.x]);
-		}
+			shiny_texture(main,img,new_x, j);
 		else if (j < SCREEN_HEIGHT / 2 * main->up_down)
 			my_mlx_pixel_put(&main->img, new_x, j, \
 			colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));

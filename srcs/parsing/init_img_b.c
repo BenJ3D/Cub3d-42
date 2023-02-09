@@ -32,6 +32,7 @@ void	ft_make_xmp_to_img_reflet(t_main *main)
 	|| !main->gm.img_reflet[3].img || !main->gm.img_reflet[4].img \
 	|| !main->gm.img_reflet[5].img)
 		ft_err_display_and_exit(ERR_MLX_FAILINIT, main);
+	ft_get_addr_img_reflet(main);
 }
 
 void	ft_get_addr_img_reflet(t_main *main)
@@ -54,5 +55,4 @@ void	ft_get_addr_img_reflet(t_main *main)
 	main->gm.img_reflet[5].addr = \
 	mlx_get_data_addr(main->gm.img_reflet[5].img, &main->gm.img_reflet[5].bpp, \
 	&main->gm.img_reflet[5].line_length, &main->gm.img_reflet[5].end);
-	ft_get_addr_img_reflet(main);
 }

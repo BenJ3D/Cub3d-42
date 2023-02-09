@@ -117,6 +117,7 @@ typedef struct s_i_vector
 }	t_i_vector;
 
 typedef struct s_raycast {
+	int			a_time;
 	int			x;
 	double		camera_x;
 	t_d_vector	ray_dir;
@@ -133,9 +134,12 @@ typedef struct s_raycast {
 	int			draw_end;
 	float		wallx;
 	t_i_vector	tex;
+	t_i_vector	s_tex;
 	float		tex_step;
 	float		tex_pos;
+	float		s_tex_pos;
 	float		f_step;
+	float		s_f_step;
 	double		fov;
 }	t_raycast;
 
@@ -216,7 +220,7 @@ int			stop_mlx(t_main *main);
 
 int			colour_to_nb(int r, int g, int b);
 void		draw_minimap(t_main *game);
-void		init_put_pixel_ray(t_main *main, t_data *img);
+void		init_put_pixel_ray(t_main *main, t_data *img, t_data *shine);
 void		put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j);
 void		init_dda(t_main *main, int x);
 void		select_step(t_main *main);

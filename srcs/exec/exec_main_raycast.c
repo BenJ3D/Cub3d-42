@@ -53,7 +53,7 @@ int	raycast_to_wall(t_main *main)
 	return (EXIT_SUCCESS);
 }
 
-void	init_put_pixel_ray(t_main *main, t_data *img)
+void	init_put_pixel_ray(t_main *main, t_data *img, t_data *shine)
 {
 	if (main->cast.side == 0)
 		main->cast.wallx = main->y / CELL_SIZE + \
@@ -62,11 +62,17 @@ void	init_put_pixel_ray(t_main *main, t_data *img)
 		main->cast.wallx = main->x / CELL_SIZE + \
 		main->cast.perp_wall_dist / CELL_SIZE * main->cast.ray_dir.x;
 	main->cast.wallx -= floorf(main->cast.wallx);
+	if (BOOL == 1)
+	{
+		main->cast.s_tex.x = (int)(main->cast.wallx * shine->height);
+		main->cast.s_tex.x = shine->width - main->cast.s_tex.x - 1;
+		main->cast.s_f_step = 1.0 * shine->height / main->cast.line_height;
+		main->cast.s_tex_pos = (main->cast.draw_start - SCREEN_HEIGHT / 2 * \
+		main->up_down + main->cast.line_height / 2) * main->cast.s_f_step;
+		main->cast.s_tex.y = (int)main->cast.s_tex_pos & (shine->height - 1);
+	}
 	main->cast.tex.x = (int)(main->cast.wallx * img->height);
-	if (main->cast.side == 0 && main->cast.ray_dir.x > 0)
-		main->cast.tex.x = img->width - main->cast.tex.x - 1;
-	if (main->cast.side == 1 && main->cast.ray_dir.y < 0)
-		main->cast.tex.x = img->width - main->cast.tex.x - 1;
+	main->cast.tex.x = img->width - main->cast.tex.x - 1;
 	main->cast.f_step = 1.0 * img->height / main->cast.line_height;
 	main->cast.tex_pos = (main->cast.draw_start - SCREEN_HEIGHT / 2 * \
 	main->up_down + main->cast.line_height / 2) * main->cast.f_step;
