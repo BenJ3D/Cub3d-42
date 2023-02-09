@@ -31,6 +31,7 @@
 # include <string.h>
 # include <errno.h>
 
+
 /* Game Settings */
 // # define SCREEN_HEIGHT 1080
 // # define SCREEN_WIDTH 1920
@@ -40,7 +41,7 @@
 // # define SPEED 1
 
 # ifndef LEGITCHAR
-#  define LEGITCHAR "PSNEW01"
+#  define LEGITCHAR "SNEW01"
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position
@@ -172,6 +173,7 @@ typedef struct s_game
 	t_data			img_we;
 	t_data			img_ea;
 	t_data			img_door;
+    t_data          img_reflet[6];
 	int				cell_size;
 	t_vector		playstart;
 	t_d_vector		start_rot;
