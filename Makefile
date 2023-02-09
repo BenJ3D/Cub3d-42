@@ -10,16 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-#	Si probleme compile mlx (genre "/usr/bin/ld: cannot find -lz")
-#	sous ubuntu/debian, try install :
-#	sudo apt-get install gcc make xorg libxext-dev libbsd-dev libz-dev balbla
-
-
-# $< "include one prerequisite"
-# $@ "include target"
-# $^ "include the full list of prerequisites)"
-# SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 
@@ -98,6 +88,21 @@ $(NAME): $(OBJS)
 
 $(NAME_BONUS): $(OBJS_B)
 	$(CC) $(OBJS_B) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME_BONUS)
+	@echo "$(GREEN)HAVE FUN ! do ./$@ map/<map>$(RST)"
+	@echo "$(N_PURPLE) ┌───────────────────────────────────────────────────────────────────────┐$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)                                                                     $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)                                                                     $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)        ██████╗██╗   ██╗██████╗ ███████╗    ██████╗ ██████╗          $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)       ██╔════╝██║   ██║██╔══██╗██╔════╝    ╚════██╗██╔══██╗         $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)       ██║     ██║   ██║██████╔╝█████╗       █████╔╝██║  ██║         $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)       ██║     ██║   ██║██╔══██╗██╔══╝       ╚═══██╗██║  ██║         $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)       ╚██████╗╚██████╔╝██████╔╝███████╗    ██████╔╝██████╔╝         $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)        ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝    ╚═════╝ ╚═════╝    42    $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)                                                                     $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)                                                                     $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │ $(PURPLE)                                                                     $(RST)$(N_PURPLE) │$(RST)"
+	@echo "$(N_PURPLE) │   By Abucia & Bducrocq                                                │$(RST)"
+	@echo "$(N_PURPLE) └───────────────────────────────────────────────────────────────────────┘$(RST)"
 
 %.o: %.c ${INCLUDES} Makefile ./libs/libft/Makefile $(HEADER)
 	${CC} ${CFLAGS} -Imlx -Ift -c $< -o $@;
@@ -124,3 +129,14 @@ re:	fclean
 	${MAKE} -C $(LIBFT_PATH) re -j
 	${MAKE} -C $(GNL_PATH) re -j
 	${MAKE} -C ./ norm
+
+#COLORS
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+CYAN = \033[1;36m
+RST = \033[0m
+PURPLE = \033[5;35m
+N_PURPLE = \033[1;35m
+
+.PHONY: bonus all clean fclean re
