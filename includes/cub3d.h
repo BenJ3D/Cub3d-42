@@ -33,8 +33,10 @@
 
 # ifndef BONUS
 #  define LEGITCHAR "SNEW01"
+#  define BOOL 0
 # else
 #  define LEGITCHAR "PSNEW01"
+#  define BOOL 1
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position

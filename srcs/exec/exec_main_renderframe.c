@@ -84,7 +84,8 @@ void	mouse_move(t_main *main)
 
 int	render_next_frame(t_main *main)
 {
-	mouse_move(main);
+	if (BOOL == 1)
+		mouse_move(main);
 	update_velocity(main);
 	move_player(main);
 	return (1);

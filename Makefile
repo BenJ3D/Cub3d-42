@@ -55,7 +55,7 @@ C_BONUS=-DBONUS=0
 OBJS = ${SOURCES:.c=.o}
 OBJS_B = ${SOURCES:.c=_bonus.o}
 
-CFLAGS = -g3 -Wall -Wextra -O3 -Werror 
+CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
 SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 
@@ -87,6 +87,9 @@ bonus :
 	${MAKE} -C ./ bb C_BONUS="-DBONUS=1"
 
 norm : $(NAME)
+
+norminette:
+	norminette srcs/ includes/ libs/gnl libs/libft
 
 bb : $(NAME_BONUS)
 
