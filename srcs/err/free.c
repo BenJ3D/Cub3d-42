@@ -26,6 +26,8 @@ void	ft_free_tab_char(char **tab)
 
 void	ft_destroy_all_img(t_main *main)
 {
+	int	i;
+
 	if (main->gm.img_ea.img)
 		mlx_destroy_image(main->mlx, main->gm.img_ea.img);
 	if (main->gm.img_we.img)
@@ -40,6 +42,14 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->mini_map.img);
 	if (main->img.img)
 		mlx_destroy_image(main->mlx, main->img.img);
+	i = 0;
+	while (i < 6)
+	{
+		if (main->gm.img_reflet[i].img)
+			mlx_destroy_image(main->mlx, main->gm.img_reflet[i].img);
+		i++;
+	}
+	
 }
 
 void	ft_free_all(t_main *main)

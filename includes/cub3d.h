@@ -60,6 +60,12 @@
 # define PARAM_F "F"		//floor color
 
 # define IMG_DOOR "./assets/textures/door/door.xpm"
+# define FRAME_ANIM0 "./assets/textures/refletAnime/Reflet_frame1.xpm"
+# define FRAME_ANIM1 "./assets/textures/refletAnime/Reflet_frame2.xpm"
+# define FRAME_ANIM2 "./assets/textures/refletAnime/Reflet_frame3.xpm"
+# define FRAME_ANIM3 "./assets/textures/refletAnime/Reflet_frame4.xpm"
+# define FRAME_ANIM4 "./assets/textures/refletAnime/Reflet_frame5.xpm"
+# define FRAME_ANIM5 "./assets/textures/refletAnime/Reflet_frame6.xpm"
 
 /* Linux Keys */
 # ifdef __linux__
@@ -264,6 +270,11 @@ int			ft_set_parameters_with_file(t_main *main);
 void		ft_pars_headerfile(char *buf, t_main *main);
 void		ft_pars_check_range_rgb(t_vector vec, t_main *main);
 void		ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main);
+
+void		ft_divide_bpp(t_main *main);
+void		ft_make_xmp_to_img(t_main *main);
+void		ft_get_addr_img(t_main *main);
+void		ft_init_mlx_img(t_main *main);
 
 /* parsing map */
 int			ft_pars_map(char *buf, t_main *main);

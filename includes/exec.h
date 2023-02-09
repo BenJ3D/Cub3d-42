@@ -36,7 +36,7 @@
 # endif
 
 # ifndef MAX_VELOCITY
-#  define MAX_VELOCITY 4
+#  define MAX_VELOCITY 6
 # endif
 
 # ifndef ROT_SPEED

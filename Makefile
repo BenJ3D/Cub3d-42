@@ -97,7 +97,7 @@ fclean: clean
 	$(MAKE) fclean -C $(LIBFT_PATH)
 	$(MAKE) fclean -C $(GNL_PATH)
 re:	fclean
-	${MAKE} -C $(MLX_PATH) re -j
+	${MAKE} -C $(MLX_PATH) re
 	${MAKE} -C $(LIBFT_PATH) re -j
 	${MAKE} -C $(GNL_PATH) re -j
 	${MAKE} -C ./ norm
