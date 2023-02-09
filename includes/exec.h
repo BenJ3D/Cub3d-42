@@ -28,11 +28,11 @@
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1400
+#  define SCREEN_HEIGHT 1600
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1800
+#  define SCREEN_WIDTH 1600
 # endif
 
 # ifndef MAX_VELOCITY

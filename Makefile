@@ -55,7 +55,7 @@ C_BONUS=-DBONUS=0
 OBJS = ${SOURCES:.c=.o}
 OBJS_B = ${SOURCES:.c=_bonus.o}
 
-CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
+CFLAGS = -g3 -Wall -Wextra -O3 -Werror 
 SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 
@@ -108,8 +108,8 @@ clean:
 	$(MAKE) clean -C $(GNL_PATH)
 	rm -rf $(OBJS)
 	rm -rf $(OBJS_B)
-	rm $(NAME_BONUS)
-	rm $(NAME)
+	rm -rf $(NAME_BONUS)
+	rm -rf $(NAME)
 
 fclean: clean
 	rm -rf $(NAME)
