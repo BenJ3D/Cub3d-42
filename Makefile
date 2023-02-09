@@ -56,7 +56,7 @@ OBJS = ${SOURCES:.c=.o}
 OBJS_B = ${SOURCES:.c=_bonus.o}
 
 CFLAGS = -g3 -Wall -Wextra -O3 -Werror 
-SANITIZE = #-fsanitize=address
+SANITIZE = -fsanitize=address
 CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
@@ -120,7 +120,7 @@ fclean: clean
 	$(MAKE) fclean -C $(GNL_PATH)
 
 re:	fclean
-	${MAKE} -C $(MLX_PATH) re -j
+	${MAKE} -C $(MLX_PATH) re
 	${MAKE} -C $(LIBFT_PATH) re -j
 	${MAKE} -C $(GNL_PATH) re -j
 	${MAKE} -C ./ norm

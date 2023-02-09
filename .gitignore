@@ -56,3 +56,5 @@ dkms.conf
 .idea/workspace.xml
 .idea/shelf/Uncommitted_changes_before_Update_at_2_9_23_5_45_PM_[Changes]/shelved.patch
 cub3d_bonus
+libs/mlx_linux/test/mlx-test
+.vscode/*
