@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2023/02/08 19:54:02 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 21:22:35 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@
 
 # ifndef COEF_DECELERATION
 #  define COEF_DECELERATION 0.94
-# endif
-
-# ifndef BONUS
-#  define BONUS 0
 # endif
 
 #endif
