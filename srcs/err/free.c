@@ -49,7 +49,6 @@ void	ft_destroy_all_img(t_main *main)
 			mlx_destroy_image(main->mlx, main->gm.img_reflet[i].img);
 		i++;
 	}
-	
 }
 
 void	ft_free_all(t_main *main)

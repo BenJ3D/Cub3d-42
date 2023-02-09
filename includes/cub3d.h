@@ -31,15 +31,6 @@
 # include <string.h>
 # include <errno.h>
 
-
-/* Game Settings */
-// # define SCREEN_HEIGHT 1080
-// # define SCREEN_WIDTH 1920
-// # define ROTATION_SPEED 0.04
-// # define ONE_DEGREE_RAD 0.00116355333
-// # define BLOCK_SIZE 32
-// # define SPEED 1
-
 # ifndef BONUS
 #  define LEGITCHAR "SNEW01"
 # else
@@ -181,7 +172,7 @@ typedef struct s_game
 	t_data			img_we;
 	t_data			img_ea;
 	t_data			img_door;
-    t_data          img_reflet[6];
+	t_data			img_reflet[6];
 	int				cell_size;
 	t_vector		playstart;
 	t_d_vector		start_rot;
@@ -274,9 +265,13 @@ void		ft_pars_check_range_rgb(t_vector vec, t_main *main);
 void		ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main);
 
 void		ft_divide_bpp(t_main *main);
-void		ft_make_xmp_to_img(t_main *main);
 void		ft_get_addr_img(t_main *main);
 void		ft_init_mlx_img(t_main *main);
+
+void		ft_make_xmp_to_img_reflet(t_main *main);
+void		ft_get_addr_img_reflet(t_main *main);
+void		ft_init_mlx_img_next_step(t_main *main);
+void		ft_make_xmp_to_img(t_main *main);
 
 /* parsing map */
 int			ft_pars_map(char *buf, t_main *main);
@@ -286,7 +281,6 @@ void		ft_pars_check_player_pos(t_main *main);
 char		*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main);
 
 /* init mlx */
-void		ft_init_mlx_img(t_main *main);
 
 /* libft custom */
 void		*ft_calloc_cub(size_t count, size_t size, t_main *main);
