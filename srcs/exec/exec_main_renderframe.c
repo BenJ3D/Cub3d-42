@@ -40,6 +40,20 @@ void	select_step(t_main *main)
 	}
 }
 
+static void	manage_animation(t_main *main)
+{
+	if (main->cast.a_time == 6)
+	{
+		if (++main->cast.time_h >= ANIMATION_TIME)
+		{
+			main->cast.a_time = 0;
+			main->cast.time_h = 0;
+		}
+	}
+	else
+		main->cast.a_time++;
+}
+
 void	render(t_main *main, double i)
 {
 	int	x;
@@ -64,9 +78,7 @@ void	render(t_main *main, double i)
 		+ 24 + main->delta_y * i), 0x00F53F);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
-	main->cast.a_time++;
-	if (main->cast.a_time >= 6)
-		main->cast.a_time = 0;
+	manage_animation(main);
 }
 
 void	mouse_move(t_main *main)

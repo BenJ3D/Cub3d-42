@@ -62,7 +62,7 @@ void	init_put_pixel_ray(t_main *main, t_data *img, t_data *shine)
 		main->cast.wallx = main->x / CELL_SIZE + \
 		main->cast.perp_wall_dist / CELL_SIZE * main->cast.ray_dir.x;
 	main->cast.wallx -= floorf(main->cast.wallx);
-	if (BOOL == 1)
+	if (BOOL == 1 && main->cast.a_time < 6)
 	{
 		main->cast.s_tex.x = (int)(main->cast.wallx * shine->height);
 		main->cast.s_tex.x = shine->width - main->cast.s_tex.x - 1;

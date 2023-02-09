@@ -17,7 +17,7 @@ void	shiny_texture(t_main *main, t_data *img, int new_x, int j)
 	int	*new_addr;
 	int	*shiny_addr;
 
-	if (BOOL == 1)
+	if (BOOL == 1 && main->cast.a_time < 6)
 	{
 		shiny_addr = (int *)main->gm.img_reflet[main->cast.a_time].addr;
 		main->cast.s_tex.y = (int)main->cast.s_tex_pos & \
@@ -27,11 +27,11 @@ void	shiny_texture(t_main *main, t_data *img, int new_x, int j)
 	new_addr = (int *)img->addr;
 	main->cast.tex.y = (int)main->cast.tex_pos & (img->height - 1);
 	main->cast.tex_pos += main->cast.f_step;
-	if (BOOL == 1 && shiny_addr[main->cast.s_tex.y * \
+	if (main->cast.a_time < 6 && BOOL == 1 && shiny_addr[main->cast.s_tex.y * \
 	main->gm.img_reflet[main->cast.a_time].height + main->cast.s_tex.x] > 1000)
 		my_mlx_pixel_put(&main->img, new_x, j, 0xFFFFFF);
 	else if (main->cast.side == 1)
-		my_mlx_pixel_put(&main->img, new_x, j,\
+		my_mlx_pixel_put(&main->img, new_x, j, \
 		new_addr[main->cast.tex.y * img->height + main->cast.tex.x]);
 	else
 		my_mlx_pixel_put(&main->img, new_x, j, \
@@ -44,7 +44,7 @@ void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
 	while (++j < SCREEN_HEIGHT)
 	{
 		if (j >= main->cast.draw_start && j <= main->cast.draw_end)
-			shiny_texture(main,img,new_x, j);
+			shiny_texture(main, img, new_x, j);
 		else if (j < SCREEN_HEIGHT / 2 * main->up_down)
 			my_mlx_pixel_put(&main->img, new_x, j, \
 			colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));

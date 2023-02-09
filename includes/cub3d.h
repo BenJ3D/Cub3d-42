@@ -118,6 +118,7 @@ typedef struct s_i_vector
 
 typedef struct s_raycast {
 	int			a_time;
+	int			time_h;
 	int			x;
 	double		camera_x;
 	t_d_vector	ray_dir;

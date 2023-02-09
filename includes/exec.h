@@ -15,6 +15,7 @@
 # include "cub3d.h"
 # include "struct_parsing.h"
 
+# define ANIMATION_TIME 24
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 10
 # define LOOK_UP_DOWN 0.03
