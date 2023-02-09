@@ -32,7 +32,7 @@ SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
 				./srcs/parsing/parsing.c \
 				./srcs/parsing/parsing_parameters.c \
 				./srcs/parsing/parsing_files.c \
-				./srcs/parsing/init_img_bonus.c \
+				./srcs/parsing/init_img_b.c \
 				./srcs/parsing/parsing_map.c \
 				./srcs/exec/exec_main_minimap.c \
 				./srcs/exec/exec_main_raycast.c \
@@ -108,6 +108,8 @@ clean:
 	$(MAKE) clean -C $(GNL_PATH)
 	rm -rf $(OBJS)
 	rm -rf $(OBJS_B)
+	rm $(NAME_BONUS)
+	rm $(NAME)
 
 fclean: clean
 	rm -rf $(NAME)
