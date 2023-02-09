@@ -56,7 +56,7 @@ OBJS = ${SOURCES:.c=.o}
 OBJS_B = ${SOURCES:.c=_bonus.o}
 
 CFLAGS = -g3 -Wall -Wextra -O3 -Werror 
-SANITIZE = -fsanitize=address
+SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 
 OS	= $(shell uname)
