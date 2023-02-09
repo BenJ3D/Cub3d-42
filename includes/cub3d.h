@@ -39,7 +39,9 @@
 // # define BLOCK_SIZE 32
 // # define SPEED 1
 
-# ifndef LEGITCHAR
+# ifndef BONUS
+#  define LEGITCHAR "SNEW01"
+# else
 #  define LEGITCHAR "PSNEW01"
 # endif
 

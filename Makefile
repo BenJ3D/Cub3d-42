@@ -20,12 +20,12 @@
 # $^ "include the full list of prerequisites)"
 # SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 
-NAME = cub3d
+NAME = cub3D
 
-
-SRCDIR      := srcs
-SRCEXT      := c
-SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
+BONUS = 0
+C_BONUS = -D BONUS=${BONUS}
+NAME_BONUS = cub3D_bonus
+SRCS_GLOBAL =		./srcs/libft_custom/ft_calloc_cub.c \
 				./srcs/parsing/parsing_parameters_header.c \
 				./srcs/parsing/parsing_utils.c \
 				./srcs/parsing/init_img.c \
@@ -48,58 +48,60 @@ SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
 				./srcs/err/free.c \
 				./srcs/err/cub3d_error.c \
 				./srcs/main.c
+OBJS_GLOBAL = ${SRCS_GLOBAL:.c=.o}
+OBJS_BONUS = ${SRCS_GLOBAL:.c=_bonus.o}
+
+INCLUDES = libs/libft/libft.h libs/gnl/get_next_line.h libs/mlx_linux/mlx.h
+CC = gcc #-g3 #-fsanitize=address
+RM = rm -f
+
+FLAGS = -Wall -Wextra -Werror -O3
+
+MLX_FLAG = -Llibs/libft -lft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+MLX = libs/mlx_linux
+
+all: lib ${NAME}
+UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        MLX_FLAG = -Llibft -lft -Lmlx -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+		MLX = libs/mlx_linux
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        MLX_FLAG = -Llibs/libft -llibs/ft -Lmlx/mlx_mac -lmlx -framework OpenGL -framework Appkit
+		MLX = libs/mlx_mac
+    endif
+
+bonus:
+	make -C ./ bb BONUS=1
+
+bb: lib ${NAME_BONUS}
+
+$(NAME): ${OBJS_GLOBAL}
+	${CC} ${OBJS_GLOBAL} ${MLX_FLAG} -o $(NAME)
+
+${NAME_BONUS}: ${OBJS_BONUS}
+	${CC} ${OBJS_BONUS} ${MLX_FLAG} -o $(NAME_BONUS)
 
 
+%.o: %.c ${INCLUDES} Makefile
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
 
-OBJS = ${SOURCES:.c=.o}
-
-CFLAGS = -g3 -Wall -Wextra -O3 #-Werror 
-SANITIZE = #-fsanitize=address
-CC = cc $(SANITIZE)
-
-OS	= $(shell uname)
-LIBFT = libs/libft/libft.a
-GNL = libs/gnl/gnl.a
-LIBFT_PATH = libs/libft
-GNL_PATH = libs/gnl
-HEADER   = includes/exec.h includes/struct_parsing.h includes/cub3d.h libs/libft/libft.h libs/gnl/get_next_line.h
-
-
-ifeq ($(OS), Linux)
-	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
-	MLX_PATH = libs/mlx_linux
-else
-	MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
-	MLX_PATH = libs/mlx_mac
-endif
-
-all :
-	${MAKE} -C $(MLX_PATH) -j
-	${MAKE} -C $(LIBFT_PATH) -j
-	${MAKE} -C $(GNL_PATH) -j
-	${MAKE} -C ./ norm
-
-norm : $(NAME)
-
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT) $(CFLAGS) -o $(NAME)
-
-%.o: %.c ${INCLUDES} Makefile ./libs/libft/Makefile $(HEADER)
-	${CC} ${CFLAGS} -Imlx -Ift -c $< -o $@;
+%_bonus.o: %.c ${INCLUDES} Makefile
+	${CC} ${C_BONUS} ${FLAGS} -Imlx -Ift -c $< -o $@;
 
 clean:
-	$(MAKE) clean -C $(MLX_PATH)
-	$(MAKE) clean -C $(LIBFT_PATH)
-	$(MAKE) clean -C $(GNL_PATH)
-	rm -rf $(OBJS)
-fclean: clean
-	rm -rf $(NAME)
-	$(MAKE) fclean -C $(LIBFT_PATH)
-	$(MAKE) fclean -C $(GNL_PATH)
-re:	fclean
-	${MAKE} -C $(MLX_PATH) re -j
-	${MAKE} -C $(LIBFT_PATH) re -j
-	${MAKE} -C $(GNL_PATH) re -j
-	${MAKE} -C ./ norm
+	${RM} ${OBJS_GLOBAL} ${OBJS_BONUS}
+	make clean -C ${MLX}
+	make clean -C libs/libft
 
-.PHONY:	all clean fclean re
+fclean: clean
+	${RM} ${NAME} ${NAME_BONUS}
+	make fclean -C libs/libft
+
+lib:
+	make -C ${MLX}
+	make -C libs/libft
+
+re:    fclean all
+
+.PHONY: all clean fclean re NAME bonus
