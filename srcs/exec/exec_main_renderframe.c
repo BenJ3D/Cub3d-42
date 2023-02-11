@@ -70,7 +70,7 @@ void	render(t_main *main, double i)
 		x++;
 	}
 	put_minimap(main);
-	while (i < 3)
+	while (i < 4)
 	{
 		i += 0.2;
 		my_mlx_pixel_put(&main->img, (SCREEN_WIDTH - ((SCREEN_WIDTH / 6) >> 1) \

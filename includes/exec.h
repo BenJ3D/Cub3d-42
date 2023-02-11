@@ -15,7 +15,7 @@
 # include "cub3d.h"
 # include "struct_parsing.h"
 
-# define ANIMATION_TIME 24
+# define ANIMATION_TIME 400
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 10
 # define LOOK_UP_DOWN 0.03
@@ -29,23 +29,23 @@
 # endif
 
 # ifndef SCREEN_HEIGHT
-#  define SCREEN_HEIGHT 1600
+#  define SCREEN_HEIGHT 1000
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1600
+#  define SCREEN_WIDTH 1000
 # endif
 
 # ifndef MAX_VELOCITY
-#  define MAX_VELOCITY 7
+#  define MAX_VELOCITY 4.0
 # endif
 
 # ifndef ROT_SPEED
-#  define ROT_SPEED 0.035
+#  define ROT_SPEED 0.025
 # endif
 
 # ifndef COEF_ACCELERATION
-#  define COEF_ACCELERATION 1.14
+#  define COEF_ACCELERATION 1.01
 # endif
 
 # ifndef COEF_DECELERATION

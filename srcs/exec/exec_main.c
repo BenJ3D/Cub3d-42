@@ -29,8 +29,8 @@ void	exec_main(t_main *game)
 	ft_bzero(game->mov_t, 11);
 	if (!game->img.img || !game->mini_map.img)
 		stop_mlx(game);
-	game->x = game->gm.playstart.x * CELL_SIZE + 32;
-	game->y = game->gm.playstart.y * CELL_SIZE + 32;
+	game->x = game->gm.playstart.x * CELL_SIZE + (CELL_SIZE >> 1);
+	game->y = game->gm.playstart.y * CELL_SIZE + (CELL_SIZE >> 1);
 	game->delta_x = game->gm.start_rot.x;
 	game->delta_y = game->gm.start_rot.y;
 	game->mini_map.addr = mlx_get_data_addr(game->mini_map.img, \
