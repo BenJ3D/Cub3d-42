@@ -73,8 +73,8 @@ void	render(t_main *main, double i)
 	while (i < 3)
 	{
 		i += 0.2;
-		my_mlx_pixel_put(&main->img, (SCREEN_WIDTH - (SCREEN_WIDTH / 6) / 2 \
-		- 24 + main->delta_x * i), ((SCREEN_WIDTH / 6) / 2 \
+		my_mlx_pixel_put(&main->img, (SCREEN_WIDTH - ((SCREEN_WIDTH / 6) >> 1) \
+		- 24 + main->delta_x * i), (((SCREEN_WIDTH / 6) >> 1) \
 		+ 24 + main->delta_y * i), 0x00F53F);
 	}
 	mlx_put_image_to_window(main->mlx, main->mlx_win, main->img.img, 0, 0);
@@ -86,13 +86,13 @@ void	mouse_move(t_main *main)
 	t_i_vector	mouse;
 
 	mlx_mouse_get_pos(main->mlx, main->mlx_win, &mouse.x, &mouse.y);
-	if (mouse.x < SCREEN_WIDTH / 4)
+	if (mouse.x < (SCREEN_WIDTH >> 2))
 		rotate_left(main);
-	else if (mouse.x > SCREEN_WIDTH - SCREEN_WIDTH / 4)
+	else if (mouse.x > SCREEN_WIDTH - (SCREEN_WIDTH >> 2))
 		rotate_right(main);
-	if (mouse.y < SCREEN_HEIGHT / 4)
+	if (mouse.y < (SCREEN_HEIGHT >> 2))
 		look_up(main);
-	else if (mouse.y > SCREEN_HEIGHT - SCREEN_HEIGHT / 4)
+	else if (mouse.y > SCREEN_HEIGHT - (SCREEN_HEIGHT >> 2))
 		look_down(main);
 	render(main, 0);
 }

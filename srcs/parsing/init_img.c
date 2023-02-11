@@ -14,17 +14,17 @@
 
 void	ft_divide_bpp(t_main *main)
 {
-	main->gm.img_ea.bpp /= 8;
-	main->gm.img_we.bpp /= 8;
-	main->gm.img_so.bpp /= 8;
-	main->gm.img_no.bpp /= 8;
-	main->gm.img_door.bpp /= 8;
-	main->gm.img_reflet[0].bpp /= 8;
-	main->gm.img_reflet[1].bpp /= 8;
-	main->gm.img_reflet[2].bpp /= 8;
-	main->gm.img_reflet[3].bpp /= 8;
-	main->gm.img_reflet[4].bpp /= 8;
-	main->gm.img_reflet[5].bpp /= 8;
+	main->gm.img_ea.bpp >>= 3;
+	main->gm.img_we.bpp >>= 3;
+	main->gm.img_so.bpp >>= 3;
+	main->gm.img_no.bpp >>= 3;
+	main->gm.img_door.bpp >>= 3;
+	main->gm.img_reflet[0].bpp >>= 3;
+	main->gm.img_reflet[1].bpp >>= 3;
+	main->gm.img_reflet[2].bpp >>= 3;
+	main->gm.img_reflet[3].bpp >>= 3;
+	main->gm.img_reflet[4].bpp >>= 3;
+	main->gm.img_reflet[5].bpp >>= 3;
 }
 
 void	ft_make_xmp_to_img(t_main *main)

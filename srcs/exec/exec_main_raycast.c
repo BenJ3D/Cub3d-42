@@ -67,14 +67,14 @@ void	init_put_pixel_ray(t_main *main, t_data *img, t_data *shine)
 		main->cast.s_tex.x = (int)(main->cast.wallx * shine->height);
 		main->cast.s_tex.x = shine->width - main->cast.s_tex.x - 1;
 		main->cast.s_f_step = 1.0 * shine->height / main->cast.line_height;
-		main->cast.s_tex_pos = (main->cast.draw_start - SCREEN_HEIGHT / 2 * \
-		main->up_down + main->cast.line_height / 2) * main->cast.s_f_step;
+		main->cast.s_tex_pos = (main->cast.draw_start - (SCREEN_HEIGHT >> 1) * \
+		main->up_down + (main->cast.line_height >> 1)) * main->cast.s_f_step;
 		main->cast.s_tex.y = (int)main->cast.s_tex_pos & (shine->height - 1);
 	}
 	main->cast.tex.x = (int)(main->cast.wallx * img->height);
 	main->cast.tex.x = img->width - main->cast.tex.x - 1;
 	main->cast.f_step = 1.0 * img->height / main->cast.line_height;
-	main->cast.tex_pos = (main->cast.draw_start - SCREEN_HEIGHT / 2 * \
-	main->up_down + main->cast.line_height / 2) * main->cast.f_step;
+	main->cast.tex_pos = (main->cast.draw_start - (SCREEN_HEIGHT >> 1) * \
+	main->up_down + (main->cast.line_height >> 1)) * main->cast.f_step;
 	main->cast.tex.y = (int)main->cast.tex_pos & (img->height - 1);
 }

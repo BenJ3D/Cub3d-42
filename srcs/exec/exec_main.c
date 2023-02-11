@@ -37,9 +37,9 @@ void	exec_main(t_main *game)
 	&game->mini_map.bpp, &game->mini_map.line_length, &game->mini_map.end);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bpp, \
 	&game->img.line_length, &game->img.end);
-	game->mini_map.bpp /= 8;
+	game->mini_map.bpp >>= 3;
 	draw_minimap(game);
-	game->img.bpp /= 8;
+	game->img.bpp >>= 3;
 	game->up_down = 1;
 	game->fov = FOV_HORIZONTAL;
 	draw_minimap(game);

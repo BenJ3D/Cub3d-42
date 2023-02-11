@@ -54,14 +54,14 @@ void	put_minimap(t_main *main)
 	t_i_vector	render;
 
 	new_addr = (int *)main->mini_map.addr;
-	if (SCREEN_WIDTH / 6 > SCREEN_HEIGHT / 2)
+	if (SCREEN_WIDTH / 6 > (SCREEN_HEIGHT >> 1))
 		return ;
 	img.x = SCREEN_WIDTH - (SCREEN_WIDTH / 6);
-	map.x = main->x * MAP_CELL_SIZE / CELL_SIZE - (SCREEN_WIDTH / 6) / 2;
+	map.x = main->x * MAP_CELL_SIZE / CELL_SIZE - ((SCREEN_WIDTH / 6) >> 1);
 	while (img.x < SCREEN_WIDTH)
 	{
 		img.y = -1;
-		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - (SCREEN_WIDTH / 6) / 2;
+		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - ((SCREEN_WIDTH / 6) >> 1);
 		while (++img.y < SCREEN_WIDTH / 6)
 			if (++map.y < SCREEN_WIDTH && \
 			calc_mini_pix(&render, map, main) == 1)

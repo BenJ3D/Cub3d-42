@@ -45,7 +45,7 @@ void	put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j)
 	{
 		if (j >= main->cast.draw_start && j <= main->cast.draw_end)
 			shiny_texture(main, img, new_x, j);
-		else if (j < SCREEN_HEIGHT / 2 * main->up_down)
+		else if (j < (SCREEN_HEIGHT >> 1) * main->up_down)
 			my_mlx_pixel_put(&main->img, new_x, j, \
 			colour_to_nb(main->gm.c_rgb.x, main->gm.c_rgb.y, main->gm.c_rgb.z));
 		else
@@ -78,12 +78,12 @@ void	define_start_end(t_main *main)
 {
 	main->cast.line_height = (int)(SCREEN_HEIGHT / \
 	(main->cast.wall_hit_dist / (CELL_SIZE - 100.0f * main->fov + 50)));
-	main->cast.draw_start = -main->cast.line_height / 2 + \
-	SCREEN_HEIGHT / 2 * main->up_down + 1;
+	main->cast.draw_start = -(main->cast.line_height >> 1) + \
+	(SCREEN_HEIGHT >> 1) * main->up_down + 1;
 	if (main->cast.draw_start < 0)
 		main->cast.draw_start = 0;
-	main->cast.draw_end = main->cast.line_height / 2 + \
-	SCREEN_HEIGHT / 2 * main->up_down - 1;
+	main->cast.draw_end = (main->cast.line_height >> 1) + \
+	(SCREEN_HEIGHT >> 1) * main->up_down - 1;
 	if (main->cast.draw_end >= SCREEN_HEIGHT)
 		main->cast.draw_end = SCREEN_HEIGHT - 1;
 }
@@ -92,10 +92,10 @@ void	select_wall_to_put_pixel(t_main *main, int x)
 {
 	if (main->cast.side == 0)
 		main->cast.perp_wall_dist = (main->cast.map.x - main->x + \
-		(1 - main->cast.step.x) / 2) / main->cast.ray_dir.x;
+		((1 - main->cast.step.x) >> 1)) / main->cast.ray_dir.x;
 	else
 		main->cast.perp_wall_dist = (main->cast.map.y - main->y + \
-		(1 - main->cast.step.y) / 2) / main->cast.ray_dir.y;
+		((1 - main->cast.step.y) >> 1)) / main->cast.ray_dir.y;
 	if (main->cast.perp_wall_dist == 0)
 		main->cast.perp_wall_dist = 0.1;
 	if (main->gm.map[main->cast.map.y / CELL_SIZE] \
