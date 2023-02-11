@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 	ft_bzero(&main, sizeof(t_main));
 	main.plane_x = 0;
 	main.plane_y = FOV_HORIZONTAL;
-	main.gm.cell_size = 64;
+	main.gm.cell_size = CELL_SIZE;
 	main.ps.ac = ac;
 	main.ps.av = av;
 	main.mlx = mlx_init();
