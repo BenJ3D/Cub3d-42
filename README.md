@@ -31,3 +31,4 @@ pour les bonus :
 make bonus
 ./cub3d_bonus maps/map_bonus.cub
 ```
+![cub3D](https://user-images.githubusercontent.com/49345674/221227053-269afe18-2a02-492f-8c0a-6ea44e137f6b.png)
