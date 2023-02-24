@@ -1,4 +1,9 @@
-<h1>Cub3D 42</h1>
+<h1 align=center>Cub3D 42</h1>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/49345674/221225597-bedfe442-84b4-430b-98ea-a326213a863a.gif" />
+</p>
+
 Le projet Cub3D est un projet en duo à réaliser à l'école 42, dans lequel les étudiants doivent développer un moteur de jeu en utilisant les techniques de parsing et de lancer de rayons.
 
 Le parsing consiste à lire un fichier de configuration pour extraire les informations nécessaires au jeu, telles que la map du jeu, les liens vers les images à utiliser, ainsi que les couleurs du ciel et du sol.
