@@ -73,7 +73,7 @@ static char	**make_line(char const *s, char c, char **tab_split, size_t nword)
 		while (s[i] == c)
 			i++;
 		if (n < nword)
-		tab_split[n] = ft_substr(s, i, size_or_cntwrd(s, c, i, 0));
+			tab_split[n] = ft_substr(s, i, size_or_cntwrd(s, c, i, 0));
 		if (!tab_split[n])
 			return (free_all(tab_split));
 		while (s[i] && s[i] != c)

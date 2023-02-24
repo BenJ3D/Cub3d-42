@@ -17,7 +17,7 @@ void	ft_free_tab_char(char **tab)
 	int	i;
 
 	i = 0;
-	if (!tab)
+	if (tab == NULL)
 		return ;
 	while (tab[i])
 		free(tab[i++]);
@@ -26,6 +26,8 @@ void	ft_free_tab_char(char **tab)
 
 void	ft_destroy_all_img(t_main *main)
 {
+	int	i;
+
 	if (main->gm.img_ea.img)
 		mlx_destroy_image(main->mlx, main->gm.img_ea.img);
 	if (main->gm.img_we.img)
@@ -34,15 +36,36 @@ void	ft_destroy_all_img(t_main *main)
 		mlx_destroy_image(main->mlx, main->gm.img_so.img);
 	if (main->gm.img_no.img)
 		mlx_destroy_image(main->mlx, main->gm.img_no.img);
+	if (main->gm.img_door.img)
+		mlx_destroy_image(main->mlx, main->gm.img_door.img);
+	if (main->mini_map.img)
+		mlx_destroy_image(main->mlx, main->mini_map.img);
+	if (main->img.img)
+		mlx_destroy_image(main->mlx, main->img.img);
+	i = 0;
+	while (i < 6)
+	{
+		if (main->gm.img_reflet[i].img)
+			mlx_destroy_image(main->mlx, main->gm.img_reflet[i].img);
+		i++;
+	}
 }
 
 void	ft_free_all(t_main *main)
 {
+	if (main->ps.ptrbuf != NULL)
+		free(*main->ps.ptrbuf);
 	free(main->ps.map_path);
 	ft_free_tab_char(main->gm.map);
 	free(main->ps.map.maptmp);
-	ft_destroy_all_img(main);
-	//destroy img mlx / mlx
+	if (main->mlx != NULL)
+	{
+		ft_destroy_all_img(main);
+		if (main->mlx_win)
+			mlx_destroy_window(main->mlx, main->mlx_win);
+		mlx_destroy_display(main->mlx);
+		free(main->mlx);
+	}
 }
 
 /**

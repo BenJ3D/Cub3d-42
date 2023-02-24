@@ -6,7 +6,7 @@
 /*   By: abucia <abucia@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 07:45:57 by abucia            #+#    #+#             */
-/*   Updated: 2022/12/09 16:40:33 by abucia           ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 21:22:35 by abucia           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 # include "cub3d.h"
 # include "struct_parsing.h"
 
+# define ANIMATION_TIME 400
 # define CELL_SIZE 64
 # define MAP_CELL_SIZE 10
+# define LOOK_UP_DOWN 0.03
 
 # ifndef RENDER_DIST
 #  define RENDER_DIST 1024
@@ -31,11 +33,11 @@
 # endif
 
 # ifndef SCREEN_WIDTH
-#  define SCREEN_WIDTH 1580
+#  define SCREEN_WIDTH 1000
 # endif
 
 # ifndef MAX_VELOCITY
-#  define MAX_VELOCITY 1.4
+#  define MAX_VELOCITY 4.0
 # endif
 
 # ifndef ROT_SPEED
@@ -48,10 +50,6 @@
 
 # ifndef COEF_DECELERATION
 #  define COEF_DECELERATION 0.94
-# endif
-
-# ifndef BONUS
-#  define BONUS 0
 # endif
 
 #endif

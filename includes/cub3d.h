@@ -6,7 +6,7 @@
 /*   By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2023/02/06 21:56:12 by bducrocq         ###   ########lyon.fr   */
+/*   Updated: 2023/02/08 03:29:20 by bducrocq         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,12 @@
 # include <string.h>
 # include <errno.h>
 
-/* Game Settings */
-// # define HEIGHT 768
-// # define WIDTH 768
-// # define ROTATION_SPEED 0.04
-// # define ONE_DEGREE_RAD 0.00116355333
-// # define BLOCK_SIZE 32
-// # define SPEED 1
-
-# ifndef LEGITCHAR
+# ifndef BONUS
 #  define LEGITCHAR "SNEW01"
+#  define BOOL 0
+# else
+#  define LEGITCHAR "PSNEW01"
+#  define BOOL 1
 # endif
 
 # define PLAYERSTART "SNEW"	// char for player start position
@@ -58,6 +54,14 @@
 # define PARAM_C "C"		//ceiling color
 # define PARAM_F "F"		//floor color
 
+# define IMG_DOOR "./assets/textures/door/door.xpm"
+# define FRAME_ANIM0 "./assets/textures/refletAnime/Reflet_frame1.xpm"
+# define FRAME_ANIM1 "./assets/textures/refletAnime/Reflet_frame2.xpm"
+# define FRAME_ANIM2 "./assets/textures/refletAnime/Reflet_frame3.xpm"
+# define FRAME_ANIM3 "./assets/textures/refletAnime/Reflet_frame4.xpm"
+# define FRAME_ANIM4 "./assets/textures/refletAnime/Reflet_frame5.xpm"
+# define FRAME_ANIM5 "./assets/textures/refletAnime/Reflet_frame6.xpm"
+
 /* Linux Keys */
 # ifdef __linux__
 #  define KEY_RIGHT 65363
@@ -68,9 +72,10 @@
 #  define KEY_MINUS 65453
 #  define KEY_W 119
 #  define KEY_S 115
-#  define KEY_A 100
-#  define KEY_D 113
-#  define DOORS 101 // E
+#  define KEY_A 97
+#  define KEY_Q 113
+#  define KEY_D 100
+#  define KEY_DOOR 101 // E
 #  define ESC 65307
 # endif
 
@@ -112,6 +117,8 @@ typedef struct s_i_vector
 }	t_i_vector;
 
 typedef struct s_raycast {
+	int			a_time;
+	int			time_h;
 	int			x;
 	double		camera_x;
 	t_d_vector	ray_dir;
@@ -128,9 +135,12 @@ typedef struct s_raycast {
 	int			draw_end;
 	float		wallx;
 	t_i_vector	tex;
+	t_i_vector	s_tex;
 	float		tex_step;
 	float		tex_pos;
+	float		s_tex_pos;
 	float		f_step;
+	float		s_f_step;
 	double		fov;
 }	t_raycast;
 
@@ -162,24 +172,26 @@ typedef struct s_data
 typedef struct s_game
 {
 	char			**map;
-	t_vector		c_rgb; // ceiling color RGB (xyz)
-	t_vector		f_rgb; // floor color RGB (xyz)
+	t_vector		c_rgb;
+	t_vector		f_rgb;
 	t_data			img_no;
 	t_data			img_so;
 	t_data			img_we;
 	t_data			img_ea;
+	t_data			img_door;
+	t_data			img_reflet[6];
 	int				cell_size;
-	t_vector		playstart;	//xy = position plyaer start
+	t_vector		playstart;
 	t_d_vector		start_rot;
+	float			pi;
 }	t_game;
 
 typedef struct s_main
 {
 	t_data		mini_map;
 	t_data		img;
-	t_data		background;
 	t_pars		ps;
-	t_game		gm; //setup regles avec les couleurs, resolution, path textures/map etc
+	t_game		gm;
 	void		*mlx;
 	void		*mlx_win;
 	int			win_h;
@@ -194,30 +206,58 @@ typedef struct s_main
 	float		plane_x;
 	float		plane_y;
 	double		up_down;
-	t_raycast	raycast;
-	int			move_tab[10];
+	t_raycast	cast;
+	int			mov_t[11];
 }	t_main;
 
 /* exec utils */
-float		deg_to_rad(float i_deg);
-float		rad_to_deg(float i_rad);
+float		deg_to_rad(float i_deg); // FIXME: introuvable ?
+float		rad_to_deg(float i_rad); // FIXME: introuvable ?
 void		exec_main(t_main *game);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			key_release(int keycode, t_main *main);
 int			key_press(int keycode, t_main *main);
-int			stop_mlx(int keycode, t_main *main);
+int			stop_mlx(t_main *main);
 
+int			colour_to_nb(int r, int g, int b);
+void		draw_minimap(t_main *game);
+void		init_put_pixel_ray(t_main *main, t_data *img, t_data *shine);
+void		put_pixel_from_ray(t_main *main, t_data *img, int new_x, int j);
+void		init_dda(t_main *main, int x);
+void		select_step(t_main *main);
+
+void		increase_raycast_step(t_main *main);
+int			raycast_to_wall(t_main *main);
+void		define_start_end(t_main *main);
+void		select_wall_to_put_pixel(t_main *main, int x);
+int			calc_mini_pix(t_i_vector *vect, t_i_vector map, t_main *main);
+
+int			translucid_minimap(int color);
+void		put_minimap(t_main *main);
+void		render(t_main *main, double i);
+int			render_next_frame(t_main *main);
+int			check_mov_t(t_main *main);
+
+/* exec player */
 void		move_player(t_main *game);
 void		move_backward(t_main *game);
 void		move_right(t_main *game);
 void		move_left(t_main *game);
 void		move_forward(t_main *game);
 
+void		rotate_right(t_main *game);
+void		rotate_left(t_main *game);
+
 void		update_velocity(t_main *main);
 
-int			render_next_frame(t_main *main);
+int			is_wall_coliding(t_main *game, float x, float y);
+void		change_fov(t_main *game);
+void		look_up(t_main *game);
+void		look_down(t_main *game);
+void		open_door(t_main *game);
 
 /* Parsing */
+void		calc_n_and_s(t_main *game, double pi, double fov);
 int			ft_start_parsing(t_main *main);
 int			ft_pars_check_has_chars(char c, char *legalchar, t_main *main);
 t_vector	ft_get_rgb_value(char *buf, t_main *main);
@@ -231,6 +271,15 @@ void		ft_pars_headerfile(char *buf, t_main *main);
 void		ft_pars_check_range_rgb(t_vector vec, t_main *main);
 void		ft_getpath_texture(char *str, char dest[PATH_MAX], t_main *main);
 
+void		ft_divide_bpp(t_main *main);
+void		ft_get_addr_img(t_main *main);
+void		ft_init_mlx_img(t_main *main);
+
+void		ft_make_xmp_to_img_reflet(t_main *main);
+void		ft_get_addr_img_reflet(t_main *main);
+void		ft_init_mlx_img_next_step(t_main *main);
+void		ft_make_xmp_to_img(t_main *main);
+
 /* parsing map */
 int			ft_pars_map(char *buf, t_main *main);
 int			ft_pars_norm_map(t_main *main);
@@ -239,7 +288,6 @@ void		ft_pars_check_player_pos(t_main *main);
 char		*ft_get_next_word_custom_i(char *buf, int *i2, t_main *main);
 
 /* init mlx */
-void		ft_init_mlx_img(t_main *main);
 
 /* libft custom */
 void		*ft_calloc_cub(size_t count, size_t size, t_main *main);
@@ -249,15 +297,8 @@ void		ft_free_all_and_exit(t_main *main);
 void		ft_free_all_and_exit_err(t_main *main, int error);
 
 /* Error display */
-void		ft_err_display(int errtype, t_main *main); //FIXME: unless ?
+void		ft_err_display(int errtype, t_main *main);
 void		ft_err_display_and_exit(int errtype, t_main *main);
-
-/* ft dbg //TODO: del before final push */
-void		dbg_display_all_parameter_value(t_main *main);
-void		dbg_display_velocity(t_main *main);
-
-
-void	render(t_main *main);
 
 # define COLOR_BLACK	"\001\033[0;30m\002"
 # define COLOR_RED		"\001\033[0;31m\002"

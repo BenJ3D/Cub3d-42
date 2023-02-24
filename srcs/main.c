@@ -12,15 +12,14 @@
 
 #include "../includes/cub3d.h"
 
-
-int	ft_exec(t_main *main)
+int	ft_exec(t_main *game)
 {
-	exec_main(main);
-	mlx_hook(main->mlx_win, 2, 1L << 0, &key_press, main);
-	mlx_hook(main->mlx_win, 17, 1L << 0, &stop_mlx, main); //sanitize ???!???
-	mlx_hook(main->mlx_win, 3, 1L << 1, &key_release, main);
-	mlx_loop_hook(main->mlx, render_next_frame, main);
-	mlx_loop(main->mlx);
+	exec_main(game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, &key_press, game);
+	mlx_hook(game->mlx_win, 17, 0L, &stop_mlx, game);
+	mlx_hook(game->mlx_win, 3, 1L << 1, &key_release, game);
+	mlx_loop_hook(game->mlx, render_next_frame, game);
+	mlx_loop(game->mlx);
 	return (EXIT_SUCCESS);
 }
 
@@ -29,7 +28,9 @@ int	main(int ac, char **av)
 	t_main	main;
 
 	ft_bzero(&main, sizeof(t_main));
-	main.gm.cell_size = 64;
+	main.plane_x = 0;
+	main.plane_y = FOV_HORIZONTAL;
+	main.gm.cell_size = CELL_SIZE;
 	main.ps.ac = ac;
 	main.ps.av = av;
 	main.mlx = mlx_init();
