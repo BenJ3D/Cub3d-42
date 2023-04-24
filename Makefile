@@ -6,46 +6,45 @@
 #    By: bducrocq <bducrocq@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 01:26:51 by bducrocq          #+#    #+#              #
-#    Updated: 2023/02/05 13:46:53 by bducrocq         ###   ########lyon.fr    #
+#    Updated: 2023/02/22 01:29:37 by abucia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 
-SRCDIR      := srcs
 SRCEXT      := c
 SOURCES =		./srcs/libft_custom/ft_calloc_cub.c \
-				./srcs/parsing/parsing_parameters_header.c \
-				./srcs/parsing/parsing_utils.c \
-				./srcs/parsing/init_img.c \
-				./srcs/parsing/parsing.c \
-				./srcs/parsing/parsing_parameters.c \
-				./srcs/parsing/parsing_files.c \
-				./srcs/parsing/init_img_b.c \
-				./srcs/parsing/parsing_map.c \
-				./srcs/exec/exec_main_minimap.c \
-				./srcs/exec/exec_main_raycast.c \
-				./srcs/exec/exec_main_keypress_release.c \
-				./srcs/exec/exec_main_tools.c \
-				./srcs/exec/player_move_rotate.c \
-				./srcs/exec/velocity.c \
-				./srcs/exec/player_coliding.c \
-				./srcs/exec/exec_main_renderframe.c \
-				./srcs/exec/exec_main.c \
-				./srcs/exec/player_lookchange_and_fov.c \
-				./srcs/exec/exec_main_putppixel_and_dda.c \
-				./srcs/exec/player_move.c \
-				./srcs/err/free.c \
-				./srcs/err/cub3d_error.c \
-				./srcs/main.c
+			./srcs/parsing/parsing_parameters_header.c \
+			./srcs/parsing/parsing_utils.c \
+			./srcs/parsing/init_img.c \
+			./srcs/parsing/parsing.c \
+			./srcs/parsing/parsing_parameters.c \
+			./srcs/parsing/parsing_files.c \
+			./srcs/parsing/init_img_b.c \
+			./srcs/parsing/parsing_map.c \
+			./srcs/exec/exec_main_minimap.c \
+			./srcs/exec/exec_main_raycast.c \
+			./srcs/exec/exec_main_keypress_release.c \
+			./srcs/exec/exec_main_tools.c \
+			./srcs/exec/player_move_rotate.c \
+			./srcs/exec/velocity.c \
+			./srcs/exec/player_coliding.c \
+			./srcs/exec/exec_main_renderframe.c \
+			./srcs/exec/exec_main.c \
+			./srcs/exec/player_lookchange_and_fov.c \
+			./srcs/exec/exec_main_putppixel_and_dda.c \
+			./srcs/exec/player_move.c \
+			./srcs/err/free.c \
+			./srcs/err/cub3d_error.c \
+			./srcs/main.c
 
 C_BONUS=-DBONUS=0
 
 OBJS = ${SOURCES:.c=.o}
 OBJS_B = ${SOURCES:.c=_bonus.o}
 
-CFLAGS = -g3 -Wall -Wextra -O3 -Werror 
+CFLAGS = -Wall -Wextra -O3 -Werror 
 SANITIZE = #-fsanitize=address
 CC = cc $(SANITIZE)
 

@@ -48,21 +48,22 @@ int	translucid_minimap(int color)
 
 void	put_minimap(t_main *main)
 {
-	int			*new_addr;
-	t_i_vector	img;
-	t_i_vector	map;
-	t_i_vector	render;
+	int					*new_addr;
+	t_i_vector			img;
+	t_i_vector			map;
+	t_i_vector			render;
+	static const int	opti = SCREEN_WIDTH / 6;
 
 	new_addr = (int *)main->mini_map.addr;
-	if (SCREEN_WIDTH / 6 > (SCREEN_HEIGHT >> 1))
+	if (opti > (SCREEN_HEIGHT >> 1))
 		return ;
-	img.x = SCREEN_WIDTH - (SCREEN_WIDTH / 6);
-	map.x = main->x * MAP_CELL_SIZE / CELL_SIZE - ((SCREEN_WIDTH / 6) >> 1);
+	img.x = SCREEN_WIDTH - opti;
+	map.x = main->x * MAP_CELL_SIZE / CELL_SIZE - (opti >> 1);
 	while (img.x < SCREEN_WIDTH)
 	{
 		img.y = -1;
-		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - ((SCREEN_WIDTH / 6) >> 1);
-		while (++img.y < SCREEN_WIDTH / 6)
+		map.y = main->y * MAP_CELL_SIZE / CELL_SIZE - (opti >> 1);
+		while (++img.y < opti)
 			if (++map.y < SCREEN_WIDTH && \
 			calc_mini_pix(&render, map, main) == 1)
 				if (translucid_minimap(new_addr[render.x + render.y]))
